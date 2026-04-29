@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhtasim Rahman | Portfolio</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4958A3',
+                        accent: '#DE6528',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass dark:glass-dark transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-bold text-primary dark:text-white spa-link">Turzo<span class="text-accent">.</span></a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/" class="hover:text-accent px-3 py-2 rounded-md text-sm font-medium spa-link">Home</a>
+                        <a href="/about" class="hover:text-accent px-3 py-2 rounded-md text-sm font-medium spa-link">About</a>
+                        <a href="/projects" class="hover:text-accent px-3 py-2 rounded-md text-sm font-medium spa-link">Projects</a>
+                        <a href="/contact" class="hover:text-accent px-3 py-2 rounded-md text-sm font-medium spa-link">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:ring-2 ring-accent transition-all">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+                    <button id="auth-btn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition-all">Login</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="app" class="pt-16 min-h-screen">
+        <!-- Home Page (Default) -->
+        <section id="hero" class="relative h-[90vh] flex items-center justify-center overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8 items-center z-10">
+                <div class="text-left space-y-6">
+                    <h2 class="text-accent font-semibold tracking-widest uppercase">Assalamu Alaikum</h2>
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                        I'm <span class="text-primary">Muhtasim</span> <br>
+                        <span id="typewriter" class="text-gray-600 dark:text-gray-400"></span>
+                    </h1>
+                    <p class="text-lg text-gray-500 max-w-md">
+                        A dedicated web developer passionate about creating user-friendly and visually stunning websites.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="/projects" class="bg-primary text-white px-8 py-3 rounded-full hover:shadow-lg hover:scale-105 transition-all spa-link">View Works</a>
+                        <a href="/contact" class="border-2 border-primary text-primary dark:text-white px-8 py-3 rounded-full hover:bg-primary hover:text-white transition-all spa-link">Contact Me</a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <!-- Banner Image Placeholder -->
+                    <div id="hero-img-container" class="relative z-10">
+                        <img id="hero-img" src="/assets/images/muhtasim.webp" alt="Muhtasim Rahman" class="w-full max-w-lg mx-auto drop-shadow-2xl">
+                    </div>
+                    <!-- Background Animated Elements -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/20 to-accent/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Under Development Badge (Global) -->
+        <div class="fixed bottom-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+            v1.0.0 Beta | Under Development
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 dark:bg-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500">© 2026 Muhtasim Rahman (Turzo). All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="/assets/js/core.js"></script>
+</body>
+</html>
