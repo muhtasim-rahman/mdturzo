@@ -1,0 +1,232 @@
+/* ================================================
+   main.css — Design System | mdturzo.web.app v1.0.1
+   Color palette derived from Muhtasim's jersey:
+   Primary: #4a90cd (steel blue) → #71d5ff (sky)
+   Dark bg: #06101e (deep navy)
+   Gold accent: #f5a623
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fira+Code:wght@400;500&display=swap');
+
+/* ── DARK THEME (default) ── */
+:root {
+  /* Backgrounds — deep navy inspired by jersey dark tones */
+  --bg:          #06101e;
+  --bg-2:        #091520;
+  --bg-card:     #0d1f35;
+  --bg-glass:    rgba(9, 21, 32, 0.82);
+
+  /* Primary accent — jersey steel blue → sky */
+  --accent:      #4a90cd;
+  --accent-hi:   #71d5ff;
+  --accent-dim:  rgba(74, 144, 205, 0.15);
+  --accent-glow: rgba(113, 213, 255, 0.25);
+
+  /* Gold — complementary warm tone */
+  --gold:        #f5a623;
+  --gold-dim:    rgba(245, 166, 35, 0.15);
+
+  /* Text */
+  --text:        #e8f4ff;
+  --text-2:      #98b8d4;
+  --text-muted:  #4a6a85;
+
+  /* Borders */
+  --border:      rgba(74, 144, 205, 0.18);
+  --border-2:    rgba(255, 255, 255, 0.06);
+
+  /* Gradients */
+  --grad-accent: linear-gradient(135deg, #4a90cd 0%, #71d5ff 100%);
+  --grad-gold:   linear-gradient(135deg, #f5a623 0%, #ff9500 100%);
+  --grad-hero:   linear-gradient(135deg, #06101e 0%, #0d2040 50%, #06101e 100%);
+  --grad-card:   linear-gradient(145deg, #0d1f35, #091520);
+
+  /* Shadows */
+  --shadow-accent: 0 0 30px rgba(113, 213, 255, 0.25);
+  --shadow-card:   0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow:   0 0 80px rgba(74, 144, 205, 0.12);
+
+  /* Fonts */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-code:    'Fira Code', monospace;
+
+  /* Transitions */
+  --t-fast: 0.2s ease;
+  --t-med:  0.35s ease;
+  --t-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --nav-h:        68px;
+  --container:    1180px;
+  --pad:          clamp(1.25rem, 5vw, 2.5rem);
+  --section-pad:  clamp(70px, 10vw, 110px) 0;
+
+  /* Radius */
+  --r-sm:   6px;
+  --r-md:   14px;
+  --r-lg:   22px;
+  --r-full: 9999px;
+}
+
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  --bg:         #eef5fc;
+  --bg-2:       #e2eef9;
+  --bg-card:    #ffffff;
+  --bg-glass:   rgba(255,255,255,0.88);
+
+  --accent:     #2272b5;
+  --accent-hi:  #1a9adf;
+  --accent-dim: rgba(34,114,181,0.10);
+  --accent-glow:rgba(34,114,181,0.20);
+
+  --gold:       #d4850a;
+  --gold-dim:   rgba(212,133,10,0.12);
+
+  --text:       #0b1e30;
+  --text-2:     #2c4f6a;
+  --text-muted: #6a90aa;
+
+  --border:     rgba(34,114,181,0.18);
+  --border-2:   rgba(0,0,0,0.07);
+
+  --grad-hero:  linear-gradient(135deg,#ddeeff 0%,#cde6f8 50%,#ddeeff 100%);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.10);
+}
+
+/* ── RESET ── */
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background var(--t-med), color var(--t-med);
+}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-2); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: var(--r-full); }
+
+/* ── TYPOGRAPHY ── */
+h1,h2,h3,h4,h5,h6 { font-family: var(--font-display); line-height: 1.15; color: var(--text); }
+p { color: var(--text-2); }
+a { color: var(--accent-hi); text-decoration: none; transition: color var(--t-fast); }
+a:hover { color: var(--accent); }
+code,pre { font-family: var(--font-code); }
+
+/* ── CONTAINER ── */
+.container { max-width: var(--container); margin: 0 auto; padding: 0 var(--pad); }
+
+/* ── SECTION ── */
+.section { padding: var(--section-pad); position: relative; }
+.section-label {
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  color: var(--accent-hi);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.section-title {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+.section-title span {
+  background: var(--grad-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  line-height: 1.75;
+}
+.divider {
+  width: 50px; height: 3px;
+  background: var(--grad-accent);
+  border-radius: var(--r-full);
+  margin: 1.1rem 0;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: var(--r-full);
+  font-family: var(--font-body); font-weight: 600; font-size: 0.92rem;
+  cursor: pointer; border: none;
+  transition: all var(--t-fast);
+  text-decoration: none; position: relative; overflow: hidden;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--grad-accent);
+  color: #06101e;
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px var(--accent-glow); color: #06101e; }
+.btn-outline {
+  background: transparent; color: var(--accent-hi);
+  border: 1.5px solid var(--accent);
+}
+.btn-outline:hover { background: var(--accent-dim); transform: translateY(-2px); color: var(--accent-hi); }
+.btn-gold {
+  background: var(--grad-gold); color: #06101e;
+  box-shadow: 0 4px 20px var(--gold-dim);
+}
+.btn-gold:hover { transform: translateY(-2px); color: #06101e; }
+
+/* ── BADGES ── */
+.badge {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--r-full);
+  font-size: 0.72rem; font-weight: 600; font-family: var(--font-code);
+}
+.badge-accent { background: var(--accent-dim); color: var(--accent-hi); border: 1px solid var(--border); }
+.badge-gold   { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(245,166,35,0.25); }
+.badge-dev    { background: rgba(255,80,80,0.12); color: #ff6b6b; border: 1px solid rgba(255,80,80,0.2); animation: pulsedev 2s ease infinite; }
+@keyframes pulsedev { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+/* ── CARD ── */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border-2);
+  border-radius: var(--r-lg); padding: 2rem;
+  transition: all var(--t-med); position: relative; overflow: hidden;
+}
+.card:hover { border-color: var(--border); box-shadow: var(--shadow-card); transform: translateY(-4px); }
+.card::before {
+  content:''; position:absolute; top:0;left:0;right:0; height:2px;
+  background: var(--grad-accent); transform: scaleX(0); transition: transform var(--t-med); transform-origin:left;
+}
+.card:hover::before { transform: scaleX(1); }
+
+/* ── APP SHELL ── */
+#app { min-height: 100vh; }
+.page-wrap { padding-top: var(--nav-h); }
+
+/* ── PAGE TRANSITION ── */
+.page-enter { animation: pgEnter 0.38s var(--t-slow) both; }
+@keyframes pgEnter { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+
+/* ── SPINNER ── */
+.spinner { width:38px;height:38px;border:3px solid var(--border-2);border-top-color:var(--accent-hi);border-radius:50%;animation:spin .8s linear infinite;margin:5rem auto; }
+@keyframes spin { to{transform:rotate(360deg)} }
+
+/* ── UTILITY GRIDS ── */
+.grid-2 { display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem; }
+.grid-3 { display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem; }
+.grid-auto { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem; }
+
+@media(max-width:768px){
+  .grid-2,.grid-3 { grid-template-columns:1fr; }
+  :root { --section-pad: 60px 0; }
+}
