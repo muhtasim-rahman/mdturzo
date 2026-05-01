@@ -1,0 +1,72 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "users": {
+      "$uid": {
+        ".read": "auth !== null && (auth.uid === $uid || root.child('admins').child(auth.uid).exists())",
+        ".write": "auth !== null && (auth.uid === $uid || root.child('admins').child(auth.uid).exists())"
+      }
+    },
+
+    "admins": {
+      ".read": "auth !== null && root.child('admins').child(auth.uid).exists()",
+      ".write": false
+    },
+
+    "projects": {
+      ".read": true,
+      "$slug": {
+        ".write": "auth !== null && root.child('admins').child(auth.uid).exists()"
+      }
+    },
+
+    "blogs": {
+      ".read": true,
+      "$slug": {
+        ".write": "auth !== null && root.child('admins').child(auth.uid).exists()"
+      }
+    },
+
+    "comments": {
+      ".read": true,
+      "$commentId": {
+        ".write": "auth !== null",
+        ".validate": "newData.hasChildren(['userId', 'text', 'postSlug', 'createdAt'])"
+      }
+    },
+
+    "reviews": {
+      ".read": true,
+      "$uid": {
+        ".write": "auth !== null && auth.uid === $uid"
+      }
+    },
+
+    "gallery": {
+      ".read": true,
+      ".write": "auth !== null && root.child('admins').child(auth.uid).exists()"
+    },
+
+    "notifications": {
+      ".read": "auth !== null",
+      ".write": "auth !== null && root.child('admins').child(auth.uid).exists()"
+    },
+
+    "messages": {
+      ".read": "auth !== null && root.child('admins').child(auth.uid).exists()",
+      ".write": true
+    },
+
+    "analytics": {
+      ".read": "auth !== null && root.child('admins').child(auth.uid).exists()",
+      ".write": true
+    },
+
+    "logs": {
+      ".read": "auth !== null && root.child('admins').child(auth.uid).exists()",
+      ".write": "auth !== null && root.child('admins').child(auth.uid).exists()"
+    }
+  }
+}
