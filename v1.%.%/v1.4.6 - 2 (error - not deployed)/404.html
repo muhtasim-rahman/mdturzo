@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | Muhtasim Rahman</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon/favicon.ico" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/navbar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    /* ── 404 Page ─────────────────────────────────────────────────────────── */
+    .e404 {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 2rem;
+    }
+
+    /* Animated background grid */
+    .e404__bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    }
+    .e404__bg::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 75%);
+      animation: grid-drift 40s linear infinite;
+    }
+    [data-theme="light"] .e404__bg::before {
+      background-image: radial-gradient(rgba(37,99,235,0.07) 1px, transparent 1px);
+    }
+    @keyframes grid-drift { from{background-position:0 0;} to{background-position:28px 28px;} }
+
+    /* Orbs */
+    .e404__orb {
+      position: absolute; border-radius: 50%; pointer-events: none; filter: blur(90px);
+      animation: e404-orb var(--d,18s) ease-in-out var(--dl,0s) infinite alternate;
+    }
+    .e404__orb--1 { width:420px;height:420px; background:radial-gradient(circle,rgba(37,99,235,0.20)0%,transparent 65%); top:-80px;left:-80px;--d:22s; }
+    .e404__orb--2 { width:320px;height:320px; background:radial-gradient(circle,rgba(99,102,241,0.15)0%,transparent 65%); bottom:-60px;right:0;--d:17s;--dl:5s; }
+    [data-theme="light"] .e404__orb--1 { background:radial-gradient(circle,rgba(37,99,235,0.08)0%,transparent 65%); }
+    [data-theme="light"] .e404__orb--2 { background:radial-gradient(circle,rgba(99,102,241,0.06)0%,transparent 65%); }
+    @keyframes e404-orb {
+      0%  { transform:translate(0,0); }
+      50% { transform:translate(28px,-22px); }
+      100%{ transform:translate(-16px,18px); }
+    }
+
+    /* ── Card ─────────────────────────────────────────────────────────────── */
+    .e404__card {
+      position: relative; z-index: 1;
+      max-width: 540px; width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      padding: clamp(2rem, 6vw, 3.5rem);
+      text-align: center;
+      box-shadow: var(--shadow-2xl);
+      backdrop-filter: blur(20px);
+    }
+    [data-theme="dark"] .e404__card {
+      background: rgba(15,23,42,0.75);
+      border-color: rgba(255,255,255,0.07);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+
+    /* ── Giant 404 ────────────────────────────────────────────────────────── */
+    .e404__number {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 20vw, 9rem);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.04em;
+      margin-bottom: 0.2em;
+    }
+    .e404__n { color: var(--text-primary); }
+    .e404__o {
+      color: transparent;
+      -webkit-text-stroke: 3px var(--accent-primary);
+      position: relative;
+      animation: e404-spin 12s linear infinite;
+      display: inline-block;
+    }
+    @keyframes e404-spin {
+      0%   { -webkit-text-stroke-color: var(--clr-primary-400); }
+      33%  { -webkit-text-stroke-color: var(--clr-primary-600); }
+      66%  { -webkit-text-stroke-color: var(--clr-primary-300); }
+      100% { -webkit-text-stroke-color: var(--clr-primary-400); }
+    }
+    /* Glitch effect on 4s */
+    .e404__n:first-child {
+      animation: glitch-left 6s ease-in-out infinite;
+    }
+    .e404__n:last-child {
+      animation: glitch-right 6s ease-in-out 0.15s infinite;
+    }
+    @keyframes glitch-left {
+      0%,94%,100% { transform:translate(0,0); filter:none; }
+      95%  { transform:translate(-3px,1px); filter:hue-rotate(30deg); }
+      97%  { transform:translate(2px,-1px); filter:hue-rotate(-15deg); }
+    }
+    @keyframes glitch-right {
+      0%,94%,100% { transform:translate(0,0); filter:none; }
+      95%  { transform:translate(3px,-1px); filter:hue-rotate(-20deg); }
+      97%  { transform:translate(-2px,1px); filter:hue-rotate(10deg); }
+    }
+
+    /* Icon badge */
+    .e404__icon-badge {
+      width: 60px; height: 60px;
+      background: var(--accent-light);
+      border: 1.5px solid rgba(59,130,246,0.3);
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; color: var(--accent-primary);
+      margin: 0 auto 1.2rem;
+      animation: badge-float 3s ease-in-out infinite;
+    }
+    @keyframes badge-float {
+      0%,100%{ transform:translateY(0); }
+      50%    { transform:translateY(-7px); }
+    }
+
+    .e404__title {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-family: var(--font-display);
+    }
+    .e404__sub {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 360px;
+      margin: 0 auto 1.8rem;
+    }
+
+    /* URL display */
+    .e404__url {
+      display: inline-flex; align-items: center; gap: 0.4em;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 0.4em 0.8em;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-tertiary);
+      margin-bottom: 1.8rem;
+      max-width: 100%; overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap;
+    }
+    .e404__url i { color: var(--clr-error); flex-shrink: 0; }
+
+    /* Buttons */
+    .e404__actions {
+      display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 1.8rem;
+    }
+
+    /* Quick links */
+    .e404__links-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-tertiary);
+      margin-bottom: 0.75rem;
+    }
+    .e404__links {
+      display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+    }
+    .e404__link {
+      display: inline-flex; align-items: center; gap: 0.35em;
+      padding: 0.38em 0.75em;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-xs);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .e404__link:hover {
+      color: var(--accent-primary);
+      border-color: var(--accent-primary);
+      background: var(--accent-light);
+    }
+    .e404__link i { font-size: 0.7em; opacity: 0.7; }
+
+    /* Footer credit */
+    .e404__footer {
+      margin-top: 2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.72rem;
+      color: var(--text-tertiary);
+    }
+    .e404__footer a { color: var(--accent-primary); text-decoration: none; font-weight: 600; }
+    .e404__footer a:hover { text-decoration: underline; }
+
+    /* Theme toggle in corner */
+    .e404__theme-btn {
+      position: fixed; top: 1.2rem; right: 1.2rem;
+      width: 38px; height: 38px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--text-secondary);
+      font-size: 0.9rem; transition: all 0.15s;
+      z-index: 99;
+    }
+    .e404__theme-btn:hover { color: var(--accent-primary); border-color: var(--accent-primary); }
+
+    /* Logo top-left */
+    .e404__logo {
+      position: fixed; top: 1.2rem; left: 1.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      text-decoration: none;
+      font-family: 'Courier New', monospace;
+      font-weight: 700; font-size: 0.92rem;
+      z-index: 99;
+    }
+    .e404__logo-img { width: 24px; height: 24px; border-radius: 6px; border: 1.5px solid var(--border-color); }
+    .e404__logo-at  { color: var(--accent-primary); }
+    .e404__logo-nm  { color: var(--text-primary); }
+  </style>
+
+  <!-- Theme init -->
+  <script>
+    (function () {
+      try {
+        var s = JSON.parse(localStorage.getItem('mdturzo_theme'));
+        if (s === 'dark' || s === 'light') document.documentElement.setAttribute('data-theme', s);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark');
+      } catch(e){}
+    })();
+  </script>
+</head>
+
+<body>
+
+  <!-- Logo -->
+  <a href="/" class="e404__logo" aria-label="Home">
+    <img src="/assets/images/favicon/android-chrome-192x192.png" alt="" class="e404__logo-img" width="24" height="24" />
+    <span class="e404__logo-at">@ </span><span class="e404__logo-nm">mdturzo999</span>
+  </a>
+
+  <!-- Theme toggle -->
+  <button class="e404__theme-btn" id="theme-btn" aria-label="Toggle theme" type="button">
+    <i class="fa-solid fa-moon" id="theme-icon" aria-hidden="true"></i>
+  </button>
+
+  <main class="e404" role="main" aria-labelledby="e404-title">
+
+    <div class="e404__bg" aria-hidden="true"></div>
+    <div class="e404__orb e404__orb--1" aria-hidden="true"></div>
+    <div class="e404__orb e404__orb--2" aria-hidden="true"></div>
+
+    <div class="e404__card">
+
+      <!-- Giant 404 -->
+      <div class="e404__number" aria-label="Error 404">
+        <span class="e404__n">4</span>
+        <span class="e404__o">0</span>
+        <span class="e404__n">4</span>
+      </div>
+
+      <!-- Icon -->
+      <div class="e404__icon-badge" aria-hidden="true">
+        <i class="fa-solid fa-map-location-dot"></i>
+      </div>
+
+      <h1 class="e404__title" id="e404-title">Page Not Found</h1>
+      <p class="e404__sub">
+        Looks like this page took a wrong turn. It may have been moved, deleted, or never existed.
+      </p>
+
+      <!-- Broken URL display -->
+      <div class="e404__url" id="e404-url" aria-label="Requested URL">
+        <i class="fa-solid fa-link-slash"></i>
+        <span id="e404-path">unknown path</span>
+      </div>
+
+      <!-- CTA buttons -->
+      <div class="e404__actions">
+        <a href="/" class="btn btn--primary">
+          <i class="fa-solid fa-house" aria-hidden="true"></i> Go Home
+        </a>
+        <button type="button" class="btn btn--outline" onclick="history.back()">
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Go Back
+        </button>
+      </div>
+
+      <!-- Quick navigation -->
+      <p class="e404__links-title">Quick Navigation</p>
+      <div class="e404__links">
+        <a href="/about"    class="e404__link"><i class="fa-solid fa-user"></i> About</a>
+        <a href="/projects" class="e404__link"><i class="fa-solid fa-code"></i> Projects</a>
+        <a href="/blogs"    class="e404__link"><i class="fa-solid fa-pen-nib"></i> Blogs</a>
+        <a href="/gallery"  class="e404__link"><i class="fa-regular fa-images"></i> Gallery</a>
+        <a href="/contact"  class="e404__link"><i class="fa-solid fa-envelope"></i> Contact</a>
+      </div>
+
+      <div class="e404__footer">
+        Lost? Visit <a href="/">mdturzo.web.app</a> or reach out via
+        <a href="https://t.me/mdturzo999" target="_blank" rel="noopener">Telegram</a>.
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Show current broken path
+    document.getElementById('e404-path').textContent = window.location.pathname + window.location.search;
+
+    // Theme toggle
+    const html    = document.documentElement;
+    const btn     = document.getElementById('theme-btn');
+    const icon    = document.getElementById('theme-icon');
+    const STORE   = 'mdturzo_theme';
+
+    const applyTheme = (t) => {
+      html.setAttribute('data-theme', t);
+      icon.className = t === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      try { localStorage.setItem(STORE, JSON.stringify(t)); } catch(e){}
+    };
+
+    btn.addEventListener('click', () => {
+      const cur = html.getAttribute('data-theme') || 'light';
+      applyTheme(cur === 'dark' ? 'light' : 'dark');
+    });
+
+    // Init icon to match current theme
+    const cur = html.getAttribute('data-theme') || 'light';
+    icon.className = cur === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+  </script>
+
+</body>
+</html>

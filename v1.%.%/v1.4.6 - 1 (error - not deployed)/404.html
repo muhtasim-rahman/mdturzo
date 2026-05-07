@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 — Page Not Found | mdturzo999</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon/favicon.ico"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png"/>
+  <meta name="theme-color" content="#2563EB"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="/assets/css/style.css"/>
+  <script>
+    (function(){
+      try{
+        var t=JSON.parse(localStorage.getItem('mdturzo_theme'));
+        if(t) document.documentElement.setAttribute('data-theme',t);
+        else if(window.matchMedia('(prefers-color-scheme: dark)').matches)
+          document.documentElement.setAttribute('data-theme','dark');
+      }catch(e){}
+      // /index.html → /
+      if(window.location.pathname==='/index.html') window.location.replace('/');
+    })();
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+    .nf-wrap {
+      min-height:100dvh;
+      display:flex;align-items:center;justify-content:center;
+      position:relative;overflow:hidden;padding:2rem;
+      background:var(--bg-page);
+    }
+
+    /* Animated BG */
+    .nf-bg {
+      position:absolute;inset:0;z-index:0;pointer-events:none;
+      background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+      background-size:30px 30px;
+      mask-image:radial-gradient(ellipse 85% 85% at 50% 50%,black 10%,transparent 80%);
+      animation:bg-drift 40s linear infinite;
+    }
+    [data-theme="light"] .nf-bg {
+      background-image:radial-gradient(rgba(37,99,235,.07) 1px,transparent 1px);
+    }
+    @keyframes bg-drift{ to{background-position:30px 30px;} }
+
+    .nf-orb {
+      position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0;
+      animation:orb-float var(--d,18s) ease-in-out var(--del,0s) infinite alternate;
+    }
+    .nf-orb--a{width:380px;height:380px;background:radial-gradient(circle,rgba(37,99,235,.18) 0%,transparent 68%);top:-80px;left:-80px;--d:20s;--del:0s;}
+    .nf-orb--b{width:300px;height:300px;background:radial-gradient(circle,rgba(99,102,241,.12) 0%,transparent 68%);bottom:-60px;right:-40px;--d:16s;--del:4s;}
+    [data-theme="light"] .nf-orb--a{background:radial-gradient(circle,rgba(37,99,235,.07) 0%,transparent 68%);}
+    [data-theme="light"] .nf-orb--b{background:radial-gradient(circle,rgba(99,102,241,.05) 0%,transparent 68%);}
+    @keyframes orb-float{0%{transform:translate(0,0) scale(1);}50%{transform:translate(20px,-15px) scale(1.06);}100%{transform:translate(-10px,12px) scale(.96);}}
+
+    /* Card */
+    .nf-card {
+      position:relative;z-index:1;
+      background:var(--bg-surface);
+      border:1px solid var(--border-color);
+      border-radius:1.75rem;
+      padding:clamp(2rem,5vw,3rem) clamp(1.5rem,5vw,3.5rem);
+      max-width:480px;width:100%;
+      box-shadow:var(--shadow-xl);
+      animation:card-in .7s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes card-in{
+      from{opacity:0;transform:scale(.93) translateY(24px);}
+      to  {opacity:1;transform:none;}
+    }
+
+    /* Glitch 404 */
+    .nf-code {
+      font-family:var(--font-display);font-weight:900;
+      font-size:clamp(4.5rem,14vw,7rem);line-height:.9;
+      letter-spacing:-.05em;margin-bottom:.2rem;
+      background:linear-gradient(135deg,var(--clr-primary-400),var(--clr-primary-600),#a78bfa);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      position:relative;display:inline-block;
+      animation:glitch-wiggle 6s ease-in-out infinite;
+    }
+    @keyframes glitch-wiggle {
+      0%,90%,100%{transform:none;}
+      92%{transform:skewX(-3deg) translateX(-2px);}
+      94%{transform:skewX(3deg)  translateX(2px);}
+      96%{transform:skewX(-1deg) translateX(-1px);}
+    }
+
+    .nf-icon {
+      font-size:1.6rem;color:var(--accent-primary);
+      margin-bottom:.75rem;display:block;
+      animation:icon-bob 3s ease-in-out infinite;
+    }
+    @keyframes icon-bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+
+    .nf-title {
+      font-family:var(--font-display);font-size:clamp(1.15rem,3vw,1.4rem);
+      font-weight:700;color:var(--text-primary);margin-bottom:.4rem;
+    }
+    .nf-desc { font-size:.875rem;color:var(--text-secondary);line-height:1.65;margin-bottom:1.5rem; }
+
+    /* Path pill */
+    .nf-path {
+      display:inline-flex;align-items:center;gap:.4rem;
+      font-family:var(--font-mono);font-size:.68rem;color:var(--text-tertiary);
+      background:var(--bg-surface-2);border:1px solid var(--border-color);
+      padding:.28rem .75rem;border-radius:.5rem;
+      margin-bottom:1.5rem;max-width:100%;overflow:hidden;
+      text-overflow:ellipsis;white-space:nowrap;
+    }
+
+    /* Buttons */
+    .nf-actions { display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.75rem; }
+    .nf-btn {
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.6rem 1.2rem;
+      font-family:var(--font-body);font-size:.875rem;font-weight:600;
+      border-radius:.75rem;border:1.5px solid transparent;
+      cursor:pointer;transition:all .2s;text-decoration:none;background:none;
+    }
+    .nf-btn--primary { background:var(--accent-primary);color:#fff;border-color:var(--accent-primary);box-shadow:0 2px 12px rgba(37,99,235,.28); }
+    .nf-btn--primary:hover { background:var(--accent-hover);transform:translateY(-1px); }
+    .nf-btn--outline { color:var(--accent-primary);border-color:var(--border-color); }
+    .nf-btn--outline:hover { background:var(--accent-light);border-color:var(--accent-primary); }
+
+    /* Quick links */
+    .nf-sugg { border-top:1px solid var(--border-color);padding-top:1.25rem; }
+    .nf-sugg-lbl { font-size:.68rem;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem; }
+    .nf-sugg-links { display:flex;gap:.4rem;flex-wrap:wrap; }
+    .nf-sugg-link {
+      display:inline-flex;align-items:center;gap:.3rem;
+      padding:.28em .75em;font-size:.78rem;font-weight:500;
+      color:var(--text-secondary);
+      background:var(--bg-surface-2);border:1px solid var(--border-color);
+      border-radius:2rem;text-decoration:none;transition:all .18s;
+    }
+    .nf-sugg-link:hover { color:var(--accent-primary);border-color:var(--accent-primary);background:var(--accent-light); }
+
+    /* Theme toggle top-right */
+    .nf-theme {
+      position:absolute;top:1rem;right:1rem;z-index:2;
+      display:flex;align-items:center;
+      background:var(--bg-surface-2);border:1px solid var(--border-color);
+      border-radius:var(--radius-full);padding:.25rem .6rem;
+      font-size:.75rem;color:var(--text-secondary);
+      cursor:pointer;gap:.3rem;
+      transition:background .15s;
+    }
+    .nf-theme:hover{background:var(--bg-surface-3);}
+  </style>
+</head>
+<body>
+<div class="nf-wrap">
+  <div class="nf-bg" aria-hidden="true"></div>
+  <div class="nf-orb nf-orb--a" aria-hidden="true"></div>
+  <div class="nf-orb nf-orb--b" aria-hidden="true"></div>
+
+  <button class="nf-theme" id="nf-theme-btn" aria-label="Toggle theme" title="Toggle theme">
+    <i class="fa-solid fa-sun" id="nf-theme-icon" aria-hidden="true"></i>
+    <span id="nf-theme-txt">Light</span>
+  </button>
+
+  <div class="nf-card" role="main">
+    <span class="nf-code" aria-label="404">404</span>
+    <i class="fa-solid fa-compass nf-icon" aria-hidden="true"></i>
+    <h1 class="nf-title">Page Not Found</h1>
+    <p class="nf-desc">The page you're looking for doesn't exist, was moved, or you may have mistyped the URL.</p>
+
+    <div class="nf-path" id="nf-path" aria-live="polite">
+      <i class="fa-solid fa-link-slash" aria-hidden="true"></i>
+      <span id="nf-path-text"></span>
+    </div>
+
+    <div class="nf-actions">
+      <a href="/" class="nf-btn nf-btn--primary">
+        <i class="fa-solid fa-house" aria-hidden="true"></i> Go Home
+      </a>
+      <button onclick="history.back()" class="nf-btn nf-btn--outline" title="Go back">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Go Back
+      </button>
+    </div>
+
+    <div class="nf-sugg">
+      <p class="nf-sugg-lbl">Quick links</p>
+      <div class="nf-sugg-links">
+        <a href="/about"    class="nf-sugg-link"><i class="fa-solid fa-user"     aria-hidden="true"></i> About</a>
+        <a href="/projects" class="nf-sugg-link"><i class="fa-solid fa-code"     aria-hidden="true"></i> Projects</a>
+        <a href="/blogs"    class="nf-sugg-link"><i class="fa-solid fa-pen-nib"  aria-hidden="true"></i> Blogs</a>
+        <a href="/gallery"  class="nf-sugg-link"><i class="fa-solid fa-images"   aria-hidden="true"></i> Gallery</a>
+        <a href="/contact"  class="nf-sugg-link"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Show current path
+  var pathEl = document.getElementById('nf-path-text');
+  if (pathEl) pathEl.textContent = window.location.pathname || '/unknown';
+
+  // Theme toggle
+  (function(){
+    var iconEl = document.getElementById('nf-theme-icon');
+    var txtEl  = document.getElementById('nf-theme-txt');
+    var KEY = 'mdturzo_theme';
+    function getTheme(){ return document.documentElement.getAttribute('data-theme') || 'light'; }
+    function applyTheme(t){
+      document.documentElement.setAttribute('data-theme', t);
+      try{ localStorage.setItem(KEY, JSON.stringify(t)); }catch(e){}
+      if(iconEl) iconEl.className = 'fa-solid ' + (t==='dark' ? 'fa-moon' : 'fa-sun');
+      if(txtEl)  txtEl.textContent = t==='dark' ? 'Dark' : 'Light';
+    }
+    applyTheme(getTheme());
+    document.getElementById('nf-theme-btn')?.addEventListener('click', function(){
+      applyTheme(getTheme()==='dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
+</body>
+</html>
