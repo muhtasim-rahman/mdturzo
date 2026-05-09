@@ -1,110 +1,166 @@
 // ============================================================
-// 404 NOT FOUND — Creative animated page
+// 404 NOT FOUND v2.0.1 — cleaner design
 // ============================================================
 
-import { useEffect }    from 'react'
-import { Link }         from 'react-router-dom'
-import { Helmet }       from 'react-helmet-async'
-import { motion }       from 'framer-motion'
+import { Link }      from 'react-router-dom'
+import { Helmet }    from 'react-helmet-async'
+import { motion }    from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faArrowLeft, faFaceSadTear } from '@fortawesome/free-solid-svg-icons'
 
 export default function NotFound() {
-  useEffect(() => {
-    document.title = '404 — Page Not Found | Muhtasim Rahman'
-  }, [])
-
   return (
     <>
       <Helmet>
-        <title>404 — Not Found | Muhtasim Rahman</title>
+        <title>404 — Page Not Found | Muhtasim Rahman</title>
         <meta name="robots" content="noindex" />
       </Helmet>
 
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-mesh overflow-hidden">
+      <div
+        className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden"
+        style={{ background: 'var(--bg-page)' }}
+      >
+        {/* Subtle background glow */}
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute', inset: 0, pointerEvents: 'none',
+            background: 'radial-gradient(ellipse 60% 40% at 50% 40%, rgba(59,130,246,0.07), transparent)',
+          }}
+        />
 
-        {/* Glowing orbs background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute w-96 h-96 rounded-full blur-3xl opacity-10"
-            style={{ background: 'radial-gradient(circle, #3b82f6, transparent)', top: '10%', left: '10%' }}
-          />
-          <div
-            className="absolute w-80 h-80 rounded-full blur-3xl opacity-8"
-            style={{ background: 'radial-gradient(circle, #6366f1, transparent)', bottom: '15%', right: '15%' }}
-          />
-        </div>
+        <div className="relative z-10 text-center max-w-lg mx-auto">
 
-        <div className="relative z-10 text-center max-w-md mx-auto">
-
-          {/* 404 number */}
+          {/* Icon */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, ease: 'backOut' }}
-            className="relative mb-6"
+            initial={{ scale: 0.7, opacity: 0 }}
+            animate={{ scale: 1,   opacity: 1 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              width: 88, height: 88,
+              borderRadius: 'var(--radius-2xl)',
+              background: 'var(--accent-light)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              margin: '0 auto 2rem',
+              color: 'var(--accent-primary)',
+              fontSize: '2.25rem',
+              border: '1px solid rgba(59,130,246,0.2)',
+            }}
           >
-            <span
-              className="text-[12rem] font-display font-black leading-none select-none"
-              style={{
-                background:          'linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor:  'transparent',
-                backgroundClip:       'text',
-                opacity:              0.25,
-              }}
-            >
-              404
-            </span>
-
-            {/* Floating code snippets */}
-            {['<html>', '</>', '{ }', '404', 'null', 'undefined'].map((text, i) => (
-              <motion.span
-                key={i}
-                className="absolute text-xs font-mono text-blue-400/30 select-none"
-                style={{
-                  top:   `${20 + (i * 13)}%`,
-                  left:  i % 2 === 0 ? `${5 + i * 8}%` : undefined,
-                  right: i % 2 !== 0 ? `${5 + i * 6}%` : undefined,
-                }}
-                animate={{ y: [0, -8, 0], opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 3 + i * 0.5, repeat: Infinity, delay: i * 0.3 }}
-              >
-                {text}
-              </motion.span>
-            ))}
+            <FontAwesomeIcon icon={faFaceSadTear} />
           </motion.div>
 
-          {/* Message */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+          {/* 404 number */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1, duration: 0.4 }}
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.8rem',
+              fontWeight: 500,
+              letterSpacing: '0.15em',
+              color: 'var(--accent-primary)',
+              textTransform: 'uppercase',
+              marginBottom: '0.75rem',
+            }}
           >
-            <h1 className="text-2xl font-display font-bold text-[var(--text-primary)] mb-3">
-              This page doesn't exist
-            </h1>
-            <p className="text-[var(--text-secondary)] mb-8 leading-relaxed">
-              The URL you visited is either wrong or this page has been removed.
-              Let's get you back on track.
-            </p>
+            Error 404
+          </motion.p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link
-                to="/"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-sm transition-all hover:shadow-lg hover:shadow-blue-500/25 active:scale-95"
-              >
-                <FontAwesomeIcon icon={faHouse} />
-                Go Home
-              </Link>
-              <button
-                onClick={() => window.history.back()}
-                className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)] font-semibold rounded-xl text-sm transition-all"
-              >
-                <FontAwesomeIcon icon={faArrowLeft} />
-                Go Back
-              </button>
-            </div>
+          <motion.h1
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.4 }}
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(1.75rem, 5vw, 2.5rem)',
+              fontWeight: 800,
+              color: 'var(--text-primary)',
+              letterSpacing: '-0.03em',
+              marginBottom: '1rem',
+              lineHeight: 1.1,
+            }}
+          >
+            Page not found
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+            style={{
+              color: 'var(--text-secondary)',
+              fontSize: '1rem',
+              lineHeight: 1.7,
+              marginBottom: '2.5rem',
+              maxWidth: 380,
+              marginInline: 'auto',
+            }}
+          >
+            The page you're looking for doesn't exist or has been moved. Let's get you back on track.
+          </motion.p>
+
+          {/* CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.28, duration: 0.4 }}
+            style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}
+          >
+            <Link
+              to="/"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '0.7rem 1.5rem',
+                background: 'var(--accent-primary)',
+                color: '#fff',
+                fontFamily: 'var(--font-display)',
+                fontWeight: 600, fontSize: '0.9rem',
+                borderRadius: 'var(--radius-lg)',
+                textDecoration: 'none',
+                transition: 'all var(--transition-base)',
+                boxShadow: '0 4px 16px rgba(59,130,246,0.3)',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'translateY(-1px)'
+                e.currentTarget.style.boxShadow = '0 6px 24px rgba(59,130,246,0.4)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = ''
+                e.currentTarget.style.boxShadow = '0 4px 16px rgba(59,130,246,0.3)'
+              }}
+            >
+              <FontAwesomeIcon icon={faHouse} />
+              Go Home
+            </Link>
+
+            <button
+              onClick={() => window.history.back()}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '0.7rem 1.5rem',
+                background: 'transparent',
+                color: 'var(--text-secondary)',
+                fontFamily: 'var(--font-display)',
+                fontWeight: 600, fontSize: '0.9rem',
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid var(--border-color)',
+                cursor: 'pointer',
+                transition: 'all var(--transition-base)',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = 'var(--accent-primary)'
+                e.currentTarget.style.color = 'var(--text-primary)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = 'var(--border-color)'
+                e.currentTarget.style.color = 'var(--text-secondary)'
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} />
+              Go Back
+            </button>
           </motion.div>
 
         </div>

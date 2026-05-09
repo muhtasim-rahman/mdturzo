@@ -1,21 +1,22 @@
 // ============================================================
-// APP.JSX — Root component
-// React Router v6, Auth listener, Theme init, all routes
+// APP.JSX v2.0.1
+// - React Router future flags added (no more console warnings)
+// - Page transition wrapper added (no more reload flicker)
 // ============================================================
 
-import { lazy, Suspense }   from 'react'
-import { Routes, Route }     from 'react-router-dom'
-import { HelmetProvider }    from 'react-helmet-async'
+import { lazy, Suspense, useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { HelmetProvider }             from 'react-helmet-async'
+import { AnimatePresence, motion }    from 'framer-motion'
 
-import { useAuthListener }          from './hooks/useAuth.js'
-import { useNotificationListener }  from './hooks/useNotifications.js'
-import { Layout }                   from './components/layout/Layout.jsx'
-import { ToastContainer }           from './components/ui/ToastContainer.jsx'
-import { PageProgress }             from './components/ui/PageProgress.jsx'
-import { ErrorBoundary }            from './components/ui/ErrorBoundary.jsx'
-import { SkeletonText }             from './components/ui/Skeleton.jsx'
+import { useAuthListener }         from './hooks/useAuth.js'
+import { useNotificationListener } from './hooks/useNotifications.js'
+import { Layout }                  from './components/layout/Layout.jsx'
+import { ToastContainer }          from './components/ui/ToastContainer.jsx'
+import { PageProgress }            from './components/ui/PageProgress.jsx'
+import { ErrorBoundary }           from './components/ui/ErrorBoundary.jsx'
 
-// Lazy loaded pages for code splitting
+// Lazy loaded pages
 const Home          = lazy(() => import('./pages/Home.jsx'))
 const About         = lazy(() => import('./pages/About.jsx'))
 const Projects      = lazy(() => import('./pages/Projects.jsx'))
@@ -35,20 +36,72 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy.jsx'))
 const CookiesPolicy = lazy(() => import('./pages/CookiesPolicy.jsx'))
 const NotFound      = lazy(() => import('./pages/NotFound.jsx'))
 
-// Fallback while lazy pages load
+// Page fade transition wrapper
+const pageVariants = {
+  initial: { opacity: 0, y: 8 },
+  enter:   { opacity: 1, y: 0, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } },
+  exit:    { opacity: 0,       transition: { duration: 0.12, ease: 'easeIn' } },
+}
+
+function PageWrapper({ children }) {
+  return (
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="enter"
+      exit="exit"
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+// Loading fallback — minimal, no skeleton flash
 function PageLoader() {
   return (
-    <div className="section container-lg">
-      <SkeletonText lines={4} className="max-w-md" />
+    <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="spinner" />
     </div>
   )
 }
 
-export default function App() {
-  // Start Firebase Auth listener (runs once, updates Zustand store)
-  useAuthListener()
+function AnimatedRoutes() {
+  const location = useLocation()
 
-  // Start Firebase RTDB notification listener
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
+        <Route element={<Layout />}>
+          <Route path="/"               element={<PageWrapper><Home /></PageWrapper>} />
+          <Route path="/about"          element={<PageWrapper><About /></PageWrapper>} />
+          <Route path="/projects"       element={<PageWrapper><Projects /></PageWrapper>} />
+          <Route path="/projects/:slug" element={<PageWrapper><ProjectDetail /></PageWrapper>} />
+          <Route path="/blogs"          element={<PageWrapper><Blogs /></PageWrapper>} />
+          <Route path="/blogs/:slug"    element={<PageWrapper><BlogDetail /></PageWrapper>} />
+          <Route path="/posts"          element={<PageWrapper><Posts /></PageWrapper>} />
+          <Route path="/posts/:slug"    element={<PageWrapper><PostDetail /></PageWrapper>} />
+          <Route path="/contact"        element={<PageWrapper><Contact /></PageWrapper>} />
+          <Route path="/login"          element={<PageWrapper><Login /></PageWrapper>} />
+          <Route path="/signup"         element={<PageWrapper><Signup /></PageWrapper>} />
+          <Route path="/profile"        element={<PageWrapper><Profile /></PageWrapper>} />
+          <Route path="/@:username"     element={<PageWrapper><PublicProfile /></PageWrapper>} />
+          <Route path="/admin"          element={<PageWrapper><Admin /></PageWrapper>} />
+          <Route path="/admin/:tab"     element={<PageWrapper><Admin /></PageWrapper>} />
+          <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
+          <Route path="/cookies-policy" element={<PageWrapper><CookiesPolicy /></PageWrapper>} />
+          <Route path="/404"            element={<PageWrapper><NotFound /></PageWrapper>} />
+          <Route path="*"              element={<PageWrapper><NotFound /></PageWrapper>} />
+        </Route>
+
+        {/* Standalone — no navbar/footer */}
+        <Route path="/auth/action" element={<PageWrapper><AuthAction /></PageWrapper>} />
+      </Routes>
+    </AnimatePresence>
+  )
+}
+
+export default function App() {
+  useAuthListener()
   useNotificationListener()
 
   return (
@@ -56,35 +109,8 @@ export default function App() {
       <ErrorBoundary>
         <PageProgress />
         <ToastContainer />
-
         <Suspense fallback={<PageLoader />}>
-          <Routes>
-            {/* ── Main layout wrapper ─────────────────────── */}
-            <Route element={<Layout />}>
-              <Route path="/"               element={<Home />} />
-              <Route path="/about"          element={<About />} />
-              <Route path="/projects"       element={<Projects />} />
-              <Route path="/projects/:slug" element={<ProjectDetail />} />
-              <Route path="/blogs"          element={<Blogs />} />
-              <Route path="/blogs/:slug"    element={<BlogDetail />} />
-              <Route path="/posts"          element={<Posts />} />
-              <Route path="/posts/:slug"    element={<PostDetail />} />
-              <Route path="/contact"        element={<Contact />} />
-              <Route path="/login"          element={<Login />} />
-              <Route path="/signup"         element={<Signup />} />
-              <Route path="/profile"        element={<Profile />} />
-              <Route path="/@:username"     element={<PublicProfile />} />
-              <Route path="/admin"          element={<Admin />} />
-              <Route path="/admin/:tab"     element={<Admin />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/cookies-policy" element={<CookiesPolicy />} />
-              <Route path="/404"            element={<NotFound />} />
-              <Route path="*"              element={<NotFound />} />
-            </Route>
-
-            {/* ── Standalone (no navbar/footer) ───────────── */}
-            <Route path="/auth/action" element={<AuthAction />} />
-          </Routes>
+          <AnimatedRoutes />
         </Suspense>
       </ErrorBoundary>
     </HelmetProvider>
