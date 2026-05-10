@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | Muhtasim Rahman</title>
+  <meta name="description" content="The page you are looking for does not exist." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+
+  <!-- Inline: Apply stored theme immediately -->
+  <script>
+    (function () {
+      try {
+        var stored = JSON.parse(localStorage.getItem('mdturzo_theme'));
+        if (stored) document.documentElement.setAttribute('data-theme', stored);
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+          document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    .not-found {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg-page);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background shapes */
+    .not-found__bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .not-found__shape {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--accent-light);
+      filter: blur(80px);
+      animation: float-shape 8s ease-in-out infinite;
+    }
+
+    .not-found__shape--1 {
+      width: 400px; height: 400px;
+      top: -100px; left: -100px;
+      animation-delay: 0s;
+    }
+
+    .not-found__shape--2 {
+      width: 300px; height: 300px;
+      bottom: -80px; right: -80px;
+      animation-delay: -4s;
+    }
+
+    @keyframes float-shape {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%       { transform: translate(20px, 20px) scale(1.05); }
+    }
+
+    .not-found__content {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+    }
+
+    .not-found__code {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 20vw, 10rem);
+      font-weight: var(--fw-extrabold);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--clr-primary-500), var(--clr-primary-700));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: code-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .not-found__icon {
+      font-size: 3rem;
+      color: var(--accent-primary);
+      margin-bottom: 1.5rem;
+      display: block;
+      animation: icon-in 0.8s 0.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .not-found__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: var(--fw-bold);
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      animation: text-in 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .not-found__desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      animation: text-in 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .not-found__actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: text-in 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .nf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 0.75rem;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .nf-btn--primary {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+      box-shadow: 0 2px 12px rgb(37 99 235 / 0.3);
+    }
+
+    .nf-btn--primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgb(37 99 235 / 0.4);
+    }
+
+    .nf-btn--outline {
+      background: transparent;
+      color: var(--accent-primary);
+      border-color: var(--accent-primary);
+    }
+
+    .nf-btn--outline:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    .not-found__path {
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      background: var(--bg-surface-2);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+      animation: text-in 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes code-in {
+      from { opacity: 0; transform: scale(0.7) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes icon-in {
+      from { opacity: 0; transform: rotate(-20deg) scale(0.5); }
+      to   { opacity: 1; transform: rotate(0deg) scale(1); }
+    }
+
+    @keyframes text-in {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Suggestions list */
+    .not-found__suggestions {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      animation: text-in 0.8s 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .not-found__sugg-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .not-found__sugg-links {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .not-found__sugg-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3em 0.8em;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-color);
+      border-radius: 2rem;
+      transition: all 0.2s ease;
+    }
+
+    .not-found__sugg-link:hover {
+      color: var(--accent-primary);
+      border-color: var(--accent-primary);
+      background: var(--accent-light);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="not-found" role="main">
+    <!-- Background decoration -->
+    <div class="not-found__bg" aria-hidden="true">
+      <div class="not-found__shape not-found__shape--1"></div>
+      <div class="not-found__shape not-found__shape--2"></div>
+    </div>
+
+    <div class="not-found__content">
+      <span class="not-found__code">404</span>
+      <i class="fa-solid fa-compass not-found__icon" aria-hidden="true"></i>
+
+      <h1 class="not-found__title">Page Not Found</h1>
+      <p class="not-found__desc">
+        The page you are looking for does not exist, may have been moved, 
+        or is temporarily unavailable.
+      </p>
+
+      <div class="not-found__actions">
+        <a href="/" class="nf-btn nf-btn--primary">
+          <i class="fa-solid fa-house" aria-hidden="true"></i>
+          Back to Home
+        </a>
+        <button onclick="history.back()" class="nf-btn nf-btn--outline">
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+          Go Back
+        </button>
+      </div>
+
+      <div class="not-found__path" id="bad-path" aria-live="polite">
+        <i class="fa-solid fa-link-slash" aria-hidden="true"></i>
+        <span id="path-text"></span>
+      </div>
+
+      <div class="not-found__suggestions">
+        <p class="not-found__sugg-title">Maybe you meant</p>
+        <div class="not-found__sugg-links">
+          <a href="/about" class="not-found__sugg-link">
+            <i class="fa-solid fa-user" aria-hidden="true"></i> About
+          </a>
+          <a href="/projects" class="not-found__sugg-link">
+            <i class="fa-solid fa-code" aria-hidden="true"></i> Projects
+          </a>
+          <a href="/blogs" class="not-found__sugg-link">
+            <i class="fa-solid fa-pen-nib" aria-hidden="true"></i> Blogs
+          </a>
+          <a href="/gallery" class="not-found__sugg-link">
+            <i class="fa-solid fa-images" aria-hidden="true"></i> Gallery
+          </a>
+          <a href="/contact" class="not-found__sugg-link">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Show current bad path
+    var pathEl = document.getElementById('path-text');
+    if (pathEl) {
+      pathEl.textContent = window.location.pathname || '/unknown';
+    }
+  </script>
+
+</body>
+</html>

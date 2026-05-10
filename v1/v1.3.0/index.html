@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Primary SEO — dynamically updated by router -->
+  <title>Muhtasim Rahman — Web Developer & Designer</title>
+  <meta name="description" content="Web Developer & Designer from Nilphamari, Bangladesh. Building user-friendly and visually stunning websites." />
+  <meta name="keywords"    content="Muhtasim Rahman, Turzo, web developer, Bangladesh, portfolio" />
+  <meta name="author"      content="Muhtasim Rahman" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://mdturzo.web.app/" />
+  <meta property="og:title"       content="Muhtasim Rahman — Web Developer & Designer" />
+  <meta property="og:description" content="Web Developer & Designer from Nilphamari, Bangladesh. Building user-friendly and visually stunning websites." />
+  <meta property="og:image"       content="/assets/images/preview.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Muhtasim Rahman — Web Developer & Designer" />
+  <meta name="twitter:description" content="Web Developer & Designer from Nilphamari, Bangladesh." />
+  <meta name="twitter:image"       content="/assets/images/preview.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://mdturzo.web.app/" />
+
+  <!-- Favicon (placeholder — update in later versions) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+
+  <!-- CSS — Global Styles -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/navbar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS CDN (utility classes) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Prevent Tailwind from resetting our CSS variables
+    tailwind.config = {
+      corePlugins: { preflight: false },
+      theme: { extend: {} },
+    };
+  </script>
+
+  <!-- Inline: Apply stored theme immediately to prevent flash -->
+  <script>
+    (function () {
+      try {
+        var stored = JSON.parse(localStorage.getItem('mdturzo_theme'));
+        if (stored === 'dark' || stored === 'light') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+
+<body>
+
+  <!-- Navigation Progress Bar (injected by router.js) -->
+  <!-- #nav-progress is created dynamically -->
+
+  <!-- ── Navbar ─────────────────────────────────────────────────── -->
+  <header id="navbar" class="navbar" role="banner">
+    <!-- Rendered by navbar.js -->
+  </header>
+
+  <!-- ── Main Content Area ─────────────────────────────────────── -->
+  <main id="main-content" role="main" class="pt-navbar">
+    <!-- Pages are rendered here by the router -->
+    <div class="placeholder-page">
+      <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:1.5rem;text-align:center;padding:4rem 1rem;">
+        <div class="placeholder-page__icon">
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </div>
+        <p style="color:var(--text-secondary);font-size:1rem;">Loading...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────────── -->
+  <footer id="footer" class="footer" role="contentinfo">
+    <!-- Rendered by footer.js -->
+  </footer>
+
+  <!-- ── Toast Notification Container (injected by utils.js) ────── -->
+  <!-- #toast-container is created dynamically -->
+
+  <!-- ════════════════════════════════════════════════════════════
+       SCRIPTS — Load Order Matters:
+       1. site-config.js  (global config, no deps)
+       2. utils.js        (utility helpers, no deps)
+       3. router.js       (depends on utils)
+       4. navbar.js       (depends on utils, site-config)
+       5. footer.js       (depends on utils, site-config)
+       6. app.js          (Firebase ESM — depends on all above)
+       ════════════════════════════════════════════════════════════ -->
+
+  <script src="/assets/js/site-config.js"></script>
+  <script src="/assets/js/utils.js"></script>
+  <script src="/assets/js/router.js"></script>
+  <script src="/assets/js/navbar.js"></script>
+  <script src="/assets/js/footer.js"></script>
+
+  <!-- app.js uses ES Modules (Firebase SDK via CDN ESM) -->
+  <script type="module" src="/assets/js/app.js"></script>
+
+  <!-- Initialize non-module components after DOM ready -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Init navbar & footer (these run before app.js Firebase resolves)
+      if (typeof Navbar !== 'undefined') Navbar.init();
+      if (typeof Footer !== 'undefined') Footer.init();
+    });
+  </script>
+
+</body>
+</html>

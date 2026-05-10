@@ -1,0 +1,179 @@
+/* =============================================================================
+   HOME / ABOUT-MINI — Full Implementation v1.4.0
+   ============================================================================= */
+
+.about-mini {
+  padding: var(--section-py) 0;
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-mini .container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+.about-mini__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* ── Image block (left) ──────────────────────────────────────────────────── */
+.about-mini__img-block {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-mini__img-frame {
+  position: relative;
+  width: 280px; height: 320px;
+}
+
+/* Decorative box behind the photo */
+.about-mini__img-deco {
+  position: absolute;
+  width: 100%; height: 100%;
+  border: 2px solid var(--accent-primary);
+  border-radius: var(--radius-2xl);
+  top: 16px; left: 16px;
+  opacity: .3;
+  pointer-events: none;
+}
+
+.about-mini__img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  border-radius: var(--radius-2xl);
+  display: block;
+  position: relative; z-index: 1;
+  box-shadow: 0 16px 48px rgba(0,0,0,.12);
+}
+
+[data-theme="dark"] .about-mini__img { box-shadow: 0 16px 48px rgba(0,0,0,.5); }
+
+/* Experience badge overlay */
+.about-mini__exp-badge {
+  position: absolute;
+  bottom: -16px; right: -16px;
+  background: var(--accent-primary);
+  color: #fff;
+  border-radius: var(--radius-xl);
+  padding: 1rem 1.25rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(59,130,246,.45);
+  z-index: 2;
+  animation: float-l 3s ease-in-out infinite;
+}
+.about-mini__exp-num {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl); font-weight: var(--fw-extrabold);
+  line-height: 1;
+}
+.about-mini__exp-lbl {
+  font-size: .65rem; font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wider); text-transform: uppercase;
+  opacity: .85; margin-top: .15rem;
+  white-space: nowrap;
+}
+@keyframes float-l { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+
+/* ── Content (right) ────────────────────────────────────────────────────── */
+.about-mini__content {
+  display: flex; flex-direction: column; gap: 1.5rem;
+}
+
+.about-mini__pretitle {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: var(--text-xs); font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest); text-transform: uppercase;
+  color: var(--accent-primary);
+  padding: .3em .9em; background: var(--accent-light);
+  border-radius: var(--radius-full); width: fit-content;
+}
+
+.about-mini__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  font-weight: var(--fw-extrabold);
+  color: var(--text-primary);
+  line-height: var(--lh-snug);
+}
+
+.about-mini__bio {
+  font-size: var(--text-base); color: var(--text-secondary);
+  line-height: var(--lh-relaxed);
+}
+
+/* Key facts list */
+.about-mini__facts {
+  display: flex; flex-direction: column; gap: .75rem;
+}
+
+.about-mini__fact {
+  display: flex; align-items: flex-start; gap: .75rem;
+}
+
+.about-mini__fact-icon {
+  width: 32px; height: 32px; flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: var(--accent-light); color: var(--accent-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem;
+}
+
+.about-mini__fact-text {
+  font-size: var(--text-sm); color: var(--text-secondary);
+  padding-top: .3rem;
+  line-height: var(--lh-normal);
+}
+
+.about-mini__fact-text strong {
+  color: var(--text-primary); font-weight: var(--fw-semibold);
+}
+
+/* Action row */
+.about-mini__actions {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+}
+
+.about-mini__actions .btn {
+  padding: .65rem 1.5rem; font-size: var(--text-sm);
+  font-weight: var(--fw-semibold); border-radius: var(--radius-lg);
+  display: inline-flex; align-items: center; gap: .5rem;
+  text-decoration: none; cursor: pointer; border: 2px solid transparent;
+  transition: all var(--transition-base);
+}
+.about-mini__actions .btn--primary {
+  background: var(--accent-primary); color: #fff;
+  box-shadow: 0 4px 12px rgba(59,130,246,.35);
+}
+.about-mini__actions .btn--primary:hover {
+  background: var(--clr-primary-700); transform: translateY(-2px);
+}
+.about-mini__actions .btn--outline {
+  background: transparent; color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+.about-mini__actions .btn--outline:hover { background: var(--accent-light); }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width:900px) {
+  .about-mini__inner {
+    grid-template-columns: 1fr; text-align: center; gap: 3rem;
+  }
+  .about-mini__img-block { order: 1; }
+  .about-mini__content   { order: 2; align-items: center; }
+  .about-mini__pretitle  { align-self: center; }
+  .about-mini__facts     { text-align: left; }
+  .about-mini__actions   { justify-content: center; }
+}
+@media (max-width:480px) {
+  .about-mini__img-frame { width:230px; height:265px; }
+}

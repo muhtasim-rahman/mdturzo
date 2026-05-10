@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mdturzo.web.app — System Workflow</title>
+<style>
+  :root {
+    --bg: #060f1e;
+    --bg2: #0d1b2e;
+    --bg3: #112240;
+    --border: #1e3a5f;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --blue: #3b82f6;
+    --blue-dark: #1d4ed8;
+    --green: #22c55e;
+    --purple: #a855f7;
+    --orange: #f97316;
+    --red: #ef4444;
+    --teal: #14b8a6;
+    --yellow: #eab308;
+    --pink: #ec4899;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.6; }
+
+  /* SIDEBAR */
+  .sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0; width: 220px;
+    background: var(--bg2); border-right: 1px solid var(--border);
+    overflow-y: auto; z-index: 100; padding: 20px 0;
+  }
+  .sidebar-logo { padding: 0 20px 20px; border-bottom: 1px solid var(--border); margin-bottom: 10px; }
+  .sidebar-logo span { color: var(--blue); font-weight: 700; font-size: 15px; }
+  .sidebar-logo small { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
+  .nav-section { padding: 8px 20px 4px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .nav-link { display: block; padding: 7px 20px; color: var(--muted); text-decoration: none; font-size: 13px; transition: all 0.2s; cursor: pointer; border-left: 2px solid transparent; }
+  .nav-link:hover, .nav-link.active { color: var(--blue); background: rgba(59,130,246,0.08); border-left-color: var(--blue); }
+
+  /* MAIN */
+  .main { margin-left: 220px; padding: 40px; max-width: 1100px; }
+  .page-title { font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .page-sub { color: var(--muted); margin-bottom: 40px; font-size: 14px; }
+
+  /* SECTION */
+  .section { margin-bottom: 60px; scroll-margin-top: 30px; }
+  .section-title { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 6px; padding-bottom: 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .section-title .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .section-desc { color: var(--muted); margin-bottom: 24px; font-size: 13px; }
+
+  /* LEGEND */
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .legend-box { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+
+  /* FLOWCHART */
+  .flow { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 32px; overflow-x: auto; }
+  .flow-row { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: nowrap; margin-bottom: 0; }
+  .flow-col { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+  /* NODES */
+  .node {
+    border-radius: 8px; padding: 10px 16px; font-size: 12px; font-weight: 600;
+    text-align: center; white-space: nowrap; position: relative; min-width: 120px;
+    border: 1.5px solid transparent; line-height: 1.4;
+  }
+  .node small { display: block; font-weight: 400; opacity: 0.8; font-size: 10px; margin-top: 2px; }
+  .node.user    { background: rgba(20,184,166,0.15); border-color: var(--teal); color: var(--teal); }
+  .node.react   { background: rgba(59,130,246,0.15); border-color: var(--blue); color: var(--blue); }
+  .node.firebase{ background: rgba(234,179,8,0.15);  border-color: var(--yellow); color: var(--yellow); }
+  .node.supabase{ background: rgba(168,85,247,0.15); border-color: var(--purple); color: var(--purple); }
+  .node.worker  { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+  .node.api     { background: rgba(239,68,68,0.15);  border-color: var(--red); color: var(--red); }
+  .node.email   { background: rgba(34,197,94,0.15);  border-color: var(--green); color: var(--green); }
+  .node.admin   { background: rgba(236,72,153,0.15); border-color: var(--pink); color: var(--pink); }
+  .node.decision{ background: rgba(59,130,246,0.1); border-color: var(--blue); color: var(--blue); border-radius: 50%; padding: 10px; min-width: 80px; min-height: 80px; display: flex; align-items: center; justify-content: center; }
+
+  /* ARROWS */
+  .arr-r { width: 48px; height: 2px; background: var(--border); position: relative; flex-shrink: 0; }
+  .arr-r::after { content: '▶'; position: absolute; right: -6px; top: -8px; color: var(--muted); font-size: 10px; }
+  .arr-d { width: 2px; height: 36px; background: var(--border); position: relative; flex-shrink: 0; margin: 0 auto; }
+  .arr-d::after { content: '▼'; position: absolute; bottom: -8px; left: -5px; color: var(--muted); font-size: 10px; }
+  .arr-label { font-size: 10px; color: var(--muted); text-align: center; margin: 0 6px; }
+
+  /* ARCH GRID */
+  .arch { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .arch-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+  .arch-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .arch-card ul { list-style: none; }
+  .arch-card ul li { font-size: 12px; color: var(--muted); padding: 3px 0; padding-left: 16px; position: relative; }
+  .arch-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--border); }
+  .arch-card ul li strong { color: var(--text); }
+
+  /* STEP FLOW */
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step-item { display: flex; gap: 20px; }
+  .step-left { display: flex; flex-direction: column; align-items: center; }
+  .step-num { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+  .step-line { width: 2px; flex: 1; min-height: 30px; margin: 4px auto; background: var(--border); }
+  .step-content { padding-bottom: 28px; padding-top: 4px; flex: 1; }
+  .step-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .step-content p { font-size: 13px; color: var(--muted); }
+  .step-content code { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; font-size: 12px; color: var(--orange); font-family: monospace; }
+
+  /* INLINE FLOW */
+  .inline-flow { display: flex; flex-direction: column; gap: 2px; }
+  .if-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; }
+  .if-node { border-radius: 6px; padding: 8px 14px; font-size: 12px; font-weight: 600; min-width: 100px; text-align: center; }
+  .if-arr { color: var(--muted); font-size: 16px; }
+  .if-label { font-size: 11px; color: var(--muted); }
+
+  /* INFO BOX */
+  .info-box { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3); border-radius: 8px; padding: 14px 18px; margin: 16px 0; font-size: 13px; color: #93c5fd; }
+  .warn-box { background: rgba(234,179,8,0.08); border: 1px solid rgba(234,179,8,0.3); border-radius: 8px; padding: 14px 18px; margin: 16px 0; font-size: 13px; color: #fde68a; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg3); color: var(--muted); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .tag.blue   { background: rgba(59,130,246,0.2); color: var(--blue); }
+  .tag.purple { background: rgba(168,85,247,0.2); color: var(--purple); }
+  .tag.orange { background: rgba(249,115,22,0.2); color: var(--orange); }
+  .tag.green  { background: rgba(34,197,94,0.2); color: var(--green); }
+  .tag.yellow { background: rgba(234,179,8,0.2); color: var(--yellow); }
+  .tag.red    { background: rgba(239,68,68,0.2); color: var(--red); }
+
+  /* SPACER */
+  .gap-flow { height: 24px; }
+  .center { display: flex; justify-content: center; }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 20px; }
+    .arch { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <span>mdturzo.web.app</span>
+    <small>System Workflow & Architecture</small>
+  </div>
+  <div class="nav-section">Overview</div>
+  <a class="nav-link" onclick="scrollTo('arch')">System Architecture</a>
+  <a class="nav-link" onclick="scrollTo('dataflow')">Data Flow Overview</a>
+  <div class="nav-section">System Flows</div>
+  <a class="nav-link" onclick="scrollTo('auth')">Auth Flow</a>
+  <a class="nav-link" onclick="scrollTo('image')">Image Upload Flow</a>
+  <a class="nav-link" onclick="scrollTo('content')">Content Flow</a>
+  <a class="nav-link" onclick="scrollTo('contact')">Contact/Form Flow</a>
+  <a class="nav-link" onclick="scrollTo('comment')">Comment/Like Flow</a>
+  <a class="nav-link" onclick="scrollTo('email')">Email System Flow</a>
+  <a class="nav-link" onclick="scrollTo('search')">Search Flow</a>
+  <a class="nav-link" onclick="scrollTo('admin')">Admin Panel Flow</a>
+  <a class="nav-link" onclick="scrollTo('notification')">Notification Flow</a>
+  <div class="nav-section">Dev Workflow</div>
+  <a class="nav-link" onclick="scrollTo('devflow')">Version Workflow</a>
+  <a class="nav-link" onclick="scrollTo('deploy')">Deploy Flow</a>
+  <a class="nav-link" onclick="scrollTo('services')">Services Map</a>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="page-title">System Workflow & Architecture</div>
+  <div class="page-sub">mdturzo.web.app — সব systems কীভাবে একসাথে কাজ করে</div>
+
+  <!-- LEGEND -->
+  <div class="legend" style="margin-bottom:36px">
+    <div class="legend-item"><div class="legend-box" style="background:rgba(20,184,166,0.4);border:1.5px solid var(--teal)"></div> User / Visitor</div>
+    <div class="legend-item"><div class="legend-box" style="background:rgba(59,130,246,0.4);border:1.5px solid var(--blue)"></div> React Frontend</div>
+    <div class="legend-item"><div class="legend-box" style="background:rgba(234,179,8,0.4);border:1.5px solid var(--yellow)"></div> Firebase</div>
+    <div class="legend-item"><div class="legend-box" style="background:rgba(168,85,247,0.4);border:1.5px solid var(--purple)"></div> Supabase</div>
+    <div class="legend-item"><div class="legend-box" style="background:rgba(249,115,22,0.4);border:1.5px solid var(--orange)"></div> Cloudflare Worker</div>
+    <div class="legend-item"><div class="legend-box" style="background:rgba(239,68,68,0.4);border:1.5px solid var(--red)"></div> External API</div>
+    <div class="legend-item"><div class="legend-box" style="background:rgba(34,197,94,0.4);border:1.5px solid var(--green)"></div> Email / Notification</div>
+    <div class="legend-item"><div class="legend-box" style="background:rgba(236,72,153,0.4);border:1.5px solid var(--pink)"></div> Admin</div>
+  </div>
+
+  <!-- ① SYSTEM ARCHITECTURE -->
+  <div class="section" id="arch">
+    <div class="section-title"><div class="dot" style="background:var(--blue)"></div>① System Architecture — কোন Service কী করে</div>
+    <div class="section-desc">পুরো website এর সব services এবং তাদের দায়িত্ব।</div>
+    <div class="arch">
+      <div class="arch-card">
+        <h4 style="color:var(--blue)">⬡ React + Vite (Frontend)</h4>
+        <ul>
+          <li>Website এর সব UI render করে</li>
+          <li>React Router → clean URLs</li>
+          <li>Zustand → global state</li>
+          <li>Framer Motion → animations</li>
+          <li>Tailwind CSS → styling</li>
+          <li>Firebase Hosting এ deploy হয়</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <h4 style="color:var(--yellow)">⬡ Firebase (Auth + Realtime)</h4>
+        <ul>
+          <li><strong>Auth</strong> → login, signup, OAuth</li>
+          <li><strong>Realtime DB</strong> → notifications live</li>
+          <li><strong>Realtime DB</strong> → online presence</li>
+          <li><strong>Hosting</strong> → website deploy</li>
+          <li><strong>Analytics</strong> → GA4 tracking</li>
+          <li>Password reset email পাঠায়</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <h4 style="color:var(--purple)">⬡ Supabase (Main Database)</h4>
+        <ul>
+          <li>Projects, Blogs, Posts data</li>
+          <li>Users, Comments, Likes, Reports</li>
+          <li>Reviews, Messages, Badges</li>
+          <li>Site settings (dynamic data)</li>
+          <li>Activity logs, Analytics</li>
+          <li>Row Level Security → data protect</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <h4 style="color:var(--orange)">⬡ Cloudflare Worker (Proxy)</h4>
+        <ul>
+          <li>Secret API keys secure রাখে</li>
+          <li><strong>/upload-image</strong> → ImgBB proxy</li>
+          <li><strong>/verify-recaptcha</strong> → spam check</li>
+          <li><strong>/send-email</strong> → Resend proxy</li>
+          <li>CORS protection</li>
+          <li>Rate limiting check</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <h4 style="color:var(--red)">⬡ External APIs</h4>
+        <ul>
+          <li><strong>ImgBB</strong> → image hosting</li>
+          <li><strong>Resend</strong> → email delivery</li>
+          <li><strong>reCAPTCHA v3</strong> → bot score</li>
+          <li><strong>ipapi.co</strong> → IP geolocation</li>
+          <li><strong>Hotjar</strong> → heatmaps</li>
+          <li><strong>Sentry</strong> → error tracking</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <h4 style="color:var(--teal)">⬡ TipTap (Rich Editor)</h4>
+        <ul>
+          <li>Blog + Project content editor</li>
+          <li>Templates (Standard, Showcase...)</li>
+          <li>Image insert → ImgBB upload</li>
+          <li>Code blocks, tables, embeds</li>
+          <li>Auto-save as draft</li>
+          <li>Preview mode</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② DATA FLOW OVERVIEW -->
+  <div class="section" id="dataflow">
+    <div class="section-title"><div class="dot" style="background:var(--teal)"></div>② Data Flow — কোন Data কোথায় যায়</div>
+    <div class="section-desc">Website এর সব data কোন path দিয়ে কোথায় store হয় এবং কোথা থেকে আসে।</div>
+    <div class="flow">
+      <!-- Row 1 -->
+      <div class="flow-row">
+        <div class="node user">Visitor / User<small>Browser</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">React App<small>Firebase Hosting</small></div>
+        <div class="arr-r"></div>
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+          <div class="node firebase">Firebase Auth<small>Login/Session</small></div>
+          <div class="node firebase">Realtime DB<small>Notifications</small></div>
+          <div class="node supabase">Supabase<small>All Main Data</small></div>
+        </div>
+      </div>
+      <div class="gap-flow"></div>
+      <!-- Row 2 — image upload -->
+      <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:4px">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Image Upload Path</div>
+        <div class="flow-row">
+          <div class="node user">User<small>Image select</small></div>
+          <div class="arr-r"></div>
+          <div class="node react">Compress<small>browser-side</small></div>
+          <div class="arr-r"></div>
+          <div class="node worker">Cloudflare Worker<small>/upload-image</small></div>
+          <div class="arr-r"></div>
+          <div class="node api">ImgBB API<small>image host</small></div>
+          <div class="arr-r"></div>
+          <div class="node react">URL return<small>→ Supabase save</small></div>
+        </div>
+      </div>
+      <div class="gap-flow"></div>
+      <!-- Row 3 — email -->
+      <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:4px">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Email Notification Path</div>
+        <div class="flow-row">
+          <div class="node react">React Form<small>Submit</small></div>
+          <div class="arr-r"></div>
+          <div class="node worker">Cloudflare Worker<small>/send-email</small></div>
+          <div class="arr-r"></div>
+          <div class="node api">Resend API<small>email service</small></div>
+          <div class="arr-r"></div>
+          <div class="node email">mdturzo.dev<small>@gmail.com</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ AUTH FLOW -->
+  <div class="section" id="auth">
+    <div class="section-title"><div class="dot" style="background:var(--yellow)"></div>③ Authentication Flow — Login/Signup</div>
+    <div class="section-desc">User কীভাবে account তৈরি করে, login করে, এবং admin হিসেবে verify হয়।</div>
+    <div class="flow">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <!-- Signup -->
+        <div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border);padding-bottom:8px">Signup Flow</div>
+          <div class="steps">
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(20,184,166,0.2);color:var(--teal)">1</div><div class="step-line"></div></div>
+              <div class="step-content"><h4>Form Fill</h4><p>Name, @username, email, password, checkbox + reCAPTCHA v3 background এ check</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(59,130,246,0.2);color:var(--blue)">2</div><div class="step-line"></div></div>
+              <div class="step-content"><h4>Spam Check</h4><p>Cloudflare Worker → reCAPTCHA score verify। Score &lt; 0.5 → block। Honeypot check।</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(234,179,8,0.2);color:var(--yellow)">3</div><div class="step-line"></div></div>
+              <div class="step-content"><h4>Firebase Auth Create</h4><p>Email/password account তৈরি হয়। Firebase UID generate হয়। Verification email পাঠানো হয়।</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(168,85,247,0.2);color:var(--purple)">4</div><div class="step-line"></div></div>
+              <div class="step-content"><h4>Supabase User Create</h4><p>Firebase UID দিয়ে Supabase <code>users</code> table এ entry। <code>usernames</code> table এ @username।</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(34,197,94,0.2);color:var(--green)">5</div></div>
+              <div class="step-content"><h4>Profile Page Redirect</h4><p>Profile complete করার জন্য redirect। Resend → admin এ new user notification।</p></div>
+            </div>
+          </div>
+        </div>
+        <!-- Admin verify -->
+        <div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border);padding-bottom:8px">Admin Verification Flow (Background)</div>
+          <div class="steps">
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(236,72,153,0.2);color:var(--pink)">1</div><div class="step-line"></div></div>
+              <div class="step-content"><h4>Firebase Token Check</h4><p>Login করলে Firebase JWT token auto check। Invalid হলে logout।</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(236,72,153,0.2);color:var(--pink)">2</div><div class="step-line"></div></div>
+              <div class="step-content"><h4>Supabase Admin Check</h4><p><code>admins</code> table এ email match আছে কিনা। না থাকলে regular user।</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(236,72,153,0.2);color:var(--pink)">3</div><div class="step-line"></div></div>
+              <div class="step-content"><h4>/admin Access</h4><p>Admin confirmed → panel access। Not admin → 404 page (existence reveal হয় না)।</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(236,72,153,0.2);color:var(--pink)">4</div></div>
+              <div class="step-content"><h4>Sensitive Action</h4><p>User delete, settings change → confirmation modal। Normal browse তে কোনো interruption নেই।</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ IMAGE UPLOAD FLOW -->
+  <div class="section" id="image">
+    <div class="section-title"><div class="dot" style="background:var(--orange)"></div>④ Image Upload Flow — Compress → Upload → Store</div>
+    <div class="section-desc">User বা Admin ছবি upload করলে কী হয়। API key কখনো browser এ আসে না।</div>
+    <div class="flow">
+      <div class="steps">
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(20,184,166,0.2);color:var(--teal)">1</div><div class="step-line"></div></div>
+          <div class="step-content"><h4 style="color:var(--teal)">Image Select</h4><p>User image file choose করে। Original size + dimensions দেখানো হয়।</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(59,130,246,0.2);color:var(--blue)">2</div><div class="step-line"></div></div>
+          <div class="step-content"><h4 style="color:var(--blue)">Crop (Cropper.js)</h4><p>Aspect ratio fix করে crop। Profile: 1:1 | Banner: 16:9 | Thumbnail: 16:9 | Review: free।</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(249,115,22,0.2);color:var(--orange)">3</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <h4 style="color:var(--orange)">Compression Options</h4>
+            <p>Normal user: auto 150KB max, WebP, no options।<br>
+            Admin: Preset (None/Low/Medium/High/Custom), Quality slider, Max size, Format select। Estimated output preview দেখায়।</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(59,130,246,0.2);color:var(--blue)">4</div><div class="step-line"></div></div>
+          <div class="step-content"><h4 style="color:var(--blue)">Compress Preview</h4><p>Left: Original | Right: Compressed। Size comparison। Buttons: Accept / Re-compress / Cancel।</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(249,115,22,0.2);color:var(--orange)">5</div><div class="step-line"></div></div>
+          <div class="step-content"><h4 style="color:var(--orange)">Cloudflare Worker → ImgBB</h4><p>React → POST /upload-image → Worker adds ImgBB API key → ImgBB upload → URL return। Key কখনো browser এ আসে না।</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(168,85,247,0.2);color:var(--purple)">6</div></div>
+          <div class="step-content"><h4 style="color:var(--purple)">Supabase Save</h4><p>ImgBB URL → Supabase তে store। naming: <code>pt_{slug}_{ts}.webp</code>, <code>up_{uid}_{ts}.webp</code> etc।</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ CONTENT FLOW -->
+  <div class="section" id="content">
+    <div class="section-title"><div class="dot" style="background:var(--purple)"></div>⑤ Content Flow — Admin থেকে Public</div>
+    <div class="section-desc">Admin কীভাবে content তৈরি করে, publish করে, এবং public এ দেখায়।</div>
+    <div class="flow">
+      <div style="display:grid;grid-template-columns:1fr 2px 1fr;gap:24px;align-items:start">
+        <div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:16px">Admin Side</div>
+          <div class="inline-flow">
+            <div class="if-row"><div class="if-node admin">/admin/projects</div><span class="if-arr">→</span><span class="if-label">Tab খোলে</span></div>
+            <div class="if-row" style="padding-left:20px"><span class="if-arr">↓</span></div>
+            <div class="if-row"><div class="if-node admin">Template Select</div><span class="if-arr">→</span><span class="if-label">Editor load</span></div>
+            <div class="if-row" style="padding-left:20px"><span class="if-arr">↓</span></div>
+            <div class="if-node admin" style="margin-bottom:8px">TipTap Editor<br><small style="font-weight:400;font-size:10px">Content লেখে, images add করে</small></div>
+            <div class="if-row" style="padding-left:20px"><span class="if-arr">↓</span></div>
+            <div class="if-row"><div class="if-node admin">Status Set</div><span class="if-arr">→</span><span class="if-label">draft/published/hidden</span></div>
+            <div class="if-row" style="padding-left:20px"><span class="if-arr">↓</span></div>
+            <div class="if-row"><div class="if-node admin">Visibility Set</div><span class="if-arr">→</span><span class="if-label">public/signed-in/private</span></div>
+            <div class="if-row" style="padding-left:20px"><span class="if-arr">↓</span></div>
+            <div class="if-node supabase" style="margin-bottom:8px">Supabase Save<br><small style="font-weight:400;font-size:10px">projects table এ store</small></div>
+          </div>
+        </div>
+        <div style="background:var(--border);width:2px;align-self:stretch"></div>
+        <div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:16px">Visitor Side</div>
+          <div class="inline-flow">
+            <div class="if-row"><div class="if-node user">/projects visit</div></div>
+            <div class="if-row" style="padding-left:20px"><span class="if-arr">↓</span></div>
+            <div class="if-node react" style="margin-bottom:8px">VisibilityGuard Check<br><small style="font-weight:400;font-size:10px">page_visibility table query</small></div>
+            <div class="if-row" style="padding-left:20px"><span class="if-arr">↓</span></div>
+            <div class="if-row"><div class="if-node react">Supabase Query</div><span class="if-arr">→</span><span class="if-label">status=published + visibility=public</span></div>
+            <div class="if-row" style="padding-left:20px"><span class="if-arr">↓</span></div>
+            <div class="if-node react" style="margin-bottom:8px">Skeleton Loading<br><small style="font-weight:400;font-size:10px">data আসার আগে</small></div>
+            <div class="if-row" style="padding-left:20px"><span class="if-arr">↓</span></div>
+            <div class="if-row"><div class="if-node react">Project Cards</div><span class="if-arr">→</span><span class="if-label">Grid/List toggle</span></div>
+            <div class="if-row" style="padding-left:20px"><span class="if-arr">↓</span></div>
+            <div class="if-row"><div class="if-node react">/projects/slug</div><span class="if-arr">→</span><span class="if-label">Detail page, views++</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑥ CONTACT/FORM FLOW -->
+  <div class="section" id="contact">
+    <div class="section-title"><div class="dot" style="background:var(--green)"></div>⑥ Contact / Form Submission Flow</div>
+    <div class="section-desc">Contact form, bug report, question — submit হলে কী কী হয়।</div>
+    <div class="flow">
+      <div class="flow-row" style="flex-wrap:wrap;gap:8px;justify-content:flex-start">
+        <div class="node user">User fills form<small>name, email, message, images</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">Validation<small>honeypot + field check</small></div>
+        <div class="arr-r"></div>
+        <div class="node worker">reCAPTCHA v3<small>Cloudflare verify</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">Score OK?</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px">
+        <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:16px">
+          <div style="color:var(--green);font-size:12px;font-weight:700;margin-bottom:12px">✓ Score ≥ 0.5 — Proceed</div>
+          <div class="steps">
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(59,130,246,0.2);color:var(--blue);width:28px;height:28px;font-size:12px">1</div><div class="step-line"></div></div>
+              <div class="step-content" style="padding-bottom:16px"><h4 style="font-size:13px">Device Info Collect</h4><p style="font-size:12px">Browser, OS, device, screen, IP, city, country, timezone, referrer।</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(168,85,247,0.2);color:var(--purple);width:28px;height:28px;font-size:12px">2</div><div class="step-line"></div></div>
+              <div class="step-content" style="padding-bottom:16px"><h4 style="font-size:13px">Supabase Save</h4><p style="font-size:12px">messages table এ সব data + device_info JSON।</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(249,115,22,0.2);color:var(--orange);width:28px;height:28px;font-size:12px">3</div><div class="step-line"></div></div>
+              <div class="step-content" style="padding-bottom:16px"><h4 style="font-size:13px">Email → Admin</h4><p style="font-size:12px">Cloudflare Worker → Resend → mdturzo.dev@gmail.com। Full details, device info, designed template।</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-left"><div class="step-num" style="background:rgba(34,197,94,0.2);color:var(--green);width:28px;height:28px;font-size:12px">4</div></div>
+              <div class="step-content"><h4 style="font-size:13px">Email → User</h4><p style="font-size:12px">Sender email এ confirmation। "আমরা পেয়েছি, শীঘ্রই reply করব।"</p></div>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:16px">
+          <div style="color:var(--red);font-size:12px;font-weight:700;margin-bottom:12px">✗ Score &lt; 0.5 — Block</div>
+          <p style="font-size:13px;color:var(--muted)">Toast error: "Spam detected. Please try again." Form reset হয়। কোনো data save হয় না। IP log এ record।</p>
+          <div class="warn-box" style="margin-top:12px;font-size:12px">Rate limit: same IP থেকে ২/ঘণ্টার বেশি submit করা যাবে না।</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑦ COMMENT/LIKE FLOW -->
+  <div class="section" id="comment">
+    <div class="section-title"><div class="dot" style="background:var(--blue)"></div>⑦ Comment / Like / Report Flow</div>
+    <div class="section-desc">কোনো Project, Blog বা Post এ user কীভাবে interact করতে পারে।</div>
+    <div class="flow">
+      <table>
+        <tr><th>Action</th><th>Requirement</th><th>Flow</th><th>Storage</th></tr>
+        <tr>
+          <td><span class="tag blue">View</span></td>
+          <td>Anyone</td>
+          <td>Page load → auto increment</td>
+          <td>Supabase views_count ++</td>
+        </tr>
+        <tr>
+          <td><span class="tag green">Like</span></td>
+          <td>Login required</td>
+          <td>Click → check existing → toggle like/remove</td>
+          <td>Supabase likes table</td>
+        </tr>
+        <tr>
+          <td><span class="tag red">Dislike</span></td>
+          <td>Login required</td>
+          <td>Click → check existing → toggle dislike/remove</td>
+          <td>Supabase likes table</td>
+        </tr>
+        <tr>
+          <td><span class="tag blue">Comment</span></td>
+          <td>Login + Email verified</td>
+          <td>Write → reCAPTCHA → rate check (3/hr) → save → pending</td>
+          <td>Supabase comments (status: pending)</td>
+        </tr>
+        <tr>
+          <td><span class="tag yellow">Report</span></td>
+          <td>Login required</td>
+          <td>Reason select → save → admin notification email</td>
+          <td>Supabase reports → admin email</td>
+        </tr>
+        <tr>
+          <td><span class="tag purple">Share</span></td>
+          <td>Anyone</td>
+          <td>Platform select → open share URL with OG preview</td>
+          <td>No storage (client-side)</td>
+        </tr>
+      </table>
+      <div class="info-box" style="margin-top:16px">Comment approval: default pending। Admin approve করলে public দেখাবে। Admin "auto-approve" toggle on করলে সাথে সাথে approved।</div>
+    </div>
+  </div>
+
+  <!-- ⑧ EMAIL SYSTEM -->
+  <div class="section" id="email">
+    <div class="section-title"><div class="dot" style="background:var(--green)"></div>⑧ Email System Flow — কোন Email কোথা থেকে যায়</div>
+    <div class="section-desc">দুটো আলাদা email system কাজ করে — Firebase Auth (automatic) এবং Resend (custom)।</div>
+    <div class="flow">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+        <div>
+          <div style="font-size:12px;color:var(--yellow);font-weight:700;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:8px">Firebase Auth Emails (Automatic)</div>
+          <table>
+            <tr><th>Trigger</th><th>Email Content</th></tr>
+            <tr><td>Signup</td><td>Email verification link → <code>/auth/action</code></td></tr>
+            <tr><td>Forgot password</td><td>Password reset link → <code>/auth/action</code></td></tr>
+          </table>
+          <div class="info-box" style="margin-top:12px;font-size:12px">Firebase Console এ template customize করা হবে। Action URL set: <code>/auth/action</code>। এই page এ সুন্দর custom UI আছে।</div>
+        </div>
+        <div>
+          <div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:8px">Resend Emails (via Cloudflare Worker)</div>
+          <table>
+            <tr><th>Trigger</th><th>To</th></tr>
+            <tr><td>Contact form</td><td>Admin + Sender</td></tr>
+            <tr><td>Bug report</td><td>Admin</td></tr>
+            <tr><td>Question</td><td>Admin</td></tr>
+            <tr><td>New comment</td><td>Admin</td></tr>
+            <tr><td>New report</td><td>Admin</td></tr>
+            <tr><td>New review</td><td>Admin</td></tr>
+            <tr><td>New signup</td><td>Admin</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑨ SEARCH FLOW -->
+  <div class="section" id="search">
+    <div class="section-title"><div class="dot" style="background:var(--teal)"></div>⑨ Global Search Flow</div>
+    <div class="section-desc">Navbar এর search icon click থেকে result এ navigate পর্যন্ত।</div>
+    <div class="flow">
+      <div class="flow-row" style="flex-wrap:wrap;gap:0">
+        <div class="node user">Search Icon Click<small>বা Ctrl+K</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">Overlay Open<small>Framer Motion</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">User Types<small>debounce 300ms</small></div>
+        <div class="arr-r"></div>
+        <div class="node supabase">Supabase Query<small>projects+blogs+posts</small></div>
+      </div>
+      <div class="gap-flow"></div>
+      <div class="flow-row" style="flex-wrap:wrap;justify-content:flex-start;gap:0">
+        <div class="node react">Score Calculate<small>Title×10, Desc×5, Tag×3</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">Sort by Score<small>Highest first</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">Category Group<small>Pages, Projects, Blogs</small></div>
+        <div class="arr-r"></div>
+        <div class="node user">User Clicks Result</div>
+      </div>
+      <div class="gap-flow"></div>
+      <div class="flow-row" style="justify-content:flex-start">
+        <div class="node react">Navigate to Page<small>React Router</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">Scroll to Section<small>scroll-margin-top</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">Highlight 2s<small>Framer Motion glow</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑩ ADMIN PANEL FLOW -->
+  <div class="section" id="admin">
+    <div class="section-title"><div class="dot" style="background:var(--pink)"></div>⑩ Admin Panel Flow — Content Management</div>
+    <div class="section-desc">Admin panel এর সব tab কীভাবে connected এবং কোথায় data যায়।</div>
+    <div class="flow">
+      <div style="text-align:center;margin-bottom:20px">
+        <div class="node admin" style="display:inline-block">/admin — Admin Verified</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div style="background:rgba(236,72,153,0.08);border:1px solid rgba(236,72,153,0.2);border-radius:8px;padding:14px">
+          <div style="color:var(--pink);font-weight:700;font-size:12px;margin-bottom:10px">Dashboard</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.8">
+            → Supabase: count queries<br>
+            → Firebase: realtime status<br>
+            → Recent activity feed<br>
+            → Site health check
+          </div>
+        </div>
+        <div style="background:rgba(236,72,153,0.08);border:1px solid rgba(236,72,153,0.2);border-radius:8px;padding:14px">
+          <div style="color:var(--pink);font-weight:700;font-size:12px;margin-bottom:10px">Content Tabs</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.8">
+            Projects: Supabase CRUD<br>
+            Blogs: Supabase CRUD<br>
+            Posts: Supabase CRUD<br>
+            TipTap editor save<br>
+            ImgBB thumbnail upload
+          </div>
+        </div>
+        <div style="background:rgba(236,72,153,0.08);border:1px solid rgba(236,72,153,0.2);border-radius:8px;padding:14px">
+          <div style="color:var(--pink);font-weight:700;font-size:12px;margin-bottom:10px">Moderation</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.8">
+            Comments: approve/flag<br>
+            Reports: review/dismiss<br>
+            Reviews: approve/reject<br>
+            Messages: read/reply<br>
+            Users: ban/badge
+          </div>
+        </div>
+        <div style="background:rgba(236,72,153,0.08);border:1px solid rgba(236,72,153,0.2);border-radius:8px;padding:14px">
+          <div style="color:var(--pink);font-weight:700;font-size:12px;margin-bottom:10px">Settings</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.8">
+            Site settings: Supabase<br>
+            Notifications: Firebase<br>
+            Page visibility: Supabase<br>
+            Analytics: Recharts<br>
+            Logs: Supabase export
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑪ NOTIFICATION FLOW -->
+  <div class="section" id="notification">
+    <div class="section-title"><div class="dot" style="background:var(--yellow)"></div>⑪ Notification Flow — Firebase Realtime</div>
+    <div class="section-desc">Admin notification পাঠায়, user সাথে সাথে দেখতে পায় — page reload ছাড়াই।</div>
+    <div class="flow">
+      <div class="flow-row" style="flex-wrap:wrap;gap:0">
+        <div class="node admin">Admin creates<small>title, target, link</small></div>
+        <div class="arr-r"></div>
+        <div class="node firebase">Firebase Realtime DB<small>notifications/ node</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">onValue listener<small>React auto update</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">Bell icon badge++<small>unread count</small></div>
+      </div>
+      <div class="gap-flow"></div>
+      <div class="flow-row" style="justify-content:flex-start">
+        <div class="node user">User clicks bell</div>
+        <div class="arr-r"></div>
+        <div class="node react">Notification popup<small>list with read/unread</small></div>
+        <div class="arr-r"></div>
+        <div class="node firebase">Mark read<small>notification_reads/ node</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">Badge count --<small>instant update</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑫ VERSION WORKFLOW -->
+  <div class="section" id="devflow">
+    <div class="section-title"><div class="dot" style="background:var(--teal)"></div>⑫ Version Development Workflow</div>
+    <div class="section-desc">AI দিয়ে প্রতিটা version কীভাবে develop করবে — step by step।</div>
+    <div class="flow">
+      <div class="steps">
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(236,72,153,0.2);color:var(--pink)">1</div><div class="step-line"></div></div>
+          <div class="step-content"><h4>নতুন Chat খোলো</h4><p>Claude.ai তে নতুন conversation। Master Prompt পুরোটা copy-paste করো।</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(20,184,166,0.2);color:var(--teal)">2</div><div class="step-line"></div></div>
+          <div class="step-content"><h4>Version বলো + Files দাও</h4><p>"v2.X.0 এর কাজ করব" বলো। Per-version guide অনুযায়ী extra files attach করো।</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(59,130,246,0.2);color:var(--blue)">3</div><div class="step-line"></div></div>
+          <div class="step-content"><h4>AI Code Generate করে</h4><p>AI সব code লিখবে। তুমি শুধু wait করো। ZIP + SQL script + commit message পাবে।</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(249,115,22,0.2);color:var(--orange)">4</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <h4>Local Test করো</h4>
+            <p>ZIP extract → <code>.env</code> বানাও → <code>npm install</code> → <code>npm run dev</code> → localhost:5173 এ test।</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(239,68,68,0.2);color:var(--red)">5</div><div class="step-line"></div></div>
+          <div class="step-content"><h4>Bug পেলে — Same Chat এ বলো</h4><p>Same chat এ error message দেখাও। AI fix করবে। Version হবে v2.X.1, v2.X.2 etc। New ZIP পাবে।</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(34,197,94,0.2);color:var(--green)">6</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <h4>Deploy করো</h4>
+            <p><code>npm run build</code> → <code>firebase deploy</code> → mdturzo.web.app এ live।</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num" style="background:rgba(168,85,247,0.2);color:var(--purple)">7</div></div>
+          <div class="step-content"><h4>পরের Version</h4><p>নতুন chat → Master Prompt → "v2.(X+1).0 এর কাজ করব" → আগের ZIP দাও।</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑬ DEPLOY FLOW -->
+  <div class="section" id="deploy">
+    <div class="section-title"><div class="dot" style="background:var(--orange)"></div>⑬ Deploy Flow — Local থেকে Live</div>
+    <div class="section-desc">Code তৈরি হওয়ার পর mdturzo.web.app এ live করার সম্পূর্ণ process।</div>
+    <div class="flow">
+      <div class="flow-row" style="flex-wrap:wrap;gap:0">
+        <div class="node react">AI দেয় ZIP<small>mdturzo-portfolio-v2.X.0</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">Extract করো<small>folder এ</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">.env বানাও<small>.env.example কপি</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">npm install<small>dependencies</small></div>
+      </div>
+      <div class="gap-flow"></div>
+      <div class="flow-row" style="flex-wrap:wrap;justify-content:flex-start;gap:0">
+        <div class="node react">npm run dev<small>localhost:5173</small></div>
+        <div class="arr-r"></div>
+        <div class="node user">Test করো<small>mobile + desktop</small></div>
+        <div class="arr-r"></div>
+        <div class="node react">npm run build<small>dist/ folder</small></div>
+        <div class="arr-r"></div>
+        <div class="node firebase">firebase deploy<small>Firebase CLI</small></div>
+        <div class="arr-r"></div>
+        <div class="node firebase">mdturzo.web.app<small>Live!</small></div>
+      </div>
+      <div class="warn-box" style="margin-top:20px">SQL Script ভুলো না — Supabase SQL Editor এ run করতে হবে প্রতিটা version এ নতুন tables এর জন্য।</div>
+    </div>
+  </div>
+
+  <!-- ⑭ SERVICES MAP -->
+  <div class="section" id="services">
+    <div class="section-title"><div class="dot" style="background:var(--purple)"></div>⑭ Services & Accounts Map</div>
+    <div class="section-desc">কোন সাইটে account আছে, কী key লাগে, কোথায় যায়।</div>
+    <div class="flow">
+      <table>
+        <tr>
+          <th>Service</th>
+          <th>Website</th>
+          <th>কী Key পাবে</th>
+          <th>কোথায় যাবে</th>
+          <th>Free Limit</th>
+        </tr>
+        <tr>
+          <td><span class="tag yellow">Firebase</span></td>
+          <td>console.firebase.google.com</td>
+          <td>API Key, App ID (already in prompt)</td>
+          <td>.env (VITE_FIREBASE_*)</td>
+          <td>Spark: Unlimited Auth, 1GB Realtime DB</td>
+        </tr>
+        <tr>
+          <td><span class="tag purple">Supabase</span></td>
+          <td>supabase.com</td>
+          <td>ANON KEY</td>
+          <td>.env (VITE_SUPABASE_ANON_KEY)</td>
+          <td>500MB DB, 50K users</td>
+        </tr>
+        <tr>
+          <td><span class="tag red">ImgBB</span></td>
+          <td>imgbb.com/api</td>
+          <td>API KEY</td>
+          <td>Cloudflare Worker (imgbb_api)</td>
+          <td>Unlimited images, max 32MB each</td>
+        </tr>
+        <tr>
+          <td><span class="tag orange">Cloudflare</span></td>
+          <td>cloudflare.com/workers</td>
+          <td>Worker already setup</td>
+          <td>Secret variables add করো</td>
+          <td>100K requests/day</td>
+        </tr>
+        <tr>
+          <td><span class="tag green">Resend</span></td>
+          <td>resend.com</td>
+          <td>API KEY</td>
+          <td>Cloudflare Worker (resend_api)</td>
+          <td>3000 emails/month, 100/day</td>
+        </tr>
+        <tr>
+          <td><span class="tag red">reCAPTCHA</span></td>
+          <td>google.com/recaptcha/admin</td>
+          <td>SITE KEY + SECRET KEY</td>
+          <td>SITE KEY → .env, SECRET → Worker</td>
+          <td>1M requests/month</td>
+        </tr>
+        <tr>
+          <td><span class="tag blue">Hotjar</span></td>
+          <td>hotjar.com</td>
+          <td>SITE ID (number)</td>
+          <td>.env (VITE_HOTJAR_ID)</td>
+          <td>35 sessions/day recording</td>
+        </tr>
+        <tr>
+          <td><span class="tag red">Sentry</span></td>
+          <td>sentry.io</td>
+          <td>DSN URL</td>
+          <td>.env (VITE_SENTRY_DSN)</td>
+          <td>5000 errors/month</td>
+        </tr>
+        <tr>
+          <td><span class="tag blue">GitHub</span></td>
+          <td>github.com</td>
+          <td>OAuth Client ID + Secret</td>
+          <td>Firebase Console → Auth → GitHub</td>
+          <td>Unlimited</td>
+        </tr>
+      </table>
+    </div>
+    <div style="height:60px"></div>
+  </div>
+
+</div>
+
+<script>
+function scrollTo(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  event.target.classList.add('active');
+}
+// Active link on scroll
+const sections = document.querySelectorAll('.section');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  document.querySelectorAll('.nav-link').forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('onclick')?.includes(current)) l.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
