@@ -1,0 +1,70 @@
+
+-----------------------------
+
+Ami react dea amr web banacchi, kintu ekn ami bujhtichi na je kemon navbar banabo. Ti tumi apatoto static html,css,js use kore amake 1 ta advanced, goodlooking, attractive and minimal navbar banay daw with responsive ness... Different different kichu try korio...
+
+Navbar er left e ekta image thakbe, tr sathe @mdturzo999, jr @ ta blue color hbe... Middle e icon soho home,abkut,projects,feed,contact eisob nav items thakbe. Eight e thakbe search icon, notification icon, light/dark toggle icon, sign in button, view all pages icon (etate click korle maga nav e sob pages jegula nav e ache ba nai sob cetagory hoye asbe. Pc er khettre nav er width er soman hbe. Compact vabe sob page er direct link thakbe.
+
+Navbar ta scroll e alada kichu design korbo. Eita upore fixed/sticky hbe na. Page er ektu height scroll korar por eita hidden hoye jabe kichuta fast tobe smooth, r ektu scroll korle (page er 400-500px) oirokomi r ekta navbar floating vabe upore asbe and fixed vabe thakbe. Seta body er xontents er sathe aligned thakbe. Agertaw align thakbe. Rounded navbar, navbar er height bashi na top er moto. Eikhanew ager moto same sob functionality thakbe. Etaw fast and smooth asbe
+
+Page e abr scroll kore jodi user upore jay tahole jokhani oi 400-500px er range visible hbe tokhone eita fast and smooth transition er maddhome upore gea hide hoje jabe and old top ta visivle hbe ager moto kore fast. Ami hoito bashi valo kore bujhaite pari na. Tobu try korio.. R eta sob width er device ei hbe
+
+Pimary and secondary button e click korle button er background e sundor click animation thakbe. Jehula button na khali icon segulate tooltip nicher dike thakbe and sekhane short kore name dewa thakbe. And nav items/mega nav items e hover korle oi page er ekta one line short description (max 10 word er moto) normal cursor tooltip e dakhaio...
+
+Eibar ektu responsive er bapar. Mid width er device e left e logo and name thakbe. Right e thakbe ekdom right e menu icon jeta dea side e navigation panel opne hbe. Er left e thakbe sign in button (jodi new user hoy, nahole eita thakbe na), aro thakbe search icon and notification icon.
+
+Sidebar er moddhe header e logo,name,close icon. Main body te sobar upore search bar thakbe and niche cetagory hosebe important kichu page er link jemon ektate home,about,projects,feed... Onno eirokom aro 2 ta cetagory rakha jite pare. Sidebar er footer e thakbe ekdom niche contact button. Er upore user new hoile login + sign up button (2ta button eki row te)... R user alreay signup thakle ekta row card e user er profile pic round left e and righ e user er name and account navication releted kichu dea dio... Contact button er niche ekta auto silde e amr joto sob social media profile link ache ogular colored icon er pore username thakbe and reght to left jithe thakbe. Hover korle thame jabe. Click korle oi link open hbe. Kichuta eirokom hbe (loop)
+
+```
+Yt-icon/@mdturzo999   •   fb-icon/mdturzo999 	 •  ....  
+```
+
+Mobile ew tablet er moto same hbe khali main page er navbar er upore menu icon er pase khali 'sign up button/profile' and notification icon thakbe (mobile and tab e new notification oage hbe, popup na)... 
+
+Kono kichur jonno aro valo idea thakle use korte paro...
+
+-----------------------------
+
+I lake the design khali koyekta jinish fix korte hbe:
+- all pages er icon ta dakacche na.
+- top navbar ta body er contents er sathe valo kore align na. Ektu calculation korte hbe. 
+- close button e red hover hbe na
+- custom thin scrollbar hbe sidebar ee..
+- Contact button er niche jei slide ta ache oita hover korle to thambei kintu oi div er vitor scroll kore left righ kora jabe mouse dea. And mobile er jonno finger dea slide kora jabe. Kono scrollbar lagbe na.. E eitar heisgh ta ektu kom koro...  Hover e username and icon er background e ektu hover effect (bg cng) hbe... Full div tar bg alada hbe na, khali left and right side e light/dark fade gredient er moto hbe jate dekhte odd na lage
+- nav er button e click korlew animation asbe. Tobe animation ta eirokom hbe na. Ti apatoto animation er partta bad daw. Ami pore seta add korbo
+
+-----------------------------
+
+Ekta new html design koro amr website er footer er jonno. Eitate aptoto kono v
+
+footer tate koyekta jinish thakbe perfectly orginized. Acctually footer ta kivabe banaile valo hbe tr kono idea nai amr kache ti ami eta tomar upor care dicchi. Jerokom korle valo mone hoy seirokom korei korba. Khali bole dicche ki ki thakbe.
+
+Logo + name and ekta short description. Echara thakbe explore er under e important koyekta oage er navigation url. Contact er jonno thakbe email (mdturzo.dev@gmail.com) ekta sundor compact and creative design er sathe ekta card hbe contact lage er jonno. Aro thakbe, legal er koyekta page, aro thakbe 8ta social media icon button, r ekta jinish add korte cacchi seta hocche email input newar jonno (stay updated type er), eitar design o onek sundor and creative hbe, input bar er niche kotogula eiporjonto unique email input dewa hoiche (ami firebase dea pore control korbo) setar live count animation er sathe dakhabe and also eta ekta oneline tect er moddhe ei sonkhata dynamically bosbe...  Footer e r ki ki thaka uchit ami thik jani na. Ti tumi tomar moto kora ja ja jekhane dile valo hoy deo. Eta ekta portfolio erbsite. Jeivabe korle valo hoy korio kono somossa naim code joto boro hoy hok, konolimitation nai...navbar lagbe na. Sob focus diba footer e.  Onek sundor kore and deeply cinta kore kaj ta korba...
+
+-----------------------------
+
+Footer changes:
+- total 4ta column rakhio
+- 1st coldun e description er nicher contact card take ektu update and compact koro and setate email tar theke bashi hiliah kora dorkar hocche contact page er link take. Ti ektu creative kichu koro..
+- 2nd column e website er top 6ta nav list thakbe. Contact vabe. Hocher e egula ektu right e jabe, blue text hbe and left e '>' icon apear hbe with animation.
+-3rd column e eki baki 2ta nav list er cetagory ke combine kore ekta banaw. Eknew 6ta item thakbe. Eki design.
+- 4th tate upore title, 1line muted text er description, er niche main email input. Tr niche sundor kore ekta 0.70 line e text soho count... Tobe eisober porew ei column ta faka thakbe ti eikhan e er niche amr social links er buttons rakhte paro. Ektu responsive korio jate jiga boro hoile 2 line e 4-4 kore i8 ta hoy. Screen widht er sathe samonjosso rakhe jeivabe korle valo hoy korio. Large screen e ekta kaj korte paro button gular left e icon and right e username eivabe 2ta column and 4ta row. Compact and height onek kom rakhar cesta korba... Abr ei column er width jodi kokhono kom hoy tahole segula khali icon button e convert hbe and segulai dakhabe.  Tokhon proti line e 4ta kore rakhba. 2line.
+- ei 4ta column er niche ekta last row er left e copyrigh text and right e version badge 'v2.1.1' and scroll to top button sundor kore creative vabe dio. 
+- tab er khettre 1st and 4th column take upore rakhba and navigation er 2ta mane 2nd and 3rd colukn egulake nicher row te rakhba. Orthat tokhon 2 column and 2 row. R nicher last row takew nijer moto kore ektu adjust kore nio.
+
+- mobile ba small screen e sobkichu aro compact hbe and tokhon 1column hbe and 3ta row. Prothome thakbe pc er 1st column, erpor 4th column, erporer row er eki sathe 2d and 3rd column 2tai thakbe. R niche last row takew ektu adjust korte hbe. Likha coto hbe, copyright text left e, badge right e. And scroll to top er button take ektu unique vabe half last eow e and half footer er uporer onse eivabe rounded vabe rakhio. Background color nicher tar moto hbe jate nixher tar sathe blend hoye jaym.. Ecaraw kichu doekar hoile korio...
+
+-----------------------------
+
+Kichu coto cngs ano
+social meda links gula ekn 1st column er description er niche place koro (pc and tab e 2 column, 4 row, with username... And mobile e just button. Responsive. Only oneline. Full widht e jite majher gap adjust korbe.) r social meadia er jaygay orthat 4th column er niche contact card ta add koro. Contact card er design ekdomi pocondo hoy nai. Card ta hbe hocche contact page er. Card er left e icon and right e ekta titlw and 1 line er caption... Card er niche email er jonno alada ekta line hbe. Seta minimal design... Kothaw emoji use korba na. Sob jaygauly icon. Nobioe and tab e 2nd and 3rd column er nav link vula valo lagteche na ti tab e ei list gula upore jiche na hoye dane bame hbe. 6ta nav link er jonno 3ta column and 2ta row hbe. Mobile er jonno.  2ta cetagory er jonno 2ta row. Mobile e list hbe 2 column and 3 row. Pc te 4ta column er height ektu same er moto rakhar cesta korba. Er jonno jeivabe responsive korte paro korio...
+
+-----------------------------
+
+Email ta card er bahire thakbe.. Ekdom alada card er niche.., r icon hbe ekta paper plane sent er moto.
+Stay connected e icon hbe mail box er moto.
+Social meadia er sathe jokhon username soho thakbe tokhon segulab background color hbe na. Transparent hbe. Pc te background color hbe na. Tab e background color hbe.
+Nav list er jei 2ta cetagory ache segula pc te thik ache kintu tab and mobile e thik nai. Tab and mobile e se 2ta column uporeniche full width e thakbe. Ekta cetagory er niche r ekta. Tab e proti row te 6ta list item thakbe,  and mobioe e 3ta kore. 
+
+
+-----------------------------

@@ -1,0 +1,859 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced Responsive Navbar</title>
+  <style>
+    :root{
+      --bg: #0b1020;
+      --panel: rgba(16, 23, 44, 0.78);
+      --panel-2: rgba(21, 30, 55, 0.95);
+      --text: #eaf0ff;
+      --muted: rgba(234,240,255,.72);
+      --line: rgba(255,255,255,.10);
+      --accent: #4d8dff;
+      --accent-2: #7c5cff;
+      --shadow: 0 18px 50px rgba(0,0,0,.28);
+      --shadow-2: 0 12px 30px rgba(0,0,0,.22);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --nav-h: 72px;
+      --nav-h-compact: 64px;
+      --content-width: 1180px;
+      --transition: 260ms cubic-bezier(.2,.8,.2,1);
+      --transition-fast: 160ms cubic-bezier(.2,.8,.2,1);
+    }[data-theme="light"]{
+  --bg: #f5f8ff;
+  --panel: rgba(255,255,255,0.78);
+  --panel-2: rgba(255,255,255,0.95);
+  --text: #101522;
+  --muted: rgba(16,21,34,.70);
+  --line: rgba(16,21,34,.10);
+  --shadow: 0 18px 50px rgba(31, 43, 80, .13);
+  --shadow-2: 0 12px 30px rgba(31, 43, 80, .10);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(77,141,255,.12), transparent 34%),
+    radial-gradient(circle at 20% 15%, rgba(124,92,255,.08), transparent 28%),
+    var(--bg);
+  color:var(--text);
+  min-height:200vh; /* demo scroll space */
+}
+
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+
+.page-shell{
+  width:min(var(--content-width), calc(100% - 32px));
+  margin:0 auto;
+}
+
+.spacer{height:26px}
+
+/* ===== Desktop navbar ===== */
+.topbar-wrap{
+  position:relative;
+  z-index:40;
+  height: calc(var(--nav-h) + 24px);
+}
+
+.topbar{
+  width:min(var(--content-width), calc(100% - 32px));
+  margin:14px auto 0;
+  height:var(--nav-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:0 16px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:var(--shadow);
+  border-radius:999px;
+  transition:
+    transform var(--transition),
+    opacity var(--transition),
+    top var(--transition),
+    width var(--transition),
+    margin var(--transition),
+    border-radius var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+  position:relative;
+}
+
+.topbar.hidden-up{
+  transform: translateY(-130%);
+  opacity:0;
+  pointer-events:none;
+}
+
+.topbar.floaty{
+  position:fixed;
+  top:12px;
+  left:50%;
+  transform: translateX(-50%);
+  width:min(var(--content-width), calc(100% - 24px));
+  border-radius:999px;
+  animation: dropIn 260ms ease;
+}
+
+@keyframes dropIn{
+  from{transform: translateX(-50%) translateY(-14px); opacity:.0;}
+  to{transform: translateX(-50%) translateY(0); opacity:1;}
+}
+
+.left-group,.center-group,.right-group{display:flex;align-items:center;gap:10px}
+.left-group{min-width:0;flex:0 0 auto}
+.center-group{flex:1;justify-content:center;gap:8px;flex-wrap:nowrap}
+.right-group{flex:0 0 auto;gap:10px}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+  padding:8px 10px;
+  border-radius:999px;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+.brand:hover{background:rgba(127,127,127,.08);transform:translateY(-1px)}
+
+.brand-img{
+  width:38px;height:38px;border-radius:50%;
+  object-fit:cover;
+  border:1px solid var(--line);
+  box-shadow: var(--shadow-2);
+  flex:0 0 auto;
+  background:#fff;
+}
+.brand-name{
+  display:flex;align-items:center;gap:0;
+  font-weight:800;font-size:1rem;letter-spacing:.2px;
+  white-space:nowrap;
+}
+.brand-name .at{color:var(--accent)}
+.brand-name .handle{opacity:.95}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:6px;
+  border-radius:999px;
+  background:rgba(127,127,127,.06);
+  border:1px solid var(--line);
+}
+
+.nav-link,.icon-btn,.ghost-btn,.sign-btn,.menu-btn,.contact-btn,.primary-btn{
+  position:relative;
+  border:0;
+  outline:none;
+  cursor:pointer;
+  color:var(--text);
+  transition: transform var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-link{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  font-weight:600;
+  color:var(--muted);
+  background:transparent;
+  white-space:nowrap;
+}
+.nav-link:hover{background:rgba(77,141,255,.10);color:var(--text)}
+.nav-link.active{background:rgba(77,141,255,.15);color:var(--text)}
+
+.nav-icon{width:16px;height:16px;display:inline-block;opacity:.96}
+
+.icon-btn,.sign-btn,.ghost-btn,.menu-btn,.contact-btn,.primary-btn{
+  height:42px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:1px solid var(--line);
+  background:rgba(127,127,127,.06);
+  padding:0 14px;
+  box-shadow:none;
+}
+
+.icon-btn{width:42px;padding:0}
+.icon-btn:hover,.ghost-btn:hover,.sign-btn:hover,.menu-btn:hover,.contact-btn:hover,.primary-btn:hover{
+  transform:translateY(-1px);
+  background:rgba(77,141,255,.12);
+}
+
+.primary-btn{
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:#fff;
+  border-color:transparent;
+  box-shadow: 0 12px 22px rgba(77,141,255,.25);
+}
+.primary-btn:hover{background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 85%, #fff 15%), color-mix(in srgb, var(--accent-2) 85%, #fff 15%))}
+
+/* click pulse */
+.pulse{
+  animation:pulse .42s ease;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  40%{transform:scale(.94)}
+  100%{transform:scale(1)}
+}
+
+/* tooltip */
+[data-tip]{position:relative}
+[data-tip]::after{
+  content:attr(data-tip);
+  position:absolute;
+  left:50%;
+  bottom:-10px;
+  transform:translate(-50%, 100%);
+  background:rgba(10,14,25,.92);
+  color:#fff;
+  font-size:12px;
+  line-height:1;
+  padding:7px 10px;
+  border-radius:10px;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+  box-shadow:var(--shadow-2);
+}
+[data-tip]::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-3px;
+  transform:translateX(-50%);
+  border:6px solid transparent;
+  border-bottom-color:rgba(10,14,25,.92);
+  opacity:0;
+  visibility:hidden;
+  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+  pointer-events:none;
+}
+[data-tip]:hover::after,[data-tip]:hover::before,
+[data-tip]:focus-visible::after,[data-tip]:focus-visible::before{
+  opacity:1;visibility:visible;
+}
+[data-tip]:hover::after,[data-tip]:focus-visible::after{transform:translate(-50%, calc(100% + 4px))}
+
+/* Hover description box */
+.desc-hint{
+  position:absolute;
+  left:50%;
+  top:calc(100% + 10px);
+  transform:translateX(-50%) translateY(-4px);
+  width:max-content;
+  max-width:250px;
+  font-size:12px;
+  line-height:1.35;
+  color:var(--text);
+  background:var(--panel-2);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-2);
+  padding:8px 10px;
+  border-radius:12px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+}
+.nav-link:hover .desc-hint{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+
+/* mega nav */
+.mega-wrap{
+  position:relative;
+}
+.mega-panel{
+  position:absolute;
+  top:calc(100% + 12px);
+  left:50%;
+  transform:translateX(-50%) translateY(-6px);
+  width:min(1180px, calc(100vw - 24px));
+  background:var(--panel-2);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  border-radius:28px;
+  padding:16px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  overflow:hidden;
+}
+.mega-wrap.open .mega-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+
+.mega-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-bottom:12px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--line);
+}
+.mega-title{font-weight:800}
+.mega-sub{font-size:12px;color:var(--muted)}
+
+.mega-grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:10px;
+}
+.mega-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px;
+  border-radius:18px;
+  background:rgba(127,127,127,.06);
+  border:1px solid transparent;
+  transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+}
+.mega-item:hover{
+  background:rgba(77,141,255,.12);
+  border-color:rgba(77,141,255,.20);
+  transform:translateY(-2px);
+}
+.mega-item .mi-icon{width:18px;height:18px;color:var(--accent)}
+.mega-item strong{display:block;font-size:14px}
+.mega-item span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+
+/* Scroll state text */
+.scroll-note{
+  width:min(var(--content-width), calc(100% - 32px));
+  margin:18px auto 0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* Content demo */
+.hero{
+  width:min(var(--content-width), calc(100% - 32px));
+  margin:18px auto 0;
+  padding:26px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:28px;
+  box-shadow:var(--shadow);
+}
+.hero h1{margin:0 0 8px;font-size:clamp(2rem, 4vw, 3.4rem);line-height:1.05}
+.hero p{margin:0;color:var(--muted);max-width:760px;line-height:1.75}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+
+/* ===== Mobile / Tablet ===== */
+.mobilebar{
+  display:none;
+  position:sticky;
+  top:0;
+  z-index:45;
+  width:100%;
+  padding:10px 0 0;
+}
+
+.mobilebar-inner{
+  width:min(var(--content-width), calc(100% - 16px));
+  margin:0 auto;
+  padding:10px 12px;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:var(--shadow);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.mobile-left{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:1;
+}
+.mobile-brand-name{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mobile-right{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+.dot{
+  width:8px;height:8px;border-radius:50%;background:#ff4d6d;display:inline-block;margin-left:4px;box-shadow:0 0 0 4px rgba(255,77,109,.12)
+}
+
+/* sidebar */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.34);
+  opacity:0;visibility:hidden;transition:var(--transition);
+  z-index:70;
+}
+.overlay.show{opacity:1;visibility:visible}
+
+.sidebar{
+  position:fixed;
+  top:0;right:-100%;
+  width:min(390px, 92vw);
+  height:100dvh;
+  background:var(--panel-2);
+  border-left:1px solid var(--line);
+  z-index:80;
+  box-shadow:var(--shadow);
+  transition:right var(--transition);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.sidebar.open{right:0}
+
+.sidebar-header,.sidebar-footer{padding:14px}
+.sidebar-header{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border-bottom:1px solid var(--line);
+}
+.sidebar-body{padding:14px;overflow:auto;flex:1}
+
+.side-search{
+  width:100%;height:46px;border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(127,127,127,.06);
+  color:var(--text);
+  padding:0 14px 0 44px;
+  outline:none;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="%237a86a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>');
+  background-repeat:no-repeat;
+  background-position:14px center;
+}
+.side-section{margin-top:16px}
+.side-section-title{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 10px}
+
+.side-links{display:grid;gap:8px}
+.side-link{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;border-radius:16px;
+  background:rgba(127,127,127,.06);
+  border:1px solid transparent;
+  transition:var(--transition-fast);
+}
+.side-link:hover{background:rgba(77,141,255,.12);border-color:rgba(77,141,255,.18)}
+.side-link .sl-icon{width:18px;height:18px;color:var(--accent)}
+.side-link strong{display:block;font-size:14px}
+.side-link span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+
+.auth-row{display:flex;gap:10px}
+.auth-row .ghost-btn,.auth-row .primary-btn{flex:1;height:44px}
+
+.profile-card{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;border-radius:18px;
+  background:rgba(127,127,127,.06);
+  border:1px solid var(--line);
+}
+.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
+.profile-card strong{display:block}
+.profile-card small{display:block;color:var(--muted);margin-top:2px}
+
+.social-marquee-wrap{
+  margin-top:16px;
+  overflow:hidden;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(127,127,127,.05);
+}
+.social-marquee{
+  display:flex;
+  gap:18px;
+  width:max-content;
+  padding:12px;
+  animation: marquee 18s linear infinite;
+}
+.social-marquee-wrap:hover .social-marquee{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.social-item{display:flex;align-items:center;gap:8px;white-space:nowrap;color:var(--text);text-decoration:none}
+.social-item svg{width:18px;height:18px}
+.yt{color:#ff3d4e}.fb{color:#3b82f6}.ig{color:#ff6ab4}.x{color:#e5e7eb}.tg{color:#60a5fa}
+
+.sidebar-footer{
+  border-top:1px solid var(--line);
+  display:grid;gap:12px;
+}
+
+.sidebar-footer .contact-btn{width:100%;height:46px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border:0}
+
+/* ===== Utilities ===== */
+.hide-desktop{display:none}
+.show-mobile{display:none}
+
+/* ===== Responsive breakpoints ===== */
+@media (max-width: 1100px){
+  .center-group{display:none}
+  .topbar .search-hide{display:none}
+  .mega-panel{width:min(900px, calc(100vw - 24px))}
+  .mega-grid{grid-template-columns:repeat(2, minmax(0,1fr))}
+}
+
+@media (max-width: 820px){
+  .topbar-wrap,.topbar{display:none}
+  .mobilebar{display:block}
+  .hide-desktop{display:inline-flex}
+  .show-mobile{display:inline-flex}
+  .hero{margin-top:12px;border-radius:22px}
+}
+
+@media (max-width: 560px){
+  .page-shell,.hero,.scroll-note{width:min(100% - 16px, var(--content-width))}
+  .hero{padding:18px}
+  .hero-actions{gap:8px}
+  .mobilebar-inner{width:calc(100% - 16px)}
+  .icon-btn,.sign-btn,.ghost-btn,.menu-btn{height:40px}
+  .primary-btn{height:40px}
+}
+
+/* demo section cards */
+.grid-demo{
+  width:min(var(--content-width), calc(100% - 32px));
+  margin:18px auto 60px;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:14px;
+}
+.card{
+  padding:18px;
+  min-height:150px;
+  border-radius:22px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  box-shadow:var(--shadow-2);
+}
+.card h3{margin:0 0 8px}
+.card p{margin:0;color:var(--muted);line-height:1.65}
+
+@media (max-width: 900px){
+  .grid-demo{grid-template-columns:1fr}
+}
+
+  </style>
+</head>
+<body data-theme="dark">
+  <!-- Desktop navbar -->
+  <div class="topbar-wrap" id="desktopWrap">
+    <nav class="topbar" id="desktopNav">
+      <div class="left-group">
+        <a class="brand" href="#home" aria-label="Home brand">
+          <!-- Replace with your own image -->
+          <img class="brand-img" src="https://picsum.photos/80/80?random=12" alt="Logo" />
+          <div class="brand-name"><span class="at">@</span><span class="handle">mdturzo999</span></div>
+        </a>
+      </div><div class="center-group">
+    <div class="nav-links">
+      <a class="nav-link active" href="#home" data-desc="Go to the start">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+        Home
+        <span class="desc-hint">Go to the start</span>
+      </a>
+      <a class="nav-link" href="#about" data-desc="Know who I am">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.5 8.5 0 0 1 13 0"/></svg>
+        About
+        <span class="desc-hint">Know who I am</span>
+      </a>
+      <a class="nav-link" href="#projects" data-desc="Things I built">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2"/></svg>
+        Projects
+        <span class="desc-hint">Things I built</span>
+      </a>
+      <a class="nav-link" href="#feed" data-desc="Updates and posts">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg>
+        Feed
+        <span class="desc-hint">Updates and posts</span>
+      </a>
+      <a class="nav-link" href="#contact" data-desc="Reach out fast">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+        Contact
+        <span class="desc-hint">Reach out fast</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="right-group">
+    <button class="icon-btn" data-tip="Search" aria-label="Search">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    </button>
+    <button class="icon-btn" data-tip="Notifications" aria-label="Notifications">
+      <span class="dot" aria-hidden="true"></span>
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M9 17a3 3 0 0 0 6 0"/></svg>
+    </button>
+    <button class="icon-btn theme-btn" data-tip="Light / Dark" aria-label="Toggle theme">
+      <svg class="nav-icon theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6.5 6.5 0 1 0 9 9A8.5 8.5 0 1 1 12 3Z"/></svg>
+    </button>
+    <button class="sign-btn pulseable" data-tip="Sign in" aria-label="Sign in">Sign in</button>
+    <div class="mega-wrap" id="megaWrap">
+      <button class="icon-btn" id="megaToggle" data-tip="All pages" aria-label="View all pages">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h7v7H4z"/><path d="M13 6h7v7h-7z"/><path d="M4 15h7v3H4z"/><path d="M13 15h7v3h-7z"/></svg>
+      </button>
+      <div class="mega-panel" aria-hidden="true">
+        <div class="mega-head">
+          <div>
+            <div class="mega-title">All pages</div>
+            <div class="mega-sub">Compact direct access to every section</div>
+          </div>
+          <button class="ghost-btn" id="megaClose">Close</button>
+        </div>
+        <div class="mega-grid">
+          <a class="mega-item" href="#home"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg><div><strong>Home</strong><span>First view and welcome</span></div></a>
+          <a class="mega-item" href="#about"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.5 8.5 0 0 1 13 0"/></svg><div><strong>About</strong><span>Short intro and identity</span></div></a>
+          <a class="mega-item" href="#projects"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2"/></svg><div><strong>Projects</strong><span>Selected work collection</span></div></a>
+          <a class="mega-item" href="#feed"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg><div><strong>Feed</strong><span>Fresh updates and posts</span></div></a>
+          <a class="mega-item" href="#contact"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg><div><strong>Contact</strong><span>Send message or mail</span></div></a>
+          <a class="mega-item" href="#services"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M2 12h20"/><path d="M7 7l10 10"/><path d="M17 7 7 17"/></svg><div><strong>Services</strong><span>What I can do</span></div></a>
+          <a class="mega-item" href="#blog"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h7"/></svg><div><strong>Blog</strong><span>Notes and learning</span></div></a>
+          <a class="mega-item" href="#faq"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 18h.01"/><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 2.2-3 5"/><circle cx="12" cy="12" r="9"/></svg><div><strong>FAQ</strong><span>Common questions answered</span></div></a>
+          <a class="mega-item" href="#privacy"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/></svg><div><strong>Privacy</strong><span>Safety and data notes</span></div></a>
+          <a class="mega-item" href="#terms"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg><div><strong>Terms</strong><span>Simple usage rules</span></div></a>
+          <a class="mega-item" href="#gallery"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 16 5-5a2 2 0 0 1 3 0l5 5"/><path d="m14 13 2-2a2 2 0 0 1 3 0l2 2"/></svg><div><strong>Gallery</strong><span>Visual snapshots area</span></div></a>
+          <a class="mega-item" href="#support"><svg class="mi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 0-10 10v5a3 3 0 0 0 3 3h3v-8H5a7 7 0 0 1 14 0h-3v8h3a3 3 0 0 0 3-3v-5A10 10 0 0 0 12 2Z"/></svg><div><strong>Support</strong><span>Help and assistance</span></div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  </div>  <!-- Mobile / tablet top bar -->  <header class="mobilebar">
+    <div class="mobilebar-inner">
+      <div class="mobile-left">
+        <img class="brand-img" src="https://picsum.photos/80/80?random=12" alt="Logo" />
+        <div style="min-width:0">
+          <div class="mobile-brand-name">@mdturzo999</div>
+          <div style="font-size:12px;color:var(--muted)">Minimal portfolio navigation</div>
+        </div>
+      </div>
+      <div class="mobile-right">
+        <button class="icon-btn" id="mobileSignOrProfile" data-tip="Sign up / Profile" aria-label="Account">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M5.5 21a8.5 8.5 0 0 1 13 0"/></svg>
+        </button>
+        <button class="icon-btn" data-tip="Notifications" aria-label="Notifications">
+          <span class="dot" aria-hidden="true"></span>
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M9 17a3 3 0 0 0 6 0"/></svg>
+        </button>
+        <button class="menu-btn pulseable" id="openSidebar" data-tip="Menu" aria-label="Open menu">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>  <!-- Sidebar -->  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
+    <div class="sidebar-header">
+      <a class="brand" href="#home" style="padding:0">
+        <img class="brand-img" src="https://picsum.photos/80/80?random=12" alt="Logo" />
+        <div class="brand-name"><span class="at">@</span><span class="handle">mdturzo999</span></div>
+      </a>
+      <button class="icon-btn" id="closeSidebar" data-tip="Close" aria-label="Close menu">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div><div class="sidebar-body">
+  <input class="side-search" type="text" placeholder="Search pages, posts, projects..." />
+
+  <div class="side-section">
+    <p class="side-section-title">Main pages</p>
+    <div class="side-links">
+      <a class="side-link" href="#home"><svg class="sl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg><div><strong>Home</strong><span>Start here</span></div></a>
+      <a class="side-link" href="#about"><svg class="sl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.5 8.5 0 0 1 13 0"/></svg><div><strong>About</strong><span>My intro</span></div></a>
+      <a class="side-link" href="#projects"><svg class="sl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2"/></svg><div><strong>Projects</strong><span>Work list</span></div></a>
+      <a class="side-link" href="#feed"><svg class="sl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg><div><strong>Feed</strong><span>Recent updates</span></div></a>
+    </div>
+  </div>
+
+  <div class="side-section">
+    <p class="side-section-title">Extra pages</p>
+    <div class="side-links">
+      <a class="side-link" href="#services"><svg class="sl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M2 12h20"/><path d="M7 7l10 10"/><path d="M17 7 7 17"/></svg><div><strong>Services</strong><span>What I offer</span></div></a>
+      <a class="side-link" href="#faq"><svg class="sl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 18h.01"/><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 2.2-3 5"/><circle cx="12" cy="12" r="9"/></svg><div><strong>FAQ</strong><span>Common questions</span></div></a>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar-footer">
+  <div class="auth-row">
+    <button class="ghost-btn pulseable">Log in</button>
+    <button class="primary-btn pulseable">Sign up</button>
+  </div>
+
+  <div class="profile-card" style="display:none" id="profileCard">
+    <img class="avatar" src="https://picsum.photos/80/80?random=18" alt="Profile" />
+    <div>
+      <strong>Muhtasim Rahman</strong>
+      <small>Account & navigation</small>
+    </div>
+  </div>
+
+  <button class="contact-btn pulseable">Contact</button>
+
+  <div class="social-marquee-wrap">
+    <div class="social-marquee">
+      <a class="social-item yt" href="https://youtube.com/@mdturzo999" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.1a3 3 0 0 0-2.1-2.1C19.1 4.5 12 4.5 12 4.5s-7.1 0-8.9.5A3 3 0 0 0 1 7.1 31.7 31.7 0 0 0 .5 12a31.7 31.7 0 0 0 .5 4.9 3 3 0 0 0 2.1 2.1c1.8.5 8.9.5 8.9.5s7.1 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.8.5-4.9.5-4.9s0-3.1-.5-4.9ZM9.7 15.2V8.8L15.5 12l-5.8 3.2Z"/></svg>
+        /@mdturzo999
+      </a>
+      <a class="social-item fb" href="https://facebook.com/mdturzo999" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.2-1.4 1.5-1.4h1.6V4.7c-.8-.1-1.7-.2-2.6-.2-2.6 0-4.3 1.6-4.3 4.5v1.9H7v3.1h2.7v8h3.8Z"/></svg>
+        /mdturzo999
+      </a>
+      <a class="social-item ig" href="https://instagram.com/mdturzo999" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 3.7A4.3 4.3 0 1 1 7.7 12 4.3 4.3 0 0 1 12 7.7Zm0 2A2.3 2.3 0 1 0 14.3 12 2.3 2.3 0 0 0 12 9.7Zm5-3.1a1 1 0 1 1-1 1 1 1 0 0 1 1-1Z"/></svg>
+        /mdturzo999
+      </a>
+      <a class="social-item x" href="https://x.com/mdturzo999" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.2l-4.9-6.2L6.5 22H3.3l7.3-8.4L1 2h6.4l4.4 5.7L18.9 2Zm-1.1 18h1.7L6.4 3.9H4.6L17.8 20Z"/></svg>
+        /mdturzo999
+      </a>
+      <a class="social-item tg" href="https://t.me/mdturzo999" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.2 15.6 9 20c.6 0 .9-.3 1.3-.7l3-2.9 6.2 4.5c1.1.6 1.8.3 2.1-1l3.8-17.8c.4-1.7-.6-2.3-1.7-1.9L1.8 9.8c-1.6.6-1.6 1.5-.3 1.9l5.4 1.7L19.4 6.3c.5-.3 1-.1.6.2"/></svg>
+        /mdturzo999
+      </a>
+    </div>
+  </div>
+</div>
+
+  </aside>  <div class="scroll-note page-shell">Scroll down a bit to see the navbar hide, then reappear as a floating rounded bar around 400–500px scroll.</div>  <section class="hero" id="home">
+    <h1>Advanced minimal navbar</h1>
+    <p>
+      Eta static HTML, CSS, JS diye banano. Desktop e full navbar, medium size screen e compact top bar + sidebar, small screen e cleaner layout.
+      Scroll e hide/floating behavior deya ache, plus toggle, tooltip, hover descriptions, and click pulse animation.
+    </p>
+    <div class="hero-actions">
+      <button class="primary-btn pulseable">Primary action</button>
+      <button class="ghost-btn pulseable">Secondary action</button>
+    </div>
+  </section>  <section class="grid-demo">
+    <div class="card" id="about"><h3>About</h3><p>Place intro content here. Navbar links keep working with smooth scrolling.</p></div>
+    <div class="card" id="projects"><h3>Projects</h3><p>Use this section for your featured work, cards, or case studies.</p></div>
+    <div class="card" id="feed"><h3>Feed</h3><p>Use this area for updates, posts, or timeline style content.</p></div>
+    <div class="card" id="services"><h3>Services</h3><p>Service blocks or skill cards can be placed here.</p></div>
+    <div class="card" id="faq"><h3>FAQ</h3><p>Frequently asked questions can fit in a neat compact layout.</p></div>
+    <div class="card" id="contact"><h3>Contact</h3><p>Put contact form, email, WhatsApp, or socials here.</p></div>
+    <div class="card" id="blog"><h3>Blog</h3><p>Extra page section for writing updates and tutorials.</p></div>
+    <div class="card" id="privacy"><h3>Privacy</h3><p>Use it for policy text or safety notes.</p></div>
+    <div class="card" id="terms"><h3>Terms</h3><p>Use it for usage rules or terms content.</p></div>
+  </section>  <script>
+    const body = document.body;
+    const desktopNav = document.getElementById('desktopNav');
+    const desktopWrap = document.getElementById('desktopWrap');
+    const megaWrap = document.getElementById('megaWrap');
+    const megaToggle = document.getElementById('megaToggle');
+    const megaClose = document.getElementById('megaClose');
+    const overlay = document.getElementById('overlay');
+    const sidebar = document.getElementById('sidebar');
+    const openSidebar = document.getElementById('openSidebar');
+    const closeSidebar = document.getElementById('closeSidebar');
+    const themeBtn = document.querySelector('.theme-btn');
+    const themeIcon = document.querySelector('.theme-icon');
+    const mobileSignOrProfile = document.getElementById('mobileSignOrProfile');
+    const profileCard = document.getElementById('profileCard');
+    const pulseables = document.querySelectorAll('.pulseable');
+
+    let lastScrollY = window.scrollY;
+    const floatAt = 420; // show floating navbar after this scroll range
+    const hideAfter = 88; // hide early part on desktop scroll
+    const hadProfile = false; // set true if logged in
+
+    function setTheme(theme){
+      body.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeIcon.innerHTML = theme === 'light'
+        ? '<path d="M12 3a6.5 6.5 0 1 0 9 9A8.5 8.5 0 1 1 12 3Z"/>'
+        : '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+    }
+
+    setTheme(localStorage.getItem('theme') || 'dark');
+    profileCard.style.display = hadProfile ? 'flex' : 'none';
+    mobileSignOrProfile.style.display = hadProfile ? 'none' : 'inline-flex';
+
+    themeBtn.addEventListener('click', () => {
+      const next = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      setTheme(next);
+      themeBtn.classList.add('pulse');
+      setTimeout(() => themeBtn.classList.remove('pulse'), 420);
+    });
+
+    function pulse(el){
+      el.classList.add('pulse');
+      setTimeout(() => el.classList.remove('pulse'), 430);
+    }
+
+    pulseables.forEach(btn => {
+      btn.addEventListener('click', () => pulse(btn));
+    });
+
+    megaToggle.addEventListener('click', () => megaWrap.classList.toggle('open'));
+    megaClose.addEventListener('click', () => megaWrap.classList.remove('open'));
+    document.addEventListener('click', (e) => {
+      if (!megaWrap.contains(e.target)) megaWrap.classList.remove('open');
+    });
+
+    function openSide(){
+      sidebar.classList.add('open');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSide(){
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    openSidebar.addEventListener('click', openSide);
+    closeSidebar.addEventListener('click', closeSide);
+    overlay.addEventListener('click', closeSide);
+
+    // Hide on scroll up/down, show floating navbar after threshold
+    function updateDesktopNav(){
+      const y = window.scrollY;
+      const goingDown = y > lastScrollY;
+      const goingUp = y < lastScrollY;
+
+      if (y > floatAt){
+        desktopNav.classList.add('floaty');
+        desktopNav.classList.remove('hidden-up');
+      } else {
+        desktopNav.classList.remove('floaty');
+        desktopNav.classList.remove('hidden-up');
+      }
+
+      if (y > hideAfter && y < floatAt && goingDown){
+        desktopNav.classList.add('hidden-up');
+      }
+
+      if (goingUp && y < floatAt){
+        desktopNav.classList.remove('hidden-up');
+      }
+
+      lastScrollY = y;
+    }
+    window.addEventListener('scroll', updateDesktopNav, { passive: true });
+    updateDesktopNav();
+
+    // Simple active link highlight based on hash
+    const links = document.querySelectorAll('a[href^="#"]');
+    function setActive(){
+      const hash = location.hash || '#home';
+      document.querySelectorAll('.nav-link').forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
+    }
+    window.addEventListener('hashchange', setActive);
+    setActive();
+
+    // Close sidebar after clicking a link
+    document.querySelectorAll('.sidebar a, .mega-item').forEach(a => {
+      a.addEventListener('click', () => {
+        closeSide();
+        megaWrap.classList.remove('open');
+      });
+    });
+  </script></body>
+</html>

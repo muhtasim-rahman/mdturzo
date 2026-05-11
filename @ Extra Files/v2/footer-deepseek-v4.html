@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>@mdturzo999 — Footer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --footer-bg: #0b0f1a;
+            --footer-surface: #131a2b;
+            --footer-surface2: #1a2332;
+            --footer-text: #e2e8f0;
+            --footer-text2: #94a3b8;
+            --footer-text3: #64748b;
+            --footer-border: #1e2a3a;
+            --footer-primary: #3b82f6;
+            --footer-primary-bright: #60a5fa;
+            --footer-accent: #8b5cf6;
+            --radius-sm: 8px;
+            --radius: 14px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin: 0;
+            padding: 0;
+        }
+
+        .site-footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            position: relative;
+            overflow: visible;
+            padding: 64px 28px 0;
+            font-size: 14.5px;
+            border-top: 1px solid var(--footer-border);
+        }
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            max-width: 800px;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(96, 165, 250, 0.5) 30%,
+                    rgba(139, 92, 246, 0.5) 70%,
+                    transparent);
+            pointer-events: none;
+        }
+        .footer-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .footer-orb--left {
+            width: 380px;
+            height: 380px;
+            background: #3b82f6;
+            top: -120px;
+            left: -80px;
+        }
+        .footer-orb--right {
+            width: 300px;
+            height: 300px;
+            background: #8b5cf6;
+            bottom: -80px;
+            right: -60px;
+        }
+
+        .footer-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1240px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr 0.85fr 1.15fr;
+            gap: 40px 32px;
+            align-items: stretch;
+        }
+
+        /* ========== COLUMN 1 ========== */
+        .footer-col-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .footer-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+        .footer-logo-img {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #6366f1, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 19px;
+            flex-shrink: 0;
+        }
+        .footer-brand-name {
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            color: #fff;
+            white-space: nowrap;
+        }
+        .footer-brand-name .at-symbol {
+            color: var(--footer-primary-bright);
+            font-weight: 800;
+            margin-right: 1px;
+        }
+        .footer-desc {
+            color: var(--footer-text2);
+            font-size: 13.5px;
+            line-height: 1.7;
+            max-width: 320px;
+        }
+
+        /* social pills */
+        .social-pill-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 4px;
+        }
+        .social-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 12px;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--footer-border);
+            color: var(--footer-text2);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all var(--transition-spring);
+            white-space: nowrap;
+            cursor: pointer;
+            background: transparent;
+        }
+        .social-pill i {
+            font-size: 13px;
+            width: 16px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .social-pill:hover {
+            background: var(--footer-primary);
+            border-color: var(--footer-primary);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+        }
+
+        /* tablet background for social pills (overrides transparent) */
+        @media (max-width: 991px) and (min-width: 641px) {
+            .social-pill {
+                background: var(--footer-surface);
+            }
+        }
+
+        /* social icon-only row (mobile) */
+        .social-icon-only-row {
+            display: none;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+        .social-icon-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--footer-surface);
+            border: 1px solid var(--footer-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--footer-text2);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all var(--transition-spring);
+            flex-shrink: 0;
+        }
+        .social-icon-circle:hover {
+            background: var(--footer-primary);
+            border-color: var(--footer-primary);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(59, 130, 246, 0.4);
+        }
+
+        /* ========== NAVIGATION COLUMNS (desktop) ========== */
+        .footer-col-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .footer-col-nav h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.6px;
+            color: var(--footer-text3);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .nav-link-animated {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--footer-text2);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 7px 4px;
+            border-radius: 8px;
+            transition: all var(--transition);
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .nav-link-animated .nav-arrow {
+            font-size: 9px;
+            color: var(--footer-primary-bright);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all var(--transition-spring);
+            flex-shrink: 0;
+            width: 14px;
+            text-align: center;
+        }
+        .nav-link-animated .nav-label {
+            transition: transform var(--transition-spring), color var(--transition);
+        }
+        .nav-link-animated:hover {
+            color: var(--footer-primary-bright);
+            background: rgba(59, 130, 246, 0.08);
+        }
+        .nav-link-animated:hover .nav-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .nav-link-animated:hover .nav-label {
+            transform: translateX(4px);
+            color: var(--footer-primary-bright);
+        }
+
+        /* ========== COLUMN 4 ========== */
+        .footer-col-subscribe {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .subscribe-block {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .subscribe-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .subscribe-title i {
+            color: var(--footer-primary-bright);
+            font-size: 16px;
+        }
+        .subscribe-muted {
+            font-size: 12.5px;
+            color: var(--footer-text3);
+            line-height: 1.5;
+            margin-top: -6px;
+        }
+        .subscribe-input-wrap {
+            display: flex;
+            align-items: center;
+            background: var(--footer-surface);
+            border: 1.5px solid var(--footer-border);
+            border-radius: var(--radius-full);
+            padding: 5px 5px 5px 18px;
+            transition: all var(--transition-spring);
+            box-shadow: var(--shadow-sm);
+        }
+        .subscribe-input-wrap:focus-within {
+            border-color: var(--footer-primary);
+            box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.12);
+        }
+        .subscribe-input-wrap input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            color: #fff;
+            font-size: 13.5px;
+            outline: none;
+            padding: 10px 4px;
+            font-family: inherit;
+            min-width: 0;
+        }
+        .subscribe-input-wrap input::placeholder {
+            color: var(--footer-text3);
+            font-weight: 400;
+        }
+        .subscribe-btn {
+            background: var(--footer-primary);
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #fff;
+            cursor: pointer;
+            transition: all var(--transition-spring);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .subscribe-btn:hover {
+            background: #4f94f7;
+            transform: scale(1.03);
+            box-shadow: 0 8px 22px rgba(59, 130, 246, 0.4);
+        }
+        .subscriber-count-line {
+            font-size: 12px;
+            color: var(--footer-text3);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.7;
+            margin-top: -4px;
+        }
+        .count-number {
+            font-weight: 800;
+            font-size: 16px;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* minimal contact card */
+        .contact-card-new {
+            background: var(--footer-surface);
+            border: 1px solid var(--footer-border);
+            border-radius: var(--radius);
+            padding: 18px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: all var(--transition-spring);
+        }
+        .contact-card-new:hover {
+            border-color: var(--footer-primary);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
+        }
+        .contact-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .contact-card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            background: rgba(59, 130, 246, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--footer-primary-bright);
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .contact-card-title {
+            font-weight: 700;
+            font-size: 14.5px;
+            color: #fff;
+        }
+        .contact-card-caption {
+            font-size: 12.5px;
+            color: var(--footer-text3);
+            line-height: 1.4;
+        }
+
+        /* email outside card */
+        .contact-email-external {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--footer-text2);
+            font-size: 13px;
+            text-decoration: none;
+            padding: 6px 0;
+            transition: color var(--transition);
+        }
+        .contact-email-external i {
+            color: var(--footer-primary-bright);
+            font-size: 15px;
+        }
+        .contact-email-external:hover {
+            color: #fff;
+        }
+
+        /* ========== BOTTOM ROW ========== */
+        .footer-bottom {
+            position: relative;
+            z-index: 2;
+            max-width: 1240px;
+            margin: 44px auto 0;
+            padding: 22px 0 20px;
+            border-top: 1px solid var(--footer-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .footer-copyright {
+            font-size: 13px;
+            color: var(--footer-text3);
+        }
+        .footer-bottom-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 11px;
+            border-radius: var(--radius-full);
+            background: var(--footer-surface);
+            border: 1px solid var(--footer-border);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: var(--footer-text2);
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            transition: all var(--transition);
+        }
+        .version-badge:hover {
+            border-color: var(--footer-primary-bright);
+            color: #fff;
+        }
+        .version-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #22c55e;
+            flex-shrink: 0;
+        }
+        .back-to-top-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--footer-surface);
+            border: 1px solid var(--footer-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--footer-text2);
+            cursor: pointer;
+            transition: all var(--transition-spring);
+        }
+        .back-to-top-btn:hover {
+            background: var(--footer-primary);
+            border-color: var(--footer-primary);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(59, 130, 246, 0.4);
+        }
+
+        /* mobile back-to-top straddle */
+        .back-to-top-mobile-wrap {
+            display: none;
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+        }
+        .back-to-top-mobile-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--footer-bg);
+            border: 2px solid var(--footer-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--footer-text2);
+            cursor: pointer;
+            transition: all var(--transition-spring);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+        .back-to-top-mobile-btn:hover {
+            background: var(--footer-primary);
+            border-color: var(--footer-primary);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(59, 130, 246, 0.5);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        /* TABLET (641px - 991px) */
+        @media (max-width: 991px) and (min-width: 641px) {
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
+                gap: 34px 28px;
+                align-items: start;
+            }
+            .footer-col-brand { grid-row: 1; grid-column: 1; }
+            .footer-col-subscribe { grid-row: 1; grid-column: 2; }
+
+            /* nav columns stacked full width */
+            .footer-nav-mobile-row {
+                grid-column: 1 / -1;
+                grid-row: 2;
+                display: flex;
+                flex-direction: column;
+                gap: 28px;
+            }
+            /* each nav column as 6‑column row */
+            .footer-col-nav {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 8px 10px;
+                align-items: center;
+            }
+            .footer-col-nav h4 {
+                grid-column: 1 / -1;
+                margin-bottom: 2px;
+                text-align: center;
+            }
+            .nav-link-animated {
+                padding: 5px 2px;
+                font-size: 11px;
+                gap: 3px;
+                justify-content: center;
+                text-align: center;
+                flex-direction: column;
+            }
+            .nav-link-animated .nav-arrow {
+                display: none; /* hide arrow on tablet to save space */
+            }
+            .nav-link-animated .nav-label {
+                white-space: normal;
+                line-height: 1.2;
+            }
+        }
+
+        /* MOBILE (< 641px) */
+        @media (max-width: 640px) {
+            .site-footer { padding: 48px 16px 0; }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px 0;
+            }
+            .footer-col-brand { grid-row: 1; }
+            .footer-col-subscribe { grid-row: 2; }
+            .footer-nav-mobile-row {
+                grid-row: 3;
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+            }
+            /* each nav column as 3‑column grid */
+            .footer-col-nav {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px 8px;
+            }
+            .footer-col-nav h4 {
+                grid-column: 1 / -1;
+                margin-bottom: 2px;
+                text-align: center;
+            }
+            .nav-link-animated {
+                padding: 5px 2px;
+                font-size: 12px;
+                gap: 4px;
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-link-animated .nav-arrow {
+                display: none;
+            }
+            .nav-link-animated .nav-label {
+                white-space: normal;
+                text-align: center;
+            }
+
+            /* switch social to icons only */
+            .social-pill-grid { display: none; }
+            .social-icon-only-row { display: flex; flex-wrap: wrap; gap: 6px; }
+            .social-icon-circle { width: 34px; height: 34px; font-size: 13px; }
+
+            .footer-bottom {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                padding-top: 30px;
+                margin-top: 36px;
+                gap: 10px;
+            }
+            .footer-copyright { font-size: 11.5px; order: 1; }
+            .footer-bottom-right { order: 2; }
+            .version-badge { font-size: 10px; padding: 4px 9px; }
+            .back-to-top-btn { display: none; }
+            .back-to-top-mobile-wrap { display: block; }
+            .back-to-top-mobile-btn { width: 40px; height: 40px; }
+        }
+
+        /* Desktop: keep wrapper transparent */
+        @media (min-width: 992px) {
+            .footer-nav-mobile-row { display: contents; }
+            .social-pill { background: transparent; }
+            .social-icon-only-row { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <footer class="site-footer" id="siteFooter">
+        <div class="footer-orb footer-orb--left"></div>
+        <div class="footer-orb footer-orb--right"></div>
+
+        <div class="footer-container">
+            <!-- COLUMN 1: Brand + Social -->
+            <div class="footer-col-brand">
+                <div>
+                    <div class="footer-logo-row">
+                        <div class="footer-logo-img">T</div>
+                        <span class="footer-brand-name"><span class="at-symbol">@</span>mdturzo999</span>
+                    </div>
+                    <p class="footer-desc">
+                        Full‑stack developer & creative technologist. Building thoughtful digital experiences with modern web technologies.
+                    </p>
+                </div>
+
+                <!-- Social: pill grid (desktop/tablet) -->
+                <div class="social-pill-grid">
+                    <a href="#" class="social-pill"><i class="fa-brands fa-youtube"></i><span>@mdturzo999</span></a>
+                    <a href="#" class="social-pill"><i class="fa-brands fa-facebook-f"></i><span>mdturzo999</span></a>
+                    <a href="#" class="social-pill"><i class="fa-brands fa-x-twitter"></i><span>@mdturzo999</span></a>
+                    <a href="#" class="social-pill"><i class="fa-brands fa-instagram"></i><span>@mdturzo999</span></a>
+                    <a href="#" class="social-pill"><i class="fa-brands fa-github"></i><span>mdturzo999</span></a>
+                    <a href="#" class="social-pill"><i class="fa-brands fa-linkedin-in"></i><span>mdturzo999</span></a>
+                    <a href="#" class="social-pill"><i class="fa-brands fa-discord"></i><span>mdturzo999</span></a>
+                    <a href="#" class="social-pill"><i class="fa-brands fa-twitch"></i><span>mdturzo999</span></a>
+                </div>
+
+                <!-- Social: icon-only row (mobile) -->
+                <div class="social-icon-only-row">
+                    <a href="#" class="social-icon-circle"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-icon-circle"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon-circle"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="social-icon-circle"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-icon-circle"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="social-icon-circle"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon-circle"><i class="fa-brands fa-discord"></i></a>
+                    <a href="#" class="social-icon-circle"><i class="fa-brands fa-twitch"></i></a>
+                </div>
+            </div>
+
+            <!-- Navigation wrapper -->
+            <div class="footer-nav-mobile-row">
+                <!-- COLUMN 2: Navigate -->
+                <div class="footer-col-nav">
+                    <h4>Navigate</h4>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">Home</span></a>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">About</span></a>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">Projects</span></a>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">Feed</span></a>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">Blog</span></a>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">Contact</span></a>
+                </div>
+                <!-- COLUMN 3: Resources -->
+                <div class="footer-col-nav">
+                    <h4>Resources</h4>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">FAQ</span></a>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">Support</span></a>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">Privacy</span></a>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">Terms</span></a>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">Changelog</span></a>
+                    <a href="#" class="nav-link-animated"><i class="fa-solid fa-chevron-right nav-arrow"></i><span class="nav-label">Sitemap</span></a>
+                </div>
+            </div>
+
+            <!-- COLUMN 4: Subscribe + Contact -->
+            <div class="footer-col-subscribe">
+                <div class="subscribe-block">
+                    <span class="subscribe-title">
+                        <i class="fa-solid fa-mailbox"></i> Stay in the Loop
+                    </span>
+                    <p class="subscribe-muted">Drop your email for occasional updates — no spam, just meaningful content.</p>
+                    <div class="subscribe-input-wrap">
+                        <input type="email" placeholder="you@example.com" id="subscribeEmailInput">
+                        <button class="subscribe-btn" id="subscribeBtn"><i class="fa-solid fa-arrow-right"></i> Join</button>
+                    </div>
+                    <div class="subscriber-count-line">
+                        <span class="count-number" id="countNumber">0</span>
+                        <span>curious minds already subscribed</span>
+                    </div>
+                </div>
+
+                <!-- Email outside the card -->
+                <a href="mailto:mdturzo.dev@gmail.com" class="contact-email-external">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>mdturzo.dev@gmail.com</span>
+                </a>
+                <!-- Minimal contact card -->
+                <div class="contact-card-new">
+                    <div class="contact-card-header">
+                        <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <div class="contact-card-title">Let's connect</div>
+                            <div class="contact-card-caption">I'm open to new projects & collaborations.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom row -->
+        <div class="footer-bottom">
+            <div class="back-to-top-mobile-wrap">
+                <button class="back-to-top-mobile-btn" id="backToTopMobileBtn"><i class="fa-solid fa-arrow-up"></i></button>
+            </div>
+            <span class="footer-copyright">© 2025 @mdturzo999. All rights reserved.</span>
+            <div class="footer-bottom-right">
+                <span class="version-badge"><span class="version-dot"></span> v2.1.1</span>
+                <button class="back-to-top-btn" id="backToTopBtn"><i class="fa-solid fa-arrow-up"></i></button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            const countEl = document.getElementById('countNumber');
+            let target = 2847, current = 0, animFrame = null;
+            function animateCount(to) {
+                if (animFrame) cancelAnimationFrame(animFrame);
+                const start = current, duration = 1400, startTime = performance.now();
+                function update(now) {
+                    const p = Math.min((now - startTime) / duration, 1);
+                    const val = Math.floor(start + (to - start) * (1 - Math.pow(1 - p, 3)));
+                    countEl.textContent = val.toLocaleString('en-US');
+                    if (p < 1) animFrame = requestAnimationFrame(update);
+                    else { current = to; countEl.textContent = to.toLocaleString('en-US'); }
+                }
+                animFrame = requestAnimationFrame(update);
+            }
+            function increment() { target++; animateCount(target); }
+            const obs = new IntersectionObserver((e) => { if (e[0].isIntersecting) { animateCount(target); obs.unobserve(e[0].target); } }, { threshold: 0.25 });
+            obs.observe(document.getElementById('siteFooter'));
+
+            document.getElementById('subscribeBtn').addEventListener('click', () => {
+                const mail = document.getElementById('subscribeEmailInput').value.trim();
+                if (mail && mail.includes('@') && mail.includes('.')) {
+                    alert('✨ Thanks for subscribing! (demo)\n' + mail);
+                    document.getElementById('subscribeEmailInput').value = '';
+                    increment();
+                } else alert('Please enter a valid email address.');
+            });
+            document.getElementById('subscribeEmailInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('subscribeBtn').click(); } });
+
+            function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+            document.getElementById('backToTopBtn').addEventListener('click', scrollTop);
+            document.getElementById('backToTopMobileBtn').addEventListener('click', scrollTop);
+
+            window.updateSubscriberCount = (n) => { target = n; animateCount(target); };
+        })();
+    </script>
+</body>
+</html>
