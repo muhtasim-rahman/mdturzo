@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Footer – Muhtasim Rahman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap"
+        rel="stylesheet"
+    />
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --blue-50: #eff6ff;
+            --blue-100: #dbeafe;
+            --blue-200: #bfdbfe;
+            --blue-400: #60a5fa;
+            --blue-500: #3b82f6;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+            --blue-900: #1e3a8a;
+
+            --surface-0: #ffffff;
+            --surface-1: #f8fafc;
+            --surface-2: #f1f5f9;
+            --surface-3: #e2e8f0;
+            --ink-1: #0f172a;
+            --ink-2: #1e293b;
+            --ink-3: #475569;
+            --ink-4: #94a3b8;
+            --ink-5: #cbd5e1;
+
+            --body-bg: #f0f4f8;
+            --footer-bg: #ffffff;
+            --shadow-card: 0 1px 3px rgba(15, 23, 42, .06), 0 4px 16px rgba(15, 23, 42, .06);
+            --shadow-hover: 0 4px 20px rgba(37, 99, 235, .18);
+            --shadow-lg: 0 8px 28px rgba(0, 0, 0, .18);
+
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+
+            --font-display: 'DM Serif Display', Georgia, serif;
+            --font-body: 'Sora', sans-serif;
+
+            --trans: all .28s cubic-bezier(.4, 0, .2, 1);
+            --trans-theme: background .35s ease, color .35s ease, border-color .35s ease,
+                box-shadow .35s ease;
+        }
+
+        /* ─── DARK MODE ──────────────────────────── */
+        [data-theme="dark"] {
+            --surface-0: #0f172a;
+            --surface-1: #1e293b;
+            --surface-2: #273449;
+            --surface-3: #334155;
+            --ink-1: #f1f5f9;
+            --ink-2: #e2e8f0;
+            --ink-3: #cbd5e1;
+            --ink-4: #94a3b8;
+            --ink-5: #64748b;
+            --body-bg: #0b1120;
+            --footer-bg: #0f172a;
+            --shadow-card: 0 1px 3px rgba(0, 0, 0, .2), 0 4px 16px rgba(0, 0, 0, .25);
+            --shadow-hover: 0 4px 20px rgba(59, 130, 246, .3);
+            --shadow-lg: 0 8px 28px rgba(0, 0, 0, .35);
+            --blue-50: #1e3050;
+            --blue-100: #1e4270;
+            --blue-200: #1e5290;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--body-bg);
+            color: var(--ink-1);
+            transition: var(--trans-theme);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* ─── THEME TOGGLE ─────────────────────────── */
+        .theme-toggle-wrap {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface-0);
+            border: 1px solid var(--surface-3);
+            border-radius: 100px;
+            padding: 5px 8px 5px 14px;
+            box-shadow: var(--shadow-card);
+            transition: var(--trans-theme);
+        }
+        .theme-toggle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--surface-2);
+            border: 1px solid var(--surface-3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-1);
+            transition: var(--trans);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .theme-toggle-btn:hover {
+            transform: scale(1.08);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--blue-400);
+            background: var(--blue-50);
+        }
+        .theme-toggle-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: var(--trans);
+            position: absolute;
+        }
+        .theme-toggle-btn .icon-sun {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+        .theme-toggle-btn .icon-moon {
+            opacity: 0;
+            transform: rotate(-90deg) scale(0.6);
+        }
+        [data-theme="dark"] .theme-toggle-btn .icon-sun {
+            opacity: 0;
+            transform: rotate(90deg) scale(0.6);
+        }
+        [data-theme="dark"] .theme-toggle-btn .icon-moon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+        .theme-label {
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--ink-4);
+            transition: var(--trans-theme);
+            white-space: nowrap;
+        }
+
+        /* ─── DEMO PAGE FILLER ─────────────────────── */
+        .page-filler {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-body);
+            font-size: .8rem;
+            color: var(--ink-4);
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            transition: var(--trans-theme);
+            padding-right: 0;
+        }
+
+        /* ═══════════════════════════════════════════════
+           STAY CONNECTED BANNER
+        ═══════════════════════════════════════════════ */
+        .stay-connected-wrap {
+            padding: 0 clamp(16px, 4vw, 48px);
+            margin-bottom: -1px;
+        }
+        .stay-connected {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            background: linear-gradient(135deg, var(--blue-700) 0%, var(--blue-500) 60%, #38bdf8 100%);
+            padding: clamp(28px, 5vw, 52px) clamp(24px, 5vw, 60px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+        .stay-connected::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='40' cy='40' r='40'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            pointer-events: none;
+        }
+        .stay-connected::after {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .06);
+            pointer-events: none;
+        }
+
+        /* ─── LEFT SIDE ──────────────────────────── */
+        .sc-left {
+            position: relative;
+            z-index: 1;
+            flex: 1 1 280px;
+            min-width: 240px;
+        }
+        .sc-left h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 3.2vw, 2.3rem);
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+        .sc-left h2 em {
+            font-style: italic;
+            opacity: .85;
+        }
+        .sc-sub-text {
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .65);
+            margin-top: 8px;
+        }
+
+        /* ─── RIGHT SIDE ─────────────────────────── */
+        .sc-right {
+            position: relative;
+            z-index: 1;
+            flex: 0 1 420px;
+            min-width: 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* ─── SUBSCRIPTION FORM ──────────────────── */
+        .sc-form-wrap {
+            background: rgba(255, 255, 255, .12);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, .22);
+            border-radius: 100px;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: var(--trans);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+        }
+        .sc-form-wrap:focus-within {
+            border-color: rgba(255, 255, 255, .55);
+            background: rgba(255, 255, 255, .18);
+            box-shadow: 0 0 0 5px rgba(255, 255, 255, .07), 0 4px 18px rgba(0, 0, 0, .12);
+        }
+        .sc-input-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #fff;
+            transition: var(--trans);
+        }
+        .sc-form-wrap:focus-within .sc-input-icon {
+            background: rgba(255, 255, 255, .28);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, .12);
+        }
+        .sc-input-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: #fff;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .sc-form-wrap input[type="email"] {
+            flex: 1 1 auto;
+            min-width: 120px;
+            padding: 10px 8px 10px 2px;
+            border: none;
+            border-radius: 0;
+            background: transparent;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: .88rem;
+            font-weight: 400;
+            outline: none;
+            letter-spacing: .01em;
+            caret-color: #fff;
+        }
+        .sc-form-wrap input[type="email"]::placeholder {
+            color: rgba(255, 255, 255, .5);
+            font-weight: 300;
+        }
+        .sc-form-wrap .sc-submit-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            color: var(--blue-700);
+            font-family: var(--font-body);
+            font-size: .85rem;
+            font-weight: 600;
+            padding: 11px 20px;
+            border-radius: 100px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--trans);
+            white-space: nowrap;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+            flex-shrink: 0;
+            letter-spacing: .01em;
+        }
+        .sc-form-wrap .sc-submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 22px rgba(0, 0, 0, .18);
+            background: #f8fafc;
+        }
+        .sc-form-wrap .sc-submit-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 6px rgba(0, 0, 0, .12);
+        }
+        .sc-form-wrap .sc-submit-btn svg {
+            flex-shrink: 0;
+            width: 15px;
+            height: 15px;
+        }
+
+        /* ─── SUBSCRIBER COUNT TEXT (moved to right side) ─── */
+        .sc-count-text {
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .6);
+            font-weight: 400;
+            letter-spacing: .01em;
+            margin: 0;
+            line-height: 1.4;
+        }
+        .sc-count-text strong {
+            color: #fff;
+            font-weight: 700;
+            font-size: .85rem;
+        }
+        .sc-count-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 0 2px rgba(74, 222, 128, .35);
+            animation: pulse 2s infinite;
+            margin-right: 6px;
+            vertical-align: middle;
+            position: relative;
+            top: -1px;
+        }
+        @keyframes pulse {
+            0%,
+            100% {
+                box-shadow: 0 0 0 2px rgba(74, 222, 128, .35)
+            }
+            50% {
+                box-shadow: 0 0 0 5px rgba(74, 222, 128, .0)
+            }
+        }
+
+        /* ─── SUCCESS MESSAGE ────────────────────── */
+        .sc-success-msg {
+            display: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: .9rem;
+            align-items: center;
+            gap: 8px;
+            animation: fadeUp .35s ease;
+            background: rgba(255, 255, 255, .12);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, .22);
+            border-radius: 100px;
+            padding: 12px 22px;
+            justify-content: center;
+        }
+        .sc-success-msg.show {
+            display: flex;
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ═══════════════════════════════════════════════
+           FOOTER SHELL
+        ═══════════════════════════════════════════════ */
+        footer {
+            background: var(--footer-bg);
+            padding: 0 clamp(16px, 4vw, 48px);
+            transition: var(--trans-theme);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ─── MAIN GRID ──────────────────────────────── */
+        .footer-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.6fr;
+            gap: 40px 32px;
+            padding: 52px 0 44px;
+            border-bottom: 1px solid var(--surface-3);
+            transition: var(--trans-theme);
+        }
+
+        /* ─── BRAND COLUMN ───────────────────────────── */
+        .brand-col {}
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            text-decoration: none;
+        }
+        .logo-mark {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, .28);
+        }
+        .logo-mark svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+        .logo-text-block {}
+        .logo-name {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--ink-1);
+            line-height: 1.1;
+            letter-spacing: -.01em;
+            transition: var(--trans-theme);
+        }
+        .logo-handle {
+            font-size: .7rem;
+            color: var(--ink-4);
+            font-weight: 400;
+            letter-spacing: .04em;
+            transition: var(--trans-theme);
+        }
+        .brand-desc {
+            font-size: .83rem;
+            line-height: 1.7;
+            color: var(--ink-3);
+            margin-bottom: 22px;
+            max-width: 280px;
+            transition: var(--trans-theme);
+        }
+
+        /* Social Icons */
+        .social-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+        .social-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 9px;
+            background: var(--surface-2);
+            border: 1px solid var(--surface-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-3);
+            text-decoration: none;
+            transition: var(--trans);
+            cursor: pointer;
+            position: relative;
+        }
+        .social-icon:hover {
+            background: var(--blue-600);
+            border-color: var(--blue-600);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        .social-icon svg {
+            width: 13px;
+            height: 13px;
+            fill: currentColor;
+        }
+
+        .location-row {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: .8rem;
+            color: var(--ink-4);
+            transition: var(--trans-theme);
+        }
+        .location-row svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--blue-500);
+            flex-shrink: 0;
+        }
+
+        /* ─── NAV COLUMNS ────────────────────────────── */
+        .nav-col {}
+        .nav-col-title {
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--ink-4);
+            margin-bottom: 16px;
+            transition: var(--trans-theme);
+        }
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .nav-list a {
+            font-size: .845rem;
+            color: var(--ink-3);
+            text-decoration: none;
+            font-weight: 400;
+            transition: var(--trans);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-list a:hover {
+            color: var(--blue-600);
+            padding-left: 4px;
+        }
+        .nav-badge {
+            font-size: .6rem;
+            font-weight: 600;
+            background: var(--blue-50);
+            color: var(--blue-600);
+            padding: 1px 6px;
+            border-radius: 100px;
+            border: 1px solid var(--blue-100);
+            letter-spacing: .03em;
+            transition: var(--trans-theme);
+        }
+
+        /* ─── CONTACT COLUMN ─────────────────────────── */
+        .contact-col {}
+        .contact-card {
+            background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-700) 100%);
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            transition: var(--trans);
+            box-shadow: 0 4px 18px rgba(37, 99, 235, .22);
+        }
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .07);
+        }
+        .contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(37, 99, 235, .32);
+        }
+        .contact-card-label {
+            font-size: .66rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .65);
+            margin-bottom: 5px;
+        }
+        .contact-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .contact-card-sub {
+            font-size: .75rem;
+            color: rgba(255, 255, 255, .65);
+            margin-bottom: 12px;
+        }
+        .contact-card-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: .78rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .contact-card-arrow svg {
+            width: 14px;
+            height: 14px;
+            fill: #fff;
+            transition: var(--trans);
+        }
+        .contact-card:hover .contact-card-arrow svg {
+            transform: translateX(3px);
+        }
+
+        .email-card {
+            background: var(--surface-1);
+            border: 1px solid var(--surface-3);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: var(--trans);
+        }
+        .email-card:hover {
+            border-color: var(--blue-400);
+            background: var(--blue-50);
+            box-shadow: 0 2px 12px rgba(37, 99, 235, .1);
+        }
+        .email-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--blue-50);
+            border: 1px solid var(--blue-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: var(--trans);
+        }
+        .email-card:hover .email-icon {
+            background: var(--blue-600);
+            border-color: var(--blue-600);
+        }
+        .email-icon svg {
+            width: 15px;
+            height: 15px;
+            fill: var(--blue-600);
+            transition: var(--trans);
+        }
+        .email-card:hover .email-icon svg {
+            fill: #fff;
+        }
+        .email-text {}
+        .email-label {
+            font-size: .66rem;
+            font-weight: 600;
+            color: var(--ink-4);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            transition: var(--trans-theme);
+        }
+        .email-addr {
+            font-size: .8rem;
+            font-weight: 500;
+            color: var(--ink-2);
+            transition: var(--trans-theme);
+        }
+
+        /* ═══════════════════════════════════════════════
+           FOOTER BOTTOM BAR
+        ═══════════════════════════════════════════════ */
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 0 22px;
+            gap: 16px;
+            flex-wrap: wrap;
+            transition: var(--trans-theme);
+        }
+        .copyright {
+            font-size: .78rem;
+            color: var(--ink-4);
+            transition: var(--trans-theme);
+        }
+        .copyright span {
+            color: var(--ink-3);
+            font-weight: 500;
+            transition: var(--trans-theme);
+        }
+        .bottom-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .version-badge {
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .06em;
+            background: var(--surface-2);
+            border: 1px solid var(--surface-3);
+            color: var(--ink-4);
+            padding: 3px 10px;
+            border-radius: 100px;
+            transition: var(--trans-theme);
+        }
+
+        /* ─── SCROLL TO TOP ──────────────────────────── */
+        .scroll-top-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--blue-600);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: var(--trans);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, .28);
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .scroll-top-btn:hover {
+            background: var(--blue-700);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, .38);
+        }
+        .scroll-top-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #fff;
+        }
+
+        /* ─── SCROLL TO TOP ON BORDER (mobile only) ─── */
+        .scroll-top-border {
+            display: none;
+            justify-content: center;
+            position: relative;
+            z-index: 5;
+            margin-top: -22px;
+            margin-bottom: 0;
+        }
+        .scroll-top-border .scroll-top-btn {
+            width: 44px;
+            height: 44px;
+            box-shadow: 0 2px 12px rgba(37, 99, 235, .25), 0 0 0 4px #fff;
+        }
+        [data-theme="dark"] .scroll-top-border .scroll-top-btn {
+            box-shadow: 0 2px 12px rgba(37, 99, 235, .35), 0 0 0 4px var(--surface-0);
+        }
+
+        /* ═══════════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════════ */
+
+        /* ── TABLET (≤1024px) ── */
+        @media (max-width: 1024px) {
+            .footer-main {
+                grid-template-columns: 1.5fr 1fr 1fr;
+                grid-template-rows: auto auto;
+            }
+            .brand-col {
+                grid-column: 1 / -1;
+            }
+            .contact-col {
+                grid-column: 1 / -1;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                align-items: stretch;
+            }
+            .contact-col .nav-col-title {
+                grid-column: 1 / -1;
+                margin-bottom: 0;
+            }
+            .brand-desc {
+                max-width: 100%;
+            }
+            .sc-right {
+                flex: 0 1 380px;
+            }
+            .contact-card,
+            .email-card {
+                height: 100%;
+            }
+            .contact-card {
+                margin-bottom: 0; 
+            }
+        }
+
+        /* ── SMALL TABLET / LARGE MOBILE (≤860px) ── */
+        @media (max-width: 860px) {
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+            }
+            .brand-col {
+                grid-column: 1 / -1;
+            }
+            .contact-col {
+                grid-column: 1 / -1;
+                grid-template-columns: 1fr 1fr;
+                align-items: stretch;
+            }
+            .sc-left h2 {
+                font-size: 1.4rem;
+            }
+            
+            .stay-connected {
+                gap: 20px;
+            }
+            .sc-right {
+                flex: 1 1 100%;
+                min-width: 100%;
+            }
+            /* Banner stacks but form stays inline - no form-wrap overrides */
+        }
+
+        /* ── MOBILE (≤600px) ── */
+        @media (max-width: 600px) {
+            .stay-connected {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+                padding: 28px 24px;
+            }
+            .sc-left {
+                flex: 1 1 auto;
+                min-width: 100%;
+            }
+            .sc-right {
+                flex: 1 1 auto;
+                min-width: 100%;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                padding: 36px 0 32px;
+                gap: 28px 20px;
+            }
+            .brand-col {
+                grid-column: 1 / -1;
+            }
+            /* Explore & Legal stay side-by-side in the 2-column grid */
+            .nav-col {
+                text-align: left;
+            }
+            .contact-col {
+                grid-column: 1 / -1;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                align-items: stretch;
+            }
+            .contact-col .nav-col-title {
+                grid-column: 1 / -1;
+            }
+            .contact-card {
+                grid-column: 1 / -1;
+            }
+            .email-card {
+                grid-column: 1 / -1;
+            }
+
+            /* Social icons - simpler, rectangular, max-width, 2 rows justified */
+            .social-row {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 7px;
+                width: 100%;
+                margin: 0 auto 22px;
+            }
+            .social-icon {
+                width: 100%;
+                height: 40px;
+                border-radius: 8px;
+                background: transparent;
+                border: 1px solid var(--surface-3);
+                color: var(--ink-3);
+                box-shadow: none;
+            }
+            .social-icon:hover {
+                background: var(--blue-50);
+                border-color: var(--blue-400);
+                color: var(--blue-600);
+                transform: none;
+                box-shadow: none;
+            }
+            [data-theme="dark"] .social-icon:hover {
+                background: rgba(59, 130, 246, .1);
+                border-color: var(--blue-500);
+                color: var(--blue-400);
+            }
+            .social-icon svg {
+                width: 15px;
+                height: 15px;
+            }
+
+            .footer-bottom {
+                text-align: center;
+                padding: 16px 0 20px;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            .bottom-right {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+            }
+            /* Hide desktop scroll-top on mobile, show border version */
+            .scroll-top-btn.desktop-only {
+                display: none;
+            }
+            .scroll-top-border {
+                display: flex;
+            }
+            .page-filler {
+                font-size: .7rem;
+            }
+            .theme-toggle-wrap {
+                top: 12px;
+                right: 12px;
+                padding: 4px 6px 4px 12px;
+                gap: 6px;
+            }
+            .theme-toggle-btn {
+                width: 32px;
+                height: 32px;
+            }
+            .theme-toggle-btn svg {
+                width: 15px;
+                height: 15px;
+            }
+            .theme-label {
+                font-size: .66rem;
+            }
+
+            /* ─── MOBILE FORM: button becomes round icon-only ─── */
+            .sc-form-wrap {
+                padding: 4px;
+                gap: 2px;
+            }
+            .sc-form-wrap .sc-submit-btn {
+                width: 38px;
+                height: 38px;
+                padding: 0;
+                border-radius: 50%;
+                min-width: 38px;
+                justify-content: center;
+            }
+            .sc-form-wrap .sc-submit-btn span {
+                display: none;
+            }
+            .sc-form-wrap .sc-submit-btn svg {
+                margin: 0;
+                width: 15px;
+                height: 15px;
+            }
+            .sc-input-icon {
+                width: 34px;
+                height: 34px;
+            }
+            .sc-input-icon svg {
+                width: 14px;
+                height: 14px;
+            }
+            .sc-form-wrap input[type="email"] {
+                font-size: .8rem;
+                padding: 8px 4px 8px 2px;
+            }
+            .sc-count-text {
+                font-size: .74rem;
+                text-align: center;
+            }
+            .sc-count-text strong {
+                font-size: .8rem;
+            }
+        }
+
+        /* ── NARROW (≤300px) Explore & Legal stack ── */
+        @media (max-width: 300px) {
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+            .nav-col {
+                grid-column: 1 / -1;
+            }
+            .contact-col {
+                grid-template-columns: 1fr;
+                grid-column: 1 / -1;
+            }
+            .contact-card {
+                grid-column: 1 / -1;
+            }
+            .email-card {
+                grid-column: 1 / -1;
+            }
+            .social-row {
+                gap: 6px;
+            }
+            .social-icon {
+                height: 38px;
+                border-radius: 8px;
+            }
+
+            .copyright {
+                font-size: .74rem;
+            }
+            .version-badge {
+                font-size: .64rem;
+            }
+            .scroll-top-border {
+                margin-top: -18px;
+            }
+            .sc-form-wrap input[type="email"] {
+                font-size: .78rem;
+                padding: 7px 3px 7px 1px;
+            }
+            .sc-form-wrap .sc-submit-btn {
+                width: 34px;
+                height: 34px;
+                min-width: 34px;
+            }
+            .sc-form-wrap .sc-submit-btn svg {
+                width: 13px;
+                height: 13px;
+            }
+            .sc-input-icon {
+                width: 30px;
+                height: 30px;
+            }
+            .sc-input-icon svg {
+                width: 12px;
+                height: 12px;
+            }
+            .email-addr {
+                font-size: .74rem;
+            }
+            .theme-toggle-wrap {
+                padding: 3px 4px 3px 10px;
+                gap: 4px;
+            }
+            .theme-label {
+                font-size: .6rem;
+            }
+            .theme-toggle-btn {
+                width: 28px;
+                height: 28px;
+            }
+            .theme-toggle-btn svg {
+                width: 13px;
+                height: 13px;
+            }
+            .sc-count-text {
+                font-size: .7rem;
+            }
+            .sc-count-text strong {
+                font-size: .75rem;
+            }
+        }
+
+        /* ── EXTRA NARROW (≤340px) ── */
+        @media (max-width: 340px) {
+            .social-row {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 4px;
+            }
+            .social-icon {
+                height: 30px;
+                border-radius: 6px;
+            }
+            .social-icon svg {
+                width: 12px;
+                height: 12px;
+            }
+            .sc-form-wrap {
+                padding: 3px;
+                gap: 1px;
+            }
+            .sc-form-wrap input[type="email"] {
+                font-size: .74rem;
+                padding: 6px 2px 6px 1px;
+                min-width: 90px;
+            }
+            .sc-form-wrap .sc-submit-btn {
+                width: 30px;
+                height: 30px;
+                min-width: 30px;
+            }
+            .sc-form-wrap .sc-submit-btn svg {
+                width: 12px;
+                height: 12px;
+            }
+            .sc-input-icon {
+                width: 28px;
+                height: 28px;
+            }
+            .sc-input-icon svg {
+                width: 11px;
+                height: 11px;
+            }
+            .sc-count-text {
+                font-size: .66rem;
+            }
+            .sc-count-text strong {
+                font-size: .7rem;
+            }
+        }
+
+        /* Subtle entrance animation */
+        @keyframes footerFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        footer,
+        .stay-connected-wrap {
+            animation: footerFadeUp .55s ease both;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ════════════════════════════════════════
+         THEME TOGGLE
+    ════════════════════════════════════════ -->
+    <div class="theme-toggle-wrap">
+        <span class="theme-label" id="themeLabel">Light</span>
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
+            <!-- Sun icon (visible in light mode) -->
+            <svg class="icon-sun" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <!-- Moon icon (visible in dark mode) -->
+            <svg class="icon-moon" viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+        </button>
+    </div>
+
+    <div class="page-filler">— Page content above —</div>
+
+    <!-- ════════════════════════════════════════
+         STAY CONNECTED BANNER
+    ════════════════════════════════════════ -->
+    <div class="stay-connected-wrap">
+        <div class="stay-connected">
+            <!-- ── LEFT SIDE: heading + sub-text ── -->
+            <div class="sc-left">
+                <h2>Stay <em>Connected</em><br>with My Work</h2>
+                <p class="sc-sub-text">Follow my journey · Get updates on new projects &amp; posts</p>
+            </div>
+
+            <!-- ── RIGHT SIDE: form + count text + success msg ── -->
+            <div class="sc-right">
+                <!-- Email subscription form -->
+                <form id="subscribeForm" novalidate>
+                    <div class="sc-form-wrap">
+                        <div class="sc-input-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="M2 7l8.5 6.5a2 2 0 002.5 0L22 7"/>
+                            </svg>
+                        </div>
+                        <input type="email" id="subEmail" placeholder="Enter your email" required autocomplete="email" />
+                        <button type="submit" class="sc-submit-btn">
+                            <svg viewBox="0 0 20 20" width="15" height="15" fill="currentColor">
+                                <path d="M10 2a6 6 0 00-6 6v1H3a1 1 0 000 2h1v1a6 6 0 0012 0v-1h1a1 1 0 000-2h-1V8a6 6 0 00-6-6zm0 2a4 4 0 014 4v2a4 4 0 01-8 0V8a4 4 0 014-4z"/>
+                            </svg>
+                            <span>Subscribe</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Subscriber count (moved from left to right, below the form) -->
+                <p class="sc-count-text">
+                    <span class="sc-count-dot" aria-hidden="true"></span>
+                    <strong id="subCount">2,847</strong> curious minds already subscribed
+                </p>
+
+                <!-- Success message -->
+                <div class="sc-success-msg" id="successMsg">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Subscribed! Check your inbox.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         FOOTER
+    ════════════════════════════════════════ -->
+    <footer id="top">
+        <div class="footer-inner">
+
+            <!-- ── MAIN SECTION ───────────────────── -->
+            <div class="footer-main">
+
+                <!-- Brand -->
+                <div class="brand-col">
+                    <a href="/" class="logo-row">
+                        <div class="logo-mark">
+                            <!-- Monogram M logo -->
+                            <svg viewBox="0 0 24 24"><path d="M3 5h18v3H14v11h-4V8H3V5z"/></svg>
+                        </div>
+                        <div class="logo-text-block">
+                            <div class="logo-name">Muhtasim Rahman</div>
+                            <div class="logo-handle">@mdturzo999 · Portfolio</div>
+                        </div>
+                    </a>
+                    <p class="brand-desc">
+                        Full-stack developer &amp; designer crafting thoughtful digital experiences.<br>
+                        Turning ideas into clean, performant, and beautiful products.
+                    </p>
+
+                    <!-- 8 Social Icons -->
+                    <div class="social-row">
+                        <!-- GitHub -->
+                        <a href="#" class="social-icon" title="GitHub" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                        </a>
+                        <!-- LinkedIn -->
+                        <a href="#" class="social-icon" title="LinkedIn" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <!-- Twitter/X -->
+                        <a href="#" class="social-icon" title="X / Twitter" aria-label="X">
+                            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <!-- Instagram -->
+                        <a href="#" class="social-icon" title="Instagram" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <!-- YouTube -->
+                        <a href="#" class="social-icon" title="YouTube" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                        <!-- Facebook -->
+                        <a href="#" class="social-icon" title="Facebook" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <!-- Dribbble -->
+                        <a href="#" class="social-icon" title="Dribbble" aria-label="Dribbble">
+                            <svg viewBox="0 0 24 24"><path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.952-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4 1.73 1.358 3.92 2.166 6.29 2.166 1.42 0 2.77-.29 4.01-.814zm-9.97-2.18c.24-.405 3.025-5.055 8.395-6.695.14-.045.29-.088.43-.127-.27-.614-.57-1.228-.888-1.832-5.22 1.56-10.33 1.492-10.77 1.486-.003.06-.003.12-.003.18 0 2.747 1.05 5.258 2.836 7.14zm-2.517-8.54c.45.01 4.883.052 9.804-1.298-1.76-3.127-3.652-5.76-3.934-6.16-2.8 1.327-4.96 3.81-5.87 6.457zm7.37-7.65c.29.41 2.21 3.03 3.952 6.22 3.76-1.41 5.35-3.55 5.54-3.82-1.59-1.42-3.69-2.33-6.01-2.44-.5-.03-1.01.01-1.49.04zm8.786 4.394c-.224.3-1.99 2.56-5.905 4.147.246.505.477 1.02.695 1.534.082.19.16.382.24.573 3.4-.43 6.78.258 7.12.33-.01-2.4-.84-4.6-2.15-6.58z"/></svg>
+                        </a>
+                        <!-- Dev.to -->
+                        <a href="#" class="social-icon" title="Dev.to" aria-label="Dev.to">
+                            <svg viewBox="0 0 24 24"><path d="M7.42 10.05c-.18-.16-.46-.23-.84-.23H6l.02 2.44.04 2.45.56-.02c.41 0 .63-.07.83-.26.24-.24.26-.36.26-2.2 0-1.91-.02-1.96-.29-2.18zM0 4.94v14.12h24V4.94H0zM8.56 15.3c-.44.58-1.06.77-2.53.77H4.71V8.53h1.4c1.67 0 2.16.18 2.6.9.27.43.29.6.32 2.57.05 2.23-.02 2.73-.47 3.3zm5.09-5.47h-2.47v1.77h1.52v1.28l-.72.04-.75.03v1.77l1.22.03 1.2.04v1.28h-1.6c-1.53 0-1.6-.01-1.87-.3l-.3-.28v-3.16c0-3.02.01-3.18.25-3.48.23-.31.25-.31 1.88-.31h1.64v1.3zm4.68 5.45c-.17.43-.64.79-1 .79-.18 0-.45-.15-.67-.39-.32-.32-.45-.63-.82-2.08l-.9-3.39-.45-1.67h.76c.4 0 .75.02.75.05 0 .06 1.16 4.54 1.26 4.83.04.15.32-.7.73-2.3l.66-2.52.74-.04c.4-.02.73 0 .73.04 0 .14-1.67 6.38-1.8 6.68z"/></svg>
+                        </a>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="location-row">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+                        Nilphamari, Bangladesh
+                    </div>
+                </div>
+
+                <!-- Nav: Explore -->
+                <div class="nav-col">
+                    <div class="nav-col-title">Explore</div>
+                    <ul class="nav-list">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li>
+                            <a href="#">Projects <span class="nav-badge">12</span></a>
+                        </li>
+                        <li><a href="#">Feed</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Nav: Legal -->
+                <div class="nav-col">
+                    <div class="nav-col-title">Legal</div>
+                    <ul class="nav-list">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookies Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="contact-col">
+                    <div class="nav-col-title">Get in Touch</div>
+
+                    <!-- Contact page card -->
+                    <a href="/contact" class="contact-card">
+                        <div class="contact-card-label">Open for work</div>
+                        <div class="contact-card-title">Let's Collaborate</div>
+                        <div class="contact-card-sub">Have a project in mind? I'd love to hear about it.</div>
+                        <span class="contact-card-arrow">
+                            Visit Contact Page
+                            <svg viewBox="0 0 20 20"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
+                        </span>
+                    </a>
+
+                    <!-- Email card -->
+                    <a href="mailto:hello@muhtasimrahman.dev" class="email-card">
+                        <div class="email-icon">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        </div>
+                        <div class="email-text">
+                            <div class="email-label">Email me</div>
+                            <div class="email-addr">hello@muhtasimrahman.dev</div>
+                        </div>
+                    </a>
+                </div>
+
+            </div><!-- /footer-main -->
+
+            <!-- ── SCROLL TO TOP ON BORDER (mobile only) ── -->
+            <div class="scroll-top-border">
+                <a href="#top" class="scroll-top-btn" aria-label="Scroll to top" title="Back to top">
+                    <svg viewBox="0 0 20 20"><path d="M10 4l-6 6h4v6h4v-6h4l-6-6z"/></svg>
+                </a>
+            </div>
+
+            <!-- ── BOTTOM BAR ─────────────────────────── -->
+            <div class="footer-bottom">
+                <p class="copyright">
+                    © <span id="year"></span> <span>Muhtasim Rahman</span>. All rights reserved.
+                </p>
+                <div class="bottom-right">
+                    <span class="version-badge">v2.1.2</span>
+                    <!-- Desktop & Tablet scroll-to-top -->
+                    <a href="#top" class="scroll-top-btn desktop-only" aria-label="Scroll to top" title="Back to top">
+                        <svg viewBox="0 0 20 20"><path d="M10 4l-6 6h4v6h4v-6h4l-6-6z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        // ── Live year ──────────────────────────────
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ── Animated subscriber counter ────────────
+        function animateCount(el, target, duration) {
+            const start = Math.max(0, target - 300);
+            const startTime = performance.now();
+
+            function tick(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                const value = Math.round(start + (target - start) * ease);
+                el.textContent = value.toLocaleString();
+                if (progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+
+        const countEl = document.getElementById('subCount');
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                animateCount(countEl, 2847, 1800);
+                observer.disconnect();
+            }
+        }, { threshold: 0.5 });
+        if (countEl) observer.observe(countEl);
+
+        // ── Smooth scroll to top ──────────────────
+        document.querySelectorAll('a[href="#top"]').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // ── Subscription form ─────────────────────
+        const subscribeForm = document.getElementById('subscribeForm');
+        const successMsg = document.getElementById('successMsg');
+        const subEmailInput = document.getElementById('subEmail');
+
+        subscribeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = subEmailInput.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                subEmailInput.style.borderColor = 'rgba(255,140,140,.7)';
+                subEmailInput.style.background = 'rgba(255,100,100,.15)';
+                subEmailInput.focus();
+                setTimeout(() => {
+                    subEmailInput.style.borderColor = 'rgba(255,255,255,.5)';
+                    subEmailInput.style.background = 'transparent';
+                }, 1800);
+                return;
+            }
+            // Simulate subscription
+            subscribeForm.style.display = 'none';
+            successMsg.classList.add('show');
+            // Increment counter
+            const currentCount = parseInt(countEl.textContent.replace(/,/g, '')) || 2847;
+            const newCount = currentCount + 1;
+            animateCount(countEl, newCount, 800);
+            // Reset after delay
+            setTimeout(() => {
+                successMsg.classList.remove('show');
+                subscribeForm.style.display = '';
+                subEmailInput.value = '';
+            }, 3500);
+        });
+
+        // ── Theme Toggle ──────────────────────────
+        const html = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+        const themeLabel = document.getElementById('themeLabel');
+
+        function setTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeLabel.textContent = theme === 'dark' ? 'Dark' : 'Light';
+        }
+
+        function toggleTheme() {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            setTheme(next);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Keyboard shortcut: Ctrl+Shift+T
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+                e.preventDefault();
+                toggleTheme();
+            }
+        });
+    </script>
+
+</body>
+</html>
