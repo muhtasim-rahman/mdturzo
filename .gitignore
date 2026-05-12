@@ -1,3 +1,3 @@
 .ignore/
 v2/deploy/node_modules/
-*/node_modules/
+v2/test/node_modules/
