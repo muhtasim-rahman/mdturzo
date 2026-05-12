@@ -18,5 +18,5 @@ function ContactContent() {
 }
 
 export default function Contact() {
-  return <VisibilityGuard page="contact"><ContactContent /></VisibilityGuard>
+  return <VisibilityGuard page="contact" skeleton="form"><ContactContent /></VisibilityGuard>
 }

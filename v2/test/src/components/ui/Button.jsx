@@ -57,6 +57,7 @@ export function Button({
       className={`${BASE} ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
       disabled={disabled || loading}
       onClick={handleClick}
+      data-ripple-managed="true"
       {...props}
     >
       <RippleLayer ripples={ripples} color={RIPPLE_COLORS[variant]} />

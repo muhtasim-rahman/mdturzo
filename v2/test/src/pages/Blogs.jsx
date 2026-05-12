@@ -18,5 +18,5 @@ function BlogsContent() {
 }
 
 export default function Blogs() {
-  return <VisibilityGuard page="blogs"><BlogsContent /></VisibilityGuard>
+  return <VisibilityGuard page="blogs" skeleton="list"><BlogsContent /></VisibilityGuard>
 }

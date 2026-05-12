@@ -18,5 +18,5 @@ function AboutContent() {
 }
 
 export default function About() {
-  return <VisibilityGuard page="about"><AboutContent /></VisibilityGuard>
+  return <VisibilityGuard page="about" skeleton="profile"><AboutContent /></VisibilityGuard>
 }

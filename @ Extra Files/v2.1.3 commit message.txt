@@ -1,0 +1,27 @@
+  - feat(footer): complete footer redesign based on footer-v9 layout
+  - feat(footer): Stay Connected blue gradient banner added above footer
+  - feat(footer): new 4-col grid — Brand, Explore, Legal, Get in Touch
+  - feat(footer): inline SVG social icons added for GitHub, LinkedIn, X, Instagram, YouTube, Facebook, Threads, TikTok
+  - feat(footer): Let's Collaborate contact card + email card added
+  - feat(footer): bottom bar redesigned with copyright, version badge, and scroll-to-top
+  - feat(footer): logo image support with fallback favicon + active status dot
+  - feat(footer): subscriber count animation improved and triggers on viewport entry
+  - feat(footer): subscribe form validation, loading state, success state, and Firebase RTDB live count kept
+  - feat(navbar): logo updated to image avatar with active status dot
+  - feat(navbar): status system prepared for 4 modes — active, busy, away, offline
+  - feat(navbar): Firebase presence/status note added for future RTDB control
+  - feat(navbar): mega menu fully redesigned into cleaner 3-column layout
+  - feat(navbar): mega menu now includes account, legal, sitemap, copy/share actions
+  - feat(navbar): desktop search popup added with Ctrl+K support
+  - feat(navbar): mobile/tablet search icon opens sidebar and auto-focuses real search input
+  - feat(navbar): sidebar search state added — typing hides nav sections and shows search placeholder
+  - feat(navbar): footer and navbar navigation links aligned
+  - feat(navbar): floating navbar glass effect enhanced
+  - fix(toast): toast UI made smaller, tighter, rounded-lg, max 320px
+  - fix(toast): all toast types now auto-dismiss after 3s
+  - fix(toast): toast stack reduced from 5 to 3
+  - chore(config): site version updated to v2.1.3
+  - chore(config): navName changed from "Md Turzo" to "Muhtasim"
+  - chore(vite): framer-motion alias added for build/runtime compatibility
+  - chore(gitignore): attachments folder ignored
+  - chore(package): package version updated to 2.1.3

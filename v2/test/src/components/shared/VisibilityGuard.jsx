@@ -6,18 +6,14 @@
 import { Navigate }           from 'react-router-dom'
 import { useAuth }            from '../../hooks/useAuth.js'
 import { usePageVisibility }  from '../../hooks/usePageVisibility.js'
-import { SkeletonText }       from '../ui/Skeleton.jsx'
+import { PageSkeleton }       from '../ui/Skeleton.jsx'
 
-export function VisibilityGuard({ page, children }) {
+export function VisibilityGuard({ page, children, skeleton = 'blank' }) {
   const { isLoggedIn, authLoading } = useAuth()
   const { visibility, loading }     = usePageVisibility()
 
   if (authLoading || loading) {
-    return (
-      <div className="container-lg py-20">
-        <SkeletonText lines={3} className="max-w-sm mx-auto" />
-      </div>
-    )
+    return <PageSkeleton layout={skeleton} />
   }
 
   const rule = visibility[page] || 'public'

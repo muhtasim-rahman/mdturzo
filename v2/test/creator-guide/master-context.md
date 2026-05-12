@@ -31,6 +31,9 @@
 | Image Upload | ImgBB via Cloudflare Worker |
 | Email | Resend via Cloudflare Worker |
 
+**For animated things use:**
+- https://animate-ui.com/
+
 
 ### Keys & Setup Status
 
@@ -249,3 +252,28 @@ User একটা AI-generated HTML design (DeepSeek) দিয়েছিল n
 - Updated package metadata to `2.1.3`.
 - Added a narrow Vite alias for `framer-motion` because the installed package's ESM entry was missing in this environment.
 - `npm run build` passed.
+
+---
+
+## v2.1.4 - Navbar/Search/Loader Interaction Polish
+
+**Summary**
+- Floating navbar is now the only rounded-avatar logo surface; top navbar, sidebar, and footer keep the original logo shape.
+- Navbar/floating-nav item heights, icon buttons, and Sign In sizing were aligned.
+- Floating navbar glass styling, search popup styling, sidebar search results, mega-menu footer sharing, mobile sidebar footer, and global click feedback were polished.
+- Notification, user, and mega-menu controls close predictably when their active icon is clicked again.
+- Native Share + current URL copy field replaced the older multi-share footer controls in the mega menu.
+- Route navigation resets scroll to the top on pathname/search changes.
+- Version metadata is `v2.1.4` in package files and `site.config.js`.
+
+**Final second-part fixes**
+- Replaced the previous `SignatureLoader` artwork with the attached CSS conic/grid loader style (`50px`, `#514b82`, rotating grid/ring shape).
+- Changed lazy route loading so the first website load can show the loader overlay, while later page switches keep navbar/footer visible and render route-shaped `PageSkeleton` fallbacks.
+- Added layout-specific route skeletons for hero, grid, list, detail, profile, admin, and form pages; `VisibilityGuard` now uses skeletons while auth/page visibility checks finish.
+- Restyled navbar right-side custom tooltips as compact glass pills with arrow pointers and right-edge alignment.
+- Mega menu active items now force both icon and text to `var(--accent-primary)` blue.
+- Top navbar inner wrapper now removes horizontal padding at `min-width: 1250px` to match the screenshot requirement.
+- Top route progress now also reacts to `location.search`.
+
+**Verification**
+- `npm run build` passed for v2.1.4.

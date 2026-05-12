@@ -5,6 +5,15 @@
 // ============================================================
 
 // ── Primitives ──────────────────────────────────────────────
+export function SignatureLoader({ compact = false, label = '' }) {
+  return (
+    <div className={`signature-loader-wrap ${compact ? 'is-compact' : ''}`} role="status" aria-live="polite">
+      <div className="signature-loader" aria-hidden />
+      {label && <p className="signature-loader-text">{label}</p>}
+    </div>
+  )
+}
+
 export function SkeletonText({ lines = 3, className = '' }) {
   const widths = ['w-full', 'w-4/5', 'w-3/4', 'w-2/3', 'w-1/2', 'w-5/6']
   return (

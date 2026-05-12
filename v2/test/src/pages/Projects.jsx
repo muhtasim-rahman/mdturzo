@@ -18,5 +18,5 @@ function ProjectsContent() {
 }
 
 export default function Projects() {
-  return <VisibilityGuard page="projects"><ProjectsContent /></VisibilityGuard>
+  return <VisibilityGuard page="projects" skeleton="grid"><ProjectsContent /></VisibilityGuard>
 }

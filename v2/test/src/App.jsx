@@ -4,7 +4,7 @@
 // React Router future flags, AnimatePresence page transitions
 // ============================================================
 
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { HelmetProvider }             from 'react-helmet-async'
 import { AnimatePresence, motion }    from 'framer-motion'
@@ -15,6 +15,7 @@ import { Layout }                  from './components/layout/Layout.jsx'
 import { ToastContainer }          from './components/ui/ToastContainer.jsx'
 import { PageProgress }            from './components/ui/PageProgress.jsx'
 import { ErrorBoundary }           from './components/ui/ErrorBoundary.jsx'
+import { PageSkeleton, SignatureLoader } from './components/ui/Skeleton.jsx'
 import { logout as signOutUser }             from './services/firebase.js'
 
 // Lazy pages
@@ -45,6 +46,56 @@ const pageVariants = {
   exit:    { opacity: 0,       transition: { duration: 0.12, ease: 'easeIn' } },
 }
 
+const CLICKABLE_SELECTOR = [
+  'button:not(:disabled)',
+  'a[href]',
+  '[role="button"]',
+  '.card',
+].join(',')
+
+const CLICK_IGNORE_SELECTOR = [
+  'input',
+  'textarea',
+  'select',
+  'option',
+  '[contenteditable="true"]',
+  '[data-click-fx-ignore="true"]',
+  '[data-ripple-managed="true"]',
+].join(',')
+
+function ClickEffect() {
+  useEffect(() => {
+    const onPointerDown = (event) => {
+      if (event.button != null && event.button !== 0) return
+      if (!(event.target instanceof Element)) return
+      if (event.target.closest(CLICK_IGNORE_SELECTOR)) return
+
+      const target = event.target.closest(CLICKABLE_SELECTOR)
+      if (!target) return
+
+      const rect = target.getBoundingClientRect()
+      if (!rect.width || !rect.height) return
+
+      const size = Math.max(rect.width, rect.height) * 1.8
+      const burst = document.createElement('span')
+      burst.className = 'click-fx-burst'
+      burst.style.width = `${size}px`
+      burst.style.height = `${size}px`
+      burst.style.left = `${event.clientX - rect.left - size / 2}px`
+      burst.style.top = `${event.clientY - rect.top - size / 2}px`
+
+      target.classList.add('click-fx-host')
+      target.appendChild(burst)
+      window.setTimeout(() => burst.remove(), 680)
+    }
+
+    document.addEventListener('pointerdown', onPointerDown, { passive: true })
+    return () => document.removeEventListener('pointerdown', onPointerDown)
+  }, [])
+
+  return null
+}
+
 function PageWrapper({ children }) {
   return (
     <motion.div variants={pageVariants} initial="initial" animate="enter" exit="exit">
@@ -53,12 +104,41 @@ function PageWrapper({ children }) {
   )
 }
 
-function PageLoader() {
+function PageLoader({ fullscreen = false }) {
   return (
-    <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div className="spinner" />
+    <div className={fullscreen
+      ? 'fixed inset-0 z-[99999] flex items-center justify-center bg-[var(--bg-page)] px-4'
+      : 'min-h-[60vh] flex items-center justify-center px-4'}>
+      <SignatureLoader />
     </div>
   )
+}
+
+function RouteReady({ children, onReady }) {
+  useEffect(() => { onReady?.() }, [onReady])
+  return children
+}
+
+function RouteBoundary({ children, layout = 'blank', initialPending, onReady }) {
+  return (
+    <Suspense fallback={initialPending ? <PageLoader fullscreen /> : <PageSkeleton layout={layout} />}>
+      <RouteReady onReady={onReady}>
+        {children}
+      </RouteReady>
+    </Suspense>
+  )
+}
+
+function ScrollToTop() {
+  const location = useLocation()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  }, [location.pathname, location.search])
+
+  return null
 }
 
 // /logout — auto sign out + redirect
@@ -72,36 +152,43 @@ function LogoutPage() {
 
 function AnimatedRoutes() {
   const location = useLocation()
+  const [hasFirstRouteReady, setHasFirstRouteReady] = useState(false)
+  const markRouteReady = useCallback(() => setHasFirstRouteReady(true), [])
+  const routeElement = (children, layout = 'blank') => (
+    <RouteBoundary layout={layout} initialPending={!hasFirstRouteReady} onReady={markRouteReady}>
+      <PageWrapper>{children}</PageWrapper>
+    </RouteBoundary>
+  )
 
   return (
     <AnimatePresence mode="wait" initial={false}>
       <Routes location={location} key={location.pathname}>
         <Route element={<Layout />}>
-          <Route path="/"               element={<PageWrapper><Home /></PageWrapper>} />
-          <Route path="/about"          element={<PageWrapper><About /></PageWrapper>} />
-          <Route path="/projects"       element={<PageWrapper><Projects /></PageWrapper>} />
-          <Route path="/projects/:slug" element={<PageWrapper><ProjectDetail /></PageWrapper>} />
-          <Route path="/feed"           element={<PageWrapper><Feed /></PageWrapper>} />
-          <Route path="/blogs"          element={<PageWrapper><Blogs /></PageWrapper>} />
-          <Route path="/blogs/:slug"    element={<PageWrapper><BlogDetail /></PageWrapper>} />
-          <Route path="/posts"          element={<PageWrapper><Posts /></PageWrapper>} />
-          <Route path="/posts/:slug"    element={<PageWrapper><PostDetail /></PageWrapper>} />
-          <Route path="/contact"        element={<PageWrapper><Contact /></PageWrapper>} />
-          <Route path="/login"          element={<PageWrapper><Login /></PageWrapper>} />
-          <Route path="/signup"         element={<PageWrapper><Signup /></PageWrapper>} />
+          <Route path="/"               element={routeElement(<Home />, 'hero')} />
+          <Route path="/about"          element={routeElement(<About />, 'profile')} />
+          <Route path="/projects"       element={routeElement(<Projects />, 'grid')} />
+          <Route path="/projects/:slug" element={routeElement(<ProjectDetail />, 'detail')} />
+          <Route path="/feed"           element={routeElement(<Feed />, 'list')} />
+          <Route path="/blogs"          element={routeElement(<Blogs />, 'list')} />
+          <Route path="/blogs/:slug"    element={routeElement(<BlogDetail />, 'detail')} />
+          <Route path="/posts"          element={routeElement(<Posts />, 'list')} />
+          <Route path="/posts/:slug"    element={routeElement(<PostDetail />, 'detail')} />
+          <Route path="/contact"        element={routeElement(<Contact />, 'form')} />
+          <Route path="/login"          element={routeElement(<Login />, 'form')} />
+          <Route path="/signup"         element={routeElement(<Signup />, 'form')} />
           <Route path="/logout"         element={<LogoutPage />} />
-          <Route path="/profile"        element={<PageWrapper><Profile /></PageWrapper>} />
-          <Route path="/@:username"     element={<PageWrapper><PublicProfile /></PageWrapper>} />
-          <Route path="/admin"          element={<PageWrapper><Admin /></PageWrapper>} />
-          <Route path="/admin/:tab"     element={<PageWrapper><Admin /></PageWrapper>} />
-          <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
-          <Route path="/cookies-policy" element={<PageWrapper><CookiesPolicy /></PageWrapper>} />
-          <Route path="/404"            element={<PageWrapper><NotFound /></PageWrapper>} />
-          <Route path="*"              element={<PageWrapper><NotFound /></PageWrapper>} />
+          <Route path="/profile"        element={routeElement(<Profile />, 'profile')} />
+          <Route path="/@:username"     element={routeElement(<PublicProfile />, 'profile')} />
+          <Route path="/admin"          element={routeElement(<Admin />, 'admin')} />
+          <Route path="/admin/:tab"     element={routeElement(<Admin />, 'admin')} />
+          <Route path="/privacy-policy" element={routeElement(<PrivacyPolicy />, 'detail')} />
+          <Route path="/cookies-policy" element={routeElement(<CookiesPolicy />, 'detail')} />
+          <Route path="/404"            element={routeElement(<NotFound />, 'blank')} />
+          <Route path="*"               element={routeElement(<NotFound />, 'blank')} />
         </Route>
 
         {/* Standalone — no navbar/footer */}
-        <Route path="/auth/action" element={<PageWrapper><AuthAction /></PageWrapper>} />
+        <Route path="/auth/action" element={routeElement(<AuthAction />, 'form')} />
       </Routes>
     </AnimatePresence>
   )
@@ -114,11 +201,11 @@ export default function App() {
   return (
     <HelmetProvider>
       <ErrorBoundary>
+        <ClickEffect />
+        <ScrollToTop />
         <PageProgress />
         <ToastContainer />
-        <Suspense fallback={<PageLoader />}>
-          <AnimatedRoutes />
-        </Suspense>
+        <AnimatedRoutes />
       </ErrorBoundary>
     </HelmetProvider>
   )

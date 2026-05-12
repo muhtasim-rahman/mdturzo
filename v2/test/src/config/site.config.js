@@ -3,7 +3,7 @@
 // ============================================================
 
 export const SITE_CONFIG = {
-  version: 'v2.1.3',
+  version: 'v2.1.4',
   siteName: 'Muhtasim Rahman',
   navName: 'Muhtasim',          // Displayed in navbar
   siteTagline: 'Web Developer & Designer',

@@ -39,13 +39,14 @@ export function PageProgress() {
       clearTimeout(timer2.current)
       clearTimeout(timer3.current)
     }
-  }, [location.pathname])
+  }, [location.pathname, location.search])
 
   if (!visible && width === 0) return null
 
   return (
     <div
       id="page-progress"
+      className={visible ? 'is-visible' : ''}
       style={{
         width:   `${width}%`,
         opacity: visible ? 1 : 0,

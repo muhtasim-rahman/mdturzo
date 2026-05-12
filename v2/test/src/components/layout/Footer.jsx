@@ -549,6 +549,7 @@ export function Footer() {
         .nf-main {
           display: grid;
           grid-template-columns: 2fr 1fr 1fr 1.6fr;
+          align-items: start;
           gap: 40px 32px;
           padding: 52px 0 44px;
           border-bottom: 1px solid var(--nf-surface-3);
@@ -561,7 +562,7 @@ export function Footer() {
           margin-bottom: 16px; text-decoration: none;
         }
         .nf-logo-mark {
-          width: 42px; height: 42px; border-radius: 50%;
+          width: 42px; height: 42px; border-radius: 12px;
           background: linear-gradient(135deg, var(--nf-blue-600), var(--nf-blue-400));
           display: flex; align-items: center; justify-content: center;
           flex-shrink: 0; box-shadow: 0 4px 14px rgba(37,99,235,.28);
@@ -569,7 +570,7 @@ export function Footer() {
           overflow: visible;
         }
         .nf-logo-img {
-          width: 42px; height: 42px; border-radius: 50%;
+          width: 42px; height: 42px; border-radius: 10px;
           object-fit: cover; border: 1px solid var(--nf-surface-3);
           background: var(--nf-surface-2);
         }

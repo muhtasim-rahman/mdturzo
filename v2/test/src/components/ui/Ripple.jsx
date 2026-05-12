@@ -38,9 +38,10 @@ export function RippleLayer({ ripples, color }) {
             width:         size,
             height:        size,
             borderRadius:  '50%',
-            background:    color,
+            background:    `radial-gradient(circle, ${color} 0%, ${color} 42%, transparent 72%)`,
+            boxShadow:     `0 0 ${Math.round(size / 5)}px ${color}`,
             transform:     'scale(0)',
-            animation:     'ripple-expand 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+            animation:     'ripple-expand 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards',
             pointerEvents: 'none',
           }}
         />
