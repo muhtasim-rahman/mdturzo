@@ -9,6 +9,9 @@
 
 User বলবে **"v2.X.0 এর কাজ করব"** → তুমি শুধু সেই version এর কাজ করবে।
 
+> kaj suru er age obossoi `master-contecxt.md` file ta read korbe. 
+> protiti major and or kaj ses korar por github commit message er sathe zip e provide kora `master-context.md` file ta update korba. ekn e ki ki cng kora hoiche setar ekta summary diba github commit description er moto tobe ektu detail e jate poroborti ai new chat e suru korle oi file ta pore project er progress somporke ekta darona paui.. also oi chat e kono important conversation, infortant info, discussion, dissisions etc thakbe. kono kichu master prompt er theke alada cile ba change of mind er bisoy ullekh thakbe. tachara api soho jekono info jegula master prompt e dewa nai kintu kore conversation e dewa hoiche ogula ullekh korba. 
+
 **প্রতিটা Major Version শেষে অবশ্যই দিতে হবে:**
 1. **ZIP file** — root folder: `mdturzo-portfolio-v2.X.0/` — সব files included, কিছু missing নেই
 2. **`.env.example`** — সব environment variables খালি value সহ
