@@ -1,0 +1,1 @@
+import{t as i}from"./firebase-DPKIO6Ex.js";import{t as o,j as n}from"./index-_UAgNNhZ.js";function e(a,t={}){if(n)try{i(n,a,t)}catch{}}async function p(a,t=null){e("page_view",{page_title:a,page_path:window.location.pathname}),await o(window.location.pathname,t).catch(()=>{})}export{p as t};
