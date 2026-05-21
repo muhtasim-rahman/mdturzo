@@ -1,0 +1,21 @@
+[debug] [2026-05-21T13:10:47.314Z] ----------------------------------------------------------------------
+[debug] [2026-05-21T13:10:47.361Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\mdtur\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy -m fix(v2.2.6): navbar overflows, tooltips, scroll snap, footer bg + hero/skills/cta redesign -- deployed with error
+[debug] [2026-05-21T13:10:47.361Z] CLI Version:   15.13.0
+[debug] [2026-05-21T13:10:47.376Z] Platform:      win32
+[debug] [2026-05-21T13:10:47.376Z] Node Version:  v24.12.0
+[debug] [2026-05-21T13:10:47.376Z] Time:          Thu May 21 2026 19:10:47 GMT+0600 (Bangladesh Standard Time)
+[debug] [2026-05-21T13:10:47.376Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-05-21T13:10:58.161Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-05-21T13:10:58.161Z] > authorizing via signed-in user (programs.turzo@gmail.com)
+[debug] [2026-05-21T13:10:58.161Z] [iam] checking project mdturzo for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-05-21T13:10:58.161Z] Checked if tokens are valid: false, expires at: 1779288957172
+[debug] [2026-05-21T13:10:58.161Z] Checked if tokens are valid: false, expires at: 1779288957172
+[debug] [2026-05-21T13:10:58.161Z] > refreshing access token with scopes: []
+[debug] [2026-05-21T13:10:58.161Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-05-21T13:10:58.161Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-05-21T13:10:58.749Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-05-21T13:10:58.749Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-05-21T13:10:58.765Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mdturzo:testIamPermissions [none]
+[debug] [2026-05-21T13:10:58.765Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/mdturzo:testIamPermissions  x-goog-user-project=mdturzo
+[debug] [2026-05-21T13:10:58.765Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mdturzo:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
