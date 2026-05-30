@@ -1,0 +1,2 @@
+- [Vite port + sourcemap fix](vite-config.md) — port must be 5000 (webview), optimizeDeps.esbuildOptions.sourcemap:false fixes motion-dom corrupted map
+- [Click effect system](click-effect.md) — App.jsx ClickEffect: CLICKABLE_SELECTOR + CLICK_IGNORE_SELECTOR; use .click-fx class or data-click-fx attr to opt-in; data-click-fx-ignore="true" to block; chips match [class*="-chip"] so need ignore attr on element itself, not parent
