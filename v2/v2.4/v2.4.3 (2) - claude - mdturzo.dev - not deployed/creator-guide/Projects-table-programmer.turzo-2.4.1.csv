@@ -1,0 +1,316 @@
+slug,title,short_name,tagline,short_description,detailed_description,content,thumbnail_url,github_link,live_link,pdf_link,custom_link,tags,category,status,visibility,is_featured,featured_order,project_timeline,languages,platform,key_features,tech_stack,complexity_level,seo_title,seo_description,seo_keywords,notes,views_count,likes_count,dislikes_count,comments_count,created_at
+"linkivo","Linkivo — Smart Link Management PWA","Linkivo","Discover, Manage, and Explore Links with Intelligence","A progressive web application for intelligent link management with weighted discovery system and advanced animations.","Linkivo is a sophisticated smart link management Progressive Web Application built with modern web technologies. The application features a Firebase-backed architecture with real-time database integration, custom client-side routing implemented in vanilla JavaScript, and advanced UI animations powered by GSAP. The latest version (v1.4.5) includes a cinematic splash screen with a narrative animation sequence where link cards converge into a padlock that auto-locks, accompanied by particle burst effects and dynamic logo assembly. The app implements a weighted point system for random link discovery, secure PIN-based authentication with DOM-hiding protection, and a comprehensive sidebar system with logo-as-toggle functionality. Key features include intelligent caching strategies, duplicate prevention mechanisms, and a multi-layered website preview fallback system supporting iframe embedding, Open Graph thumbnails, screenshot API integration, and favicon extraction.","<h2>About This Project</h2>
+<p>Linkivo is my most advanced active project — a sophisticated Progressive Web Application for intelligent link management. It features a Firebase-backed architecture, a custom client-side router built in Vanilla JavaScript, and cinematic animations powered by GSAP.</p>
+<p>The latest version (v1.4.5) introduces a cinematic splash screen where link cards converge into an auto-locking padlock, complete with particle burst effects and dynamic logo assembly. The app implements a <strong>weighted point system</strong> for random link discovery — the more points assigned to a link, the higher its chance of being surfaced.</p>
+<h2>Key Features</h2>
+<ul>
+  <li>Cinematic GSAP-powered splash screen with narrative animation sequence</li>
+  <li>Firebase Authentication &amp; Realtime Database integration</li>
+  <li>Custom client-side SPA router (no framework)</li>
+  <li>Weighted point system for intelligent random link discovery</li>
+  <li>Secure PIN lock with DOM-hiding protection (<code>visibility:hidden</code> + <code>inert</code>)</li>
+  <li>Multi-layered website preview: iframe → OG image → screenshot API → favicon</li>
+  <li>Advanced caching with invalidation strategies</li>
+  <li>Duplicate link prevention &amp; safe delete ordering</li>
+  <li>Responsive sidebar with logo-as-toggle behavior</li>
+  <li>SVG logo with blue-to-cyan gradient variants</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Frontend:</strong> Vanilla JavaScript, HTML5, CSS3 | <strong>Database:</strong> Firebase Realtime Database | <strong>Auth:</strong> Firebase Auth | <strong>Animation:</strong> GSAP (GreenSock) | <strong>Storage:</strong> LocalStorage, IndexedDB | <strong>APIs:</strong> Screenshot APIs, OG scraping</p>
+<h2>Version History</h2>
+<p>Started early 2024. Current version: <strong>v1.4.5</strong> (April 2026). Ongoing active development with multiple architectural iterations including cache invalidation fixes, dangerous delete-order corrections, and duplicate function consolidation.</p>","https://i.ibb.co.com/tM0hm78r/linkivo.webp","","","","","{PWA,Firebase,GSAP,JavaScript,Link-Management,SPA,Vanilla-JS}","Web App","published","public","true","1","Start Date: 2024 - Current Version: v1.4.5 (April 2026)","{JavaScript,HTML5,CSS3}","Web (PWA), Cross-platform compatible","{Cinematic GSAP splash screen,Firebase Auth & Database,Weighted random discovery link system,DOM-hiding PIN lock system,Multi-layered link previews}","{Vanilla JS,Firebase DB,Firebase Auth,GSAP,IndexedDB}","Advanced","Linkivo — Smart Link Management PWA | Muhtasim Rahman","Linkivo is a sophisticated Progressive Web App for intelligent link management. Features Firebase backend, GSAP animations, PIN auth, and a weighted discovery algorithm.","{pwa,link management,firebase realtime database,gsap animation,muhtasim rahman}","Turzo's most advanced active project, showcasing DOM isolation and custom animations.","320","45","2","0","2024-01-15 00:00:00+00"
+"qr-prism","QR Prism — Advanced QR Code Generator & Scanner","QR Prism","Generate, Scan, and Manage QR Codes with Professional Features","A feature-rich PWA for generating, scanning, and batch-processing QR codes with cloud storage and offline support.","QR Prism is a comprehensive QR code solution built as a Progressive Web Application with extensive functionality covering generation, scanning, batch processing, and cloud management. The application features multiple input methods including CSV/TXT/JSON drag-and-drop batch generation with JSZip export capabilities, a sophisticated scanner with CSS overlay and type-based action buttons, profile editing with ImgBB image upload integration, and a messenger-style report system for user feedback. The app implements a three-tier Service Worker caching strategy for optimal offline performance, secure admin panel access via SHA-256 hashing with Firebase Database role verification, and Firebase-backed user authentication and data storage. The architecture evolved through major versions from Canvas rendering (v2.7) to SVG-based rendering (v3.4) with modular CSS organization. The admin system was redesigned with server-side enforcement using Firebase DB structure admins/{uid}: true for enhanced security.","<h2>About This Project</h2>
+<p>QR Prism is a comprehensive QR code solution built as a Progressive Web Application. It covers generation, scanning, batch processing, and cloud management in a single polished app. The project evolved significantly from v2.7 (Canvas rendering) to v3.4 (SVG-based rendering) with major security and architecture improvements along the way.</p>
+<h2>Key Features</h2>
+<ul>
+  <li>Multiple QR generation modes: text, URL, contact card, WiFi</li>
+  <li>Batch generation from CSV / TXT / JSON files with drag-and-drop</li>
+  <li>ZIP export for batch-generated QR codes (JSZip)</li>
+  <li>Built-in camera scanner with CSS overlay &amp; type-based action buttons</li>
+  <li>Profile management with image upload via ImgBB API</li>
+  <li>Messenger-style report/feedback system</li>
+  <li>Three-tier Service Worker caching (Cache-First, Network-First, Stale-While-Revalidate)</li>
+  <li>Secure admin panel with SHA-256 authentication</li>
+  <li>Firebase role-based access control (<code>admins/{uid}: true</code>)</li>
+  <li>Canvas → SVG rendering migration for better scalability</li>
+</ul>
+<h2>Version Timeline</h2>
+<ul>
+  <li><strong>v2.7:</strong> Initial Canvas-based rendering</li>
+  <li><strong>v3.1:</strong> Major feature additions (batch, scanner)</li>
+  <li><strong>v3.3:</strong> SVG migration begins</li>
+  <li><strong>v3.4:</strong> Final — admin security fully server-side (2024)</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Frontend:</strong> Vanilla JavaScript, HTML5, Modular CSS | <strong>Database:</strong> Firebase Realtime Database | <strong>Auth:</strong> Firebase Auth + SHA-256 | <strong>APIs:</strong> ImgBB, Google Charts (QR) | <strong>Libraries:</strong> JSZip | <strong>Rendering:</strong> SVG (migrated from Canvas)</p>","https://i.ibb.co.com/ch7JtRKQ/qr-prism.webp","https://github.com/muhtasim-rahman/qr-prism","https://muhtasim-rahman.github.io/qr-prism","","","{PWA,QR-Code,Firebase,Batch-Processing,Scanner,Service-Worker,Open-Source}","Utility","published","public","true","2","Start Date: 2023 - Completed v3.4 (2024)","{JavaScript,HTML5,CSS3}","Web (PWA), Mobile-optimized","{Camera scanner with CSS overlay UI,Batch generation from CSV/TXT/JSON with ZIP export,SHA-256 secure admin authentication,ImgBB API profile image upload,3-tier Service Worker caching}","{Vanilla JS,Firebase DB,JSZip,Service Workers,ImgBB API}","Advanced","QR Prism — QR Code Generator & Scanner PWA | Muhtasim Rahman","QR Prism is a comprehensive PWA for QR code generation, scanning, batch processing from CSV/JSON, ZIP export, and Firebase-backed cloud storage.","{qr generator,qr scanner,pwa,jszip,firebase,muhtasim rahman}","Security redesign in v3.4 moved admin check entirely to Firebase Rules to prevent client-side bypass.","280","38","0","0","2023-09-01 00:00:00+00"
+"project-exporter-pro","Project Exporter Pro — Universal Export Engine","Exporter Pro","Universal Export Engine for Web Applications","A self-contained JavaScript export engine supporting multiple image and document formats with Shadow DOM isolation.","Project Exporter Pro is an open-source, self-contained JavaScript export engine designed to handle multiple output formats including PNG, JPG, WebP, SVG, PDF, and CMYK color space exports. The tool is built as a completely standalone component using Shadow DOM isolation for encapsulation, making it easily embeddable in any web project without style conflicts. The engine provides a clean API for programmatic exports and includes a live README documentation modal built into the interface. The project is published on GitHub as an open-source tool for the developer community and features comprehensive export options with quality controls, format-specific optimizations, and batch processing capabilities. The architecture emphasizes modularity, reusability, and zero external dependencies beyond core export libraries.","<h2>About This Project</h2>
+<p>Project Exporter Pro is an open-source, self-contained JavaScript export engine I built for the developer community. It handles multiple output formats — PNG, JPG, WebP, SVG, PDF, and CMYK — and is architected as a Shadow DOM Web Component, meaning it can be dropped into any existing project without style conflicts.</p>
+<h2>Why Shadow DOM?</h2>
+<p>Most export libraries either pollute the global stylesheet or require careful CSS isolation. By encapsulating the entire engine inside a Shadow DOM, Exporter Pro guarantees zero conflicts with the host application regardless of its CSS framework or custom styles.</p>
+<h2>Key Features</h2>
+<ul>
+  <li>Multi-format export: PNG, JPG, WebP, SVG, PDF, CMYK</li>
+  <li>Shadow DOM encapsulation — zero style conflicts</li>
+  <li>Fully self-contained, no external runtime dependencies</li>
+  <li>Built-in live README documentation modal</li>
+  <li>Clean programmatic API for integration</li>
+  <li>Quality control options per format</li>
+  <li>Batch export capabilities</li>
+  <li>Browser-native file download</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Language:</strong> Vanilla JavaScript, HTML5, CSS3 | <strong>Architecture:</strong> Shadow DOM, Web Components | <strong>Rendering:</strong> Canvas API | <strong>Export:</strong> Native browser APIs | <strong>Published:</strong> GitHub (open source)</p>","https://i.ibb.co.com/4wQy7GTc/project-exporter-pro.webp","https://github.com/muhtasim-rahman/exporter-pro","https://muhtasim-rahman.github.io/exporter-pro","","","{JavaScript,Library,Open-Source,Shadow-DOM,Export,PDF,Canvas}","Dev Tool","published","public","true","5","Start Date: 2024 - Status: Published and maintained","{JavaScript,HTML5,CSS3}","Web (Universal), Browser-based","{Multi-format export engine (PNG, JPG, WebP, SVG, PDF, CMYK),Shadow DOM isolation pattern,No external runtime dependencies,Live README markdown component,API controls for custom exports}","{Vanilla JS,Shadow DOM,Canvas API,Browser File APIs}","Expert","Project Exporter Pro — Universal JS Export Engine | Muhtasim Rahman","Open-source JavaScript export engine with Shadow DOM isolation. Supports PNG, JPG, WebP, SVG, PDF, CMYK. Drop-in for any web project with zero style conflicts.","{export engine,shadow dom,pdf export,cmyk export,web component,muhtasim rahman}","Demonstrates advanced web component isolation patterns and complex canvas-to-file rendering workflows.","195","24","1","0","2024-03-01 00:00:00+00"
+"ufmt-ssc26","UFMT-SSC26 — Udvash FMT Merit Tracker","UFMT-SSC26","Track Your Academic Journey with Precision","A powerful web application for tracking merit positions and ranks across various examinations, powered by Google Sheets database.","Udvash FMT Tracker (SSC-26) is a merit position tracker built for students of Saidpur Government Science College. The application acts as a performance analytics dashboard, consuming real-time exams rankings data from Udvash FMT test series. Using Google Sheets API v4 as a serverless database backend, student coordinates are synchronized dynamically and presented through custom JavaScript visualizations, allowing students of the college to track their academic trajectory seamlessly.","<h2>About This Project</h2>
+<p>UFMT-SSC26 (Udvash FMT Tracker for SSC Batch 2026) is a web application I built specifically for my batch at Saidpur Government Science College. It tracks merit positions and exam rankings across Udvash FMT (Foundation Merit Test) examinations.</p>
+<p>By using Google Sheets as the database, updating the data is as simple as editing a spreadsheet — no server, no backend, no deployment required every time results come in.</p>
+<h2>Key Features</h2>
+<ul>
+  <li>Real-time data sync from Google Sheets API</li>
+  <li>Merit position &amp; rank tracking across multiple exams</li>
+  <li>Student performance analytics dashboard</li>
+  <li>Batch-specific tracking (SSC-26, SGSC)</li>
+  <li>Responsive design for mobile and desktop</li>
+  <li>Fast loading with API caching</li>
+  <li>Easy data updates through Google Sheets</li>
+</ul>
+<h2>Why I Built This</h2>
+<p>SSC-26 batch students needed a quick way to check their merit standing after each FMT exam. The school had no system for this, so I built one. It's actively used by my classmates during the exam season.</p>
+<h2>Tech Stack</h2>
+<p><strong>Frontend:</strong> Vanilla JavaScript, HTML5, CSS3 | <strong>Database:</strong> Google Sheets API v4 | <strong>Hosting:</strong> GitHub Pages | <strong>Visualization:</strong> Custom JS charts</p>","https://i.ibb.co.com/2YqYxGHz/ufmt-ssc26.webp","https://github.com/muhtasim-rahman/UFMT-SSC26","https://muhtasim-rahman.github.io/UFMT-SSC26/","","","{Education,Google-Sheets,Tracking,Student,JavaScript,Data-Visualization,Bangladesh}","Education","published","public","true","3","Start Date: 2024 - Status: Active and maintained","{JavaScript,HTML5,CSS3}","Web, Mobile-optimized","{Google Sheets API v4 integration,Dynamic exam rank calculations,Saidpur Govt. Science College student search,Interactive merit dashboard,Mobile-responsive grid stats}","{Vanilla JS,Sheets API,GitHub Pages,Canvas chart rendering}","Intermediate","UFMT-SSC26 — FMT Merit Tracker | Muhtasim Rahman","Web app for tracking Udvash FMT merit positions for SSC-26 students. Uses Google Sheets as database for easy real-time updates.","{merit tracker,udvash,saidpur science college,ssc-26,muhtasim rahman}","Extremely popular during college entrance exams, eliminating manually checking PDFs.","512","87","0","0","2024-06-01 00:00:00+00"
+"notification-panel","Functional Notification Panel — Google Sheets Powered","Notification Panel","Elegant Notifications Powered by Google Sheets","A dynamic, embeddable notification panel powered by Google Sheets with read/unread tracking, filters, and LocalStorage persistence.","The Functional Notification Panel is a plug-and-play UI widget designed to integrate into any website. It fetches live announcement feeds from Google Sheets, providing client admins an easy way to manage broadcast notifications without a backend dashboard. The panel tracks read/unread actions, supports pinning important updates, and saves states in browser local storage.","<h2>About This Project</h2>
+<p>The Functional Notification Panel is a drop-in web component for adding real-time notifications to any website. The content is managed through Google Sheets — no server setup needed, making it perfect for clients or projects that need easy content management without technical complexity.</p>
+<h2>Key Features</h2>
+<ul>
+  <li>Google Sheets as backend — update content without touching code</li>
+  <li>Real-time data fetching on load</li>
+  <li>Read / Unread status with LocalStorage persistence</li>
+  <li>Mark as Important toggle</li>
+  <li>Filter views: All, Unread, Important</li>
+  <li>Batch actions: Mark All as Read / Unimportant</li>
+  <li>Report / Feedback mechanism</li>
+  <li>Smooth CSS animations and transitions</li>
+  <li>Fully responsive — works on all screen sizes</li>
+  <li>Lightweight — no framework dependencies</li>
+</ul>
+<h2>Use Cases</h2>
+<p>This panel is ideal for school/college websites, personal dashboards, or any project where the owner wants to push announcements without a complex CMS. The Google Sheets backend means even non-technical users can manage the notifications.</p>
+<h2>Tech Stack</h2>
+<p><strong>Language:</strong> Vanilla JavaScript, HTML5, CSS3 | <strong>Data Source:</strong> Google Sheets API | <strong>Storage:</strong> Browser LocalStorage | <strong>Animations:</strong> CSS transitions | <strong>Hosting:</strong> GitHub Pages</p>","https://i.ibb.co.com/cSRDz09h/functional-notification-panel.webp","https://github.com/muhtasim-rahman/notification-panel","https://muhtasim-rahman.github.io/notification-panel/","","","{UI-Component,Google-Sheets,JavaScript,Real-time,LocalStorage,Widget,Open-Source}","UI Component","published","public","true","4","Development: 2024 - Status: Completed and available","{JavaScript,HTML5,CSS3}","Web (Universal)","{Google Sheets backend integration,Read/unread status markers,LocalStorage persistence mapping,Important status filters,Zero-dependency embed script}","{Vanilla JS,Google Sheets API,LocalStorage,CSS transitions}","Advanced","Notification Panel — Google Sheets Powered Widget | Muhtasim Rahman","Embeddable notification panel component. Powered by Google Sheets for easy content management. Read/unread tracking, filters, local storage persistence.","{notification widget,google sheets backend,localstorage UI,web component,muhtasim rahman}","Demonstrates micro-interactions and smart data fetching strategies to optimize API limits.","140","18","0","0","2024-02-01 00:00:00+00"
+"sgsc-web-campus","SGSC Web Campus — Saidpur Govt. Science College","SGSC Web Campus","Digital Hub for Academic Excellence and Student Life","Official institutional website for Saidpur Government Science College, featuring club management, events, and student resources.","SGSC Web Campus is a complete institutional management portal created by Muhtasim Rahman as a community service for his college. Developed on the Odoo CMS framework with custom HTML/CSS additions, the site serves as the college's main online portal, offering centralized event management, club admin profiles, and student resource catalogs.","<h2>About This Project</h2>
+<p>SGSC Web Campus is the official institutional website I built for Saidpur Government Science College — my own school. I developed and maintain it entirely as a free service to my institution, as a way to give back to the community that educated me.</p>
+<p>The site serves as the primary digital presence for the college, with special focus on the four newly established student clubs that are a vital part of campus life.</p>
+<h2>Key Features</h2>
+<ul>
+  <li>Complete institutional information portal</li>
+  <li>Four club management systems (activities, members, events)</li>
+  <li>Event calendar and announcements</li>
+  <li>Student resources section</li>
+  <li>News and updates</li>
+  <li>Gallery and media management</li>
+  <li>Contact and inquiry system</li>
+  <li>Admin panel for college staff</li>
+  <li>Mobile-responsive Odoo CMS</li>
+  <li>Professional institutional branding</li>
+</ul>
+<h2>My Contribution</h2>
+<p>I am the sole developer of this project. I designed, built, and continue to maintain this website as a community contribution. This project represents real-world web development applied to an institution with actual users and stakeholders.</p>
+<h2>Tech Stack</h2>
+<p><strong>Platform:</strong> Odoo CMS | <strong>Backend:</strong> Python (Odoo Framework) | <strong>Frontend:</strong> JavaScript, HTML5, CSS3 | <strong>Database:</strong> PostgreSQL | <strong>Hosting:</strong> Odoo Cloud</p>","https://i.ibb.co.com/G475zMXm/sgsc-web-campus.webp","","https://sgsc.odoo.com","","","{Institution,Odoo,College-Website,Education,Bangladesh,Club-Management,Community}","Institution","published","public","true","6","Start Date: 2024 - Status: Ongoing development and maintenance","{Python,JavaScript,HTML5,CSS3,XML}","Web, Odoo CMS","{Institutional info hub,Four clubs administration boards,College events calendar mapping,Dynamic resources directories,Admin portals for college staff}","{Odoo CMS,Python,PostgreSQL,Odoo Web API,XML UI templates}","Expert","SGSC Web Campus — Saidpur Govt. Science College Website | Muhtasim Rahman","Official website for Saidpur Government Science College built by student Muhtasim Rahman. Features club management, events, and student resources on Odoo CMS.","{saidpur science college,sgsc website,odoo school campus,muhtasim rahman}","Developed completely for free as a gift to the college community.","420","67","1","0","2024-04-01 00:00:00+00"
+"mdturzo-portfolio","mdturzo.odoo.com — Professional Portfolio Website","mdturzo Portfolio","Transforming Ideas into Digital Excellence","Current professional portfolio on Odoo platform showcasing web development and editing services, with project gallery, skills, eLearning, and contact.","The professional portfolio website hosted on Odoo platform serving as Muhtasim Rahman's business portal. It contains modules for portfolio galleries, eLearning courses, service bookings, and resume sections, designed to present services to clients.","<h2>About This Project</h2>
+<p>This is my primary professional portfolio hosted on the Odoo platform at <a href=""https://mdturzo.odoo.com"" target=""_blank"">mdturzo.odoo.com</a>. It replaced the earlier turzo.odoo.com version and serves as my main online presence for clients and collaborators.</p>
+<h2>Key Sections</h2>
+<ul>
+  <li>Comprehensive project gallery with previews</li>
+  <li>Service offerings: Website Design, Video Editing, Logo Design, Photo Editing</li>
+  <li>Integrated eLearning / Course platform</li>
+  <li>Educational qualifications timeline</li>
+  <li>Skills rating system</li>
+  <li>Work experience showcase</li>
+  <li>Custom notification panel system</li>
+  <li>Photo and video galleries</li>
+  <li>Contact form integration</li>
+  <li>Privacy policy &amp; cookie policy pages</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Platform:</strong> Odoo CMS | <strong>Backend:</strong> Python (Odoo) | <strong>Frontend:</strong> JavaScript, HTML5, CSS3 | <strong>Database:</strong> PostgreSQL | <strong>Hosting:</strong> Odoo Cloud</p>","https://i.ibb.co.com/p9Hc1RR/portfolio-firebase.webp","","https://mdturzo.odoo.com","","","{Portfolio,Odoo,Professional,Responsive,Services,eLearning}","Portfolio","published","public","false","","Launch Date: 2024 - Status: Active","{Python,JavaScript,HTML5,CSS3}","Web (Odoo CMS)","{Integrated eLearning portal,Services catalog showcase,Booking portal endpoints,Skills rating matrix,Photo and video layout galleries}","{Odoo CMS,Python,Odoo Blocks,PostgreSQL}","Intermediate","mdturzo Portfolio — Muhtasim Rahman's Odoo Portfolio","Professional portfolio website at mdturzo.odoo.com showcasing projects, services (web design, video editing, logo design), skills, and educational background.","{odoo portfolio,freelance web developer,mdturzo,muhtasim rahman}","Acts as the business landing page for design and video editing services.","190","22","0","0","2024-03-15 00:00:00+00"
+"turzo-odoo-legacy","turzo.odoo.com — Legacy Portfolio (Archived)","Legacy Portfolio","First Professional Portfolio - Historical Archive","Previous version of portfolio website, discontinued due to platform limitations.","Discontinued 2023 version of Muhtasim's portfolio built on the Odoo CMS. Kept in static view-only mode for historical mapping, showing early styles and layout templates.","<h2>About This Project</h2>
+<p>turzo.odoo.com was my first professional portfolio website, built on the Odoo platform in 2023. It served as my initial attempt at creating a professional online presence as a student web developer.</p>
+<p>Development was discontinued in 2024 due to platform limitations, and the project was superseded by the more polished <strong>mdturzo.odoo.com</strong>. The site is preserved in view-only state as a historical archive.</p>
+<h2>What It Included</h2>
+<ul>
+  <li>Basic project showcase</li>
+  <li>Service listings (web design, editing)</li>
+  <li>Contact information</li>
+  <li>Educational background</li>
+  <li>Skills overview</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Platform:</strong> Odoo CMS | <strong>Backend:</strong> Python (Odoo) | <strong>Frontend:</strong> JavaScript, HTML5, CSS3 | <strong>Status:</strong> Archived, view-only</p>","https://i.ibb.co.com/N5zKLSD/portfolio-odoo-old.webp","","https://turzo.odoo.com","","","{Portfolio,Odoo,Legacy,Archived,Historical}","Portfolio","published","public","false","","Launch: 2023 - Discontinued: 2024","{Python,JavaScript,HTML5,CSS3}","Web (Odoo CMS)","{Basic landing details,Services outlines,Traditional bio cards,Simple contact info layout}","{Odoo CMS,Odoo Blocks,PostgreSQL}","Intermediate","turzo.odoo.com — Legacy Portfolio (Archived) | Muhtasim Rahman","Muhtasim Rahman's first Odoo-based portfolio, discontinued in 2024 in favor of mdturzo.odoo.com. Preserved as a historical archive.","{legacy portfolio,archived site,odoo old portfolio,muhtasim rahman}","Replaced by mdturzo.odoo.com due to hosting limitations.","85","8","0","0","2023-06-01 00:00:00+00"
+"github-profile-readme","GitHub Profile README — muhtasim-rahman","muhtasim-rahman Profile","Lets know about me...✌","Personal GitHub profile README with introduction, skills, and social links.","Custom GitHub markdown document serving as Muhtasim Rahman's developer identity on GitHub. Features API integration showing real-time stats, animated skill ratings, and responsive layout.","<h2>About This Project</h2>
+<p>My GitHub profile README is a carefully crafted digital introduction for anyone visiting my GitHub page. It communicates my background, skills, and personality in a professional yet approachable way — acting as a first impression for potential collaborators, recruiters, and the open-source community.</p>
+<h2>What's Inside</h2>
+<ul>
+  <li>Custom banner image and profile picture</li>
+  <li>Detailed """"About Me"""" section (education, goals, interests)</li>
+  <li>Skills rating system (★★★★☆ format) for HTML, CSS, JS, Python, Java, Git</li>
+  <li>Educational timeline from St. Geroza's (2013) to SGSC SSC-26</li>
+  <li>Language proficiency: Bengali (native), English (advanced), Hindi (communicative)</li>
+  <li>Hobbies and activities section</li>
+  <li>GitHub statistics cards (repos, stars, streak)</li>
+  <li>Social media icon integration (Facebook, Instagram, YouTube, LinkedIn, etc.)</li>
+  <li>Downloadable PDF version available</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Format:</strong> GitHub-Flavored Markdown | <strong>Graphics:</strong> Custom images hosted on GitHub | <strong>Stats:</strong> github-readme-stats API | <strong>Download:</strong> Google Drive PDF</p>","https://i.ibb.co.com/3yLXFvmy/github-profile-readme.webp","https://github.com/muhtasim-rahman/muhtasim-rahman","https://github.com/muhtasim-rahman","https://drive.google.com/file/d/1JB6aLx4gvJx-KGiLdnJFtGwjX3FgEvGM/view?usp=drive_link","","{GitHub,Profile,Markdown,Skills-Showcase,Open-Source,Developer-Branding}","Portfolio","published","public","false","","Created: 2024","{Markdown,HTML}","GitHub","{Custom profile branding banner,Dynamic GitHub stats cards integration,Ratings chart for code languages,Academic timeline layouts,PDF mirror document download}","{GitHub Markdown,HTML blocks,Readme Stats APIs}","Intermediate","GitHub Profile README — muhtasim-rahman | Muhtasim Rahman","Custom GitHub profile README for muhtasim-rahman. Includes skills rating (★), educational timeline, language proficiency, GitHub stats, and social links.","{github profile readme,muhtasim-rahman github,readme custom design,muhtasim rahman}","Provides a central visual introduction to Turzo's open source projects.","240","15","0","0","2024-01-01 00:00:00+00"
+"halal-the-world-of-muslim","Halal || The World of Muslim","Halal","The World of Muslim - Islamic Resources and Content","Repository for Islamic content, resources, and materials aligned with Islamic values.","Halal is an Islamic content portal built by Muhtasim Rahman. Hosted on GitHub Pages, the site provides structured Islamic reminders, Quranic text catalogs, and ethical technology guides for Muslim developer cohorts.","<h2>About This Project</h2>
+<p>Halal is a project close to my heart — a dedicated website and repository for collecting, organizing, and sharing Islamic content and resources. It reflects my Islamic values and commitment to creating beneficial, halal online content that serves the Muslim community.</p>
+<h2>What It Contains</h2>
+<ul>
+  <li>Quranic verses collection</li>
+  <li>Islamic reminders and motivational quotes</li>
+  <li>Educational content on Islamic principles</li>
+  <li>Halal income and ethical technology resources</li>
+  <li>Resources for Muslim developers and content creators</li>
+  <li>Organized content categories for easy navigation</li>
+  <li>Downloadable PDF version</li>
+</ul>
+<h2>Motivation</h2>
+<p>As a Muslim developer, I believe technology should be used for beneficial purposes. This project is my contribution to the Muslim community online — a place where Islamic knowledge and modern web technology meet.</p>
+<h2>Tech Stack</h2>
+<p><strong>Frontend:</strong> HTML5, CSS3, JavaScript | <strong>Graphics:</strong> Islamic-themed SVG illustrations | <strong>Hosting:</strong> GitHub Pages | <strong>Content:</strong> HTML, Markdown</p>","https://i.ibb.co.com/qYvbmsTH/halal-islamic.webp","https://github.com/muhtasim-rahman/halal","https://muhtasim-rahman.github.io/halal","https://drive.google.com/file/d/1gODNtJVruqN6vwbHEy7HlkBSngl_f7jN/view?usp=drive_link","","{Islamic,Education,HTML,GitHub-Pages,Muslim-Resources,Halal,Community}","Islamic","published","public","false","","Start Date: 2024 - Status: Active development","{HTML,CSS,JavaScript}","Web (GitHub Pages)","{Quranic verses database library,Islamic motivational quotes slides,Ethical tech and halal income articles,Responsive Islamic typography themes,GitHub Pages static hosting}","{HTML5,CSS3,Vanilla JS,SVG graphics}","Intermediate","Halal — The World of Muslim | Muhtasim Rahman","Islamic resource website by Muhtasim Rahman. Collects Quranic verses, Islamic reminders, halal principles, and beneficial resources for the Muslim community.","{halal site,islamic portal,muslim developers,ethical coding,muhtasim rahman}","Reflects Turzo's religious identity and values integrated with frontend skills.","160","27","0","0","2024-05-01 00:00:00+00"
+"web-templates-2023","My Web Templates 2023 — Frontend Template Collection","Web Templates 2023","Responsive Web Templates for Modern Websites","Collection of web templates created in 2023, built with HTML, CSS, and Bootstrap with responsive design.","A collection of visual web templates created by Muhtasim during 2023. Contains responsive landing pages, portfolio grids, and business landing designs utilizing CSS Flexbox and Bootstrap components.","<h2>About This Project</h2>
+<p>This is a comprehensive collection of web templates I designed and developed throughout 2023. Each template demonstrates different aspects of web development — layout structures, responsive patterns, Bootstrap component usage, and CSS styling techniques.</p>
+<p>The collection serves both as a portfolio piece and a learning resource, showing my growth as a frontend developer over the year.</p>
+<h2>What's Included</h2>
+<ul>
+  <li>Multiple template variations (landing pages, portfolios, business sites)</li>
+  <li>Fully responsive Bootstrap layouts</li>
+  <li>Modern CSS styling with clean HTML structure</li>
+  <li>Cross-browser compatible</li>
+  <li>Mobile-first approach throughout</li>
+  <li>Various layout patterns (Flexbox, Bootstrap Grid)</li>
+  <li>Component library elements</li>
+  <li>Easy customization base</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Frontend:</strong> HTML5, CSS3, Bootstrap 4/5 | <strong>JavaScript:</strong> Vanilla JS for interactions | <strong>Responsive:</strong> Bootstrap Grid | <strong>Hosting:</strong> GitHub Pages</p>","https://i.ibb.co.com/TBWFkKbH/my-web-templates-2023.webp","https://github.com/muhtasim-rahman/web-templets-2024.2","https://muhtasim-rahman.github.io/web-templets-2024.2","https://drive.google.com/file/d/1H7tlUqZtkRSkQ9ZCv3neozY1DRhd80CQ/view?usp=drive_link","","{HTML,CSS,Bootstrap,Responsive,Templates,Frontend,Learning}","Web App","published","public","false","","Development Period: 2023 - Compilation: 2024","{HTML5,CSS3,JavaScript}","Web (GitHub Pages)","{Landing page visual variants,Bootstrap responsive layout grids,Custom components presets,CSS flexboxes templates,Mobile-first framework base}","{HTML5,CSS3,Bootstrap 4/5,Vanilla JS}","Intermediate","Web Templates 2023 — HTML/CSS/Bootstrap Collection | Muhtasim Rahman","Collection of responsive HTML, CSS, and Bootstrap web templates by Muhtasim Rahman. Covers landing pages, portfolios, and business sites.","{free web templates,bootstrap templates,landing pages html,muhtasim rahman}","A compilation of design patterns and layout templates built during the learning phase.","110","14","0","0","2023-12-01 00:00:00+00"
+"study-with-muhtasim","Study With Muhtasim — Online Teaching Platform UI","Study Platform","Learn, Grow, and Excel Together","Online teacher website project made with HTML, CSS, and Bootstrap (Responsive, UI prototype without backend functionality).","Study With Muhtasim is a visual mockup project displaying an online learning management frontend dashboard. Built using Bootstrap, it highlights course profiles, enrollment forms, and tutoring info blocks.","<h2>About This Project</h2>
+<p>Study With Muhtasim is a complete UI prototype for an online teaching/tutoring platform. While it's a frontend-only design without backend functionality, it demonstrates a thorough understanding of educational platform requirements and user experience design for learning management systems.</p>
+<h2>UI Sections Designed</h2>
+<ul>
+  <li>Hero section with enrollment CTA</li>
+  <li>Course listing cards with preview imagery</li>
+  <li>Teacher profile showcase</li>
+  <li>Student enrollment interface</li>
+  <li>Resource download section</li>
+  <li>Contact and inquiry form</li>
+  <li>About / mission section</li>
+  <li>Mobile-optimized navigation</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Frontend:</strong> HTML5, CSS3, Bootstrap 4/5 | <strong>Icons:</strong> Font Awesome | <strong>Layout:</strong> Bootstrap Grid | <strong>Hosting:</strong> GitHub Pages</p>","https://i.ibb.co.com/pvwkkPmK/study-with-muhtasim.webp","https://github.com/muhtasim-rahman/study-with-muhtasim","https://muhtasim-rahman.github.io/study-with-muhtasim","https://drive.google.com/file/d/1gPhSve63b6FLeElXBgvX-LgIHlAPC6al/view?usp=drive_link","","{Education,Bootstrap,HTML,CSS,UI-Prototype,Frontend,Teaching}","Education","published","public","false","","Development: 2023-2024","{HTML5,CSS3,JavaScript}","Web (Static)","{LMS home dashboard UI,Teacher biography cards,Contact and signup modal views,Bootstrap grid responsive breakpoints,Static download links widgets}","{HTML5,CSS3,Bootstrap,Font Awesome}","Intermediate","Study With Muhtasim — Online Teaching Platform UI | Muhtasim Rahman","Frontend prototype of an online tutoring platform. Complete responsive UI with course listings, teacher profiles, enrollment, and contact sections. Built with Bootstrap.","{tutor template,education ui design,bootstrap learning web,muhtasim rahman}","Design prototype mapping out essential features for a standard online tutorial site.","95","10","0","0","2024-01-01 00:00:00+00"
+"turzo-express","Turzo Express — E-commerce Website Frontend","Turzo Express","Your Online Shopping Destination","E-commerce website project made with HTML and CSS (Responsive design, frontend prototype without backend).","Turzo Express is a responsive shopping store interface mockup. Features flexbox catalogs, product specification widgets, shopping cart views, and checkout billing detail grids built with raw CSS.","<h2>About This Project</h2>
+<p>Turzo Express is a fully designed e-commerce website frontend. It covers all the essential pages and flows of an online shopping experience — from browsing products to the checkout process — using only HTML and CSS with custom responsive media queries.</p>
+<h2>Pages & Sections</h2>
+<ul>
+  <li>Homepage with promotional banners and featured products</li>
+  <li>Product catalog with category navigation</li>
+  <li>Individual product detail pages</li>
+  <li>Shopping cart interface</li>
+  <li>Checkout process design</li>
+  <li>User account sections</li>
+  <li>Search interface</li>
+  <li>Mobile-optimized views throughout</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Frontend:</strong> HTML5, CSS3 | <strong>Responsive:</strong> Custom CSS media queries | <strong>Layout:</strong> CSS Flexbox &amp; Grid | <strong>Hosting:</strong> GitHub Pages</p>","https://i.ibb.co.com/GQy0jPNx/turzo-express.webp","https://github.com/muhtasim-rahman/turzo-express","https://muhtasim-rahman.github.io/turzo-express","https://drive.google.com/file/d/1SKkoFSw7wDegUgpltdhY600F9fVqCe0m/view?usp=drive_link","","{E-commerce,HTML,CSS,Responsive,Frontend,Shopping,Product-Catalog}","Web App","published","public","false","","Development: 2023","{HTML5,CSS3}","Web (Static)","{Product catalog flex columns,Item details mock options,Mock shopping cart side panel,Checkout forms layouts,Custom responsive CSS media templates}","{HTML5,CSS3,CSS Flexbox,CSS Grids}","Intermediate","Turzo Express — E-commerce Frontend Design | Muhtasim Rahman","E-commerce website frontend prototype with product catalog, shopping cart, checkout design, and responsive layout. Built with HTML and CSS.","{e-commerce frontend,online store ui mockup,raw css flexbox shop,muhtasim rahman}","Highlights raw CSS styling capabilities, focusing on visual alignments and shopping card grids.","125","16","0","0","2023-10-01 00:00:00+00"
+"master-chef","Master Chef — Restaurant Website Design","Master Chef","Culinary Excellence in Every Bite","Restaurant website project made with HTML and CSS (Responsive design, frontend prototype).","Master Chef restaurant landing template built with HTML/CSS. Highlights dark color design systems, culinary menus, booking schedules tables, and staff galleries with hover zoom effects.","<h2>About This Project</h2>
+<p>Master Chef is a professionally designed restaurant website prototype showcasing my ability to create premium, visually appealing designs for the hospitality industry. The design balances elegance with functionality — exactly what a fine dining establishment needs.</p>
+<h2>Sections Designed</h2>
+<ul>
+  <li>Hero section with cinematic food imagery</li>
+  <li>Menu presentation pages with pricing</li>
+  <li>Chef profile showcase with bios</li>
+  <li>Food photography gallery</li>
+  <li>Reservation interface / booking form</li>
+  <li>Special offers and promotions section</li>
+  <li>About the restaurant story</li>
+  <li>Contact, location &amp; hours info</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Frontend:</strong> HTML5, CSS3 | <strong>Responsive:</strong> Custom CSS media queries | <strong>Layout:</strong> CSS Flexbox | <strong>Typography:</strong> Google Fonts | <strong>Hosting:</strong> GitHub Pages</p>","https://i.ibb.co.com/jvG5r4r6/master-chef.webp","https://github.com/muhtasim-rahman/master-chef","https://muhtasim-rahman.github.io/master-chef","https://drive.google.com/file/d/1WggmuUO4mBd7IHeYQoTncIaI3LajY1mO/view?usp=drive_link","","{Restaurant,HTML,CSS,Responsive,Frontend-Design,Hospitality,UI}","Web App","published","public","false","","Development: 2023","{HTML5,CSS3}","Web (Static)","{Menu listings layout,Table reservation mock inputs,Chef bio grid layout,Sophisticated dark gold theme,Mobile responsive navigation}","{HTML5,CSS3,CSS Flexbox,Google Fonts}","Intermediate","Master Chef — Restaurant Website Design | Muhtasim Rahman","Premium restaurant website frontend prototype with menu, chef profiles, gallery, and reservation interface. Responsive HTML/CSS design.","{restaurant food templates,dining UI layout,bistro dark design,muhtasim rahman}","Design practice focusing on visual brand hierarchy and high-quality food layouts.","88","11","0","0","2023-08-01 00:00:00+00"
+"portfolio-2023","Portfolio 2023 — Personal Developer Portfolio","Portfolio 2023","Showcasing Skills, Sharing My Journey","Personal portfolio website made with HTML and CSS (Responsive design).","Muhtasim's single page portfolio built in late 2023. Contains clean slide divisions, skill bars, and project cards with simple transitions using custom CSS breakpoints without any CSS libraries.","<h2>About This Project</h2>
+<p>Portfolio 2023 is my first proper developer portfolio website — built entirely with HTML5 and CSS3, without any frameworks. It represents an important milestone: my first attempt to professionally present myself to the world as a web developer.</p>
+<p>Unlike the Odoo portfolios that came later, this one is hand-coded from scratch, which gave me deep understanding of responsive design, CSS layout systems, and portfolio UX.</p>
+<h2>Sections</h2>
+<ul>
+  <li>Hero / Introduction section</li>
+  <li>Skills section with star ratings</li>
+  <li>Project showcase cards with hover effects</li>
+  <li>Education timeline</li>
+  <li>Contact information and social links</li>
+  <li>Smooth scroll navigation</li>
+  <li>Mobile-responsive layout</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Frontend:</strong> HTML5, CSS3 (pure — no frameworks) | <strong>Responsive:</strong> Custom media queries | <strong>Layout:</strong> CSS Flexbox | <strong>Effects:</strong> CSS transitions | <strong>Hosting:</strong> GitHub Pages</p>","https://i.ibb.co.com/qY65zBDK/portfolio-2023.webp","https://github.com/muhtasim-rahman/portfolio-2023","https://muhtasim-rahman.github.io/portfolio-2023","https://drive.google.com/file/d/1RXsRpIrT0_dPM9hlBAT7y6Lt19QEt0Td/view?usp=drive_link","","{Portfolio,HTML,CSS,Responsive,GitHub-Pages,Developer-Showcase,2023}","Portfolio","published","public","false","","Development: 2023","{HTML5,CSS3}","Web (Static)","{Single page smooth scroll navigation,Animated skills metrics bars,Projects list with hover pop-up effects,Educational history timeline board,Responsive layout for mobile}","{HTML5,CSS3,CSS Flexbox,CSS transitions}","Intermediate","Portfolio 2023 — Muhtasim Rahman's Developer Portfolio","Personal developer portfolio created in 2023 with pure HTML and CSS. Responsive single-page design with skills, projects, education, and contact sections.","{old portfolio,muhtasim rahman developer 2023,vanilla HTML portfolio,muhtasim rahman}","Historical landmark illustrating Turzo's initial hand-coded portfolio iteration.","145","18","0","0","2023-11-01 00:00:00+00"
+"basic-cv","Basic CV — HTML Resume Website","Basic CV","Simple CV - Learning Web Development Basics","A basic CV/Resume project made with HTML and simple CSS (Not responsive for small devices).","Muhtasim's very first HTML practice page. Formats simple curriculum vitae details into standard table rows, demonstrating foundational markup syntax.","<h2>About This Project</h2>
+<p>This is the project where it all started. Basic CV is my very first web development project — a simple curriculum vitae website built with fundamental HTML and CSS. No JavaScript, no frameworks, no responsive design. Just pure HTML structure and basic CSS styling.</p>
+<p>I've preserved this project exactly as it was built to serve as a reminder of where I started — and how far I've come since then.</p>
+<h2>What It Contains</h2>
+<ul>
+  <li>Personal information section</li>
+  <li>Educational background</li>
+  <li>Skills listing</li>
+  <li>Work/project experience</li>
+  <li>Contact information</li>
+  <li>Traditional HTML table-based layout</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Frontend:</strong> HTML (basic), CSS (simple) | <strong>Layout:</strong> HTML tables, basic CSS | <strong>Target:</strong> Desktop browsers only | <strong>Hosting:</strong> GitHub Pages</p>","https://i.ibb.co.com/hxvBVbTQ/basic-cv.webp","https://github.com/muhtasim-rahman/basic-cv","https://muhtasim-rahman.github.io/basic-cv","https://drive.google.com/file/d/1TeHFnrvJRBy22gbJHIa9rnup6GJsEPs8/view?usp=drive_link","","{HTML,CSS,CV,Resume,Beginner,Learning,Static}","Web App","published","public","false","","Development: Early 2023","{HTML,CSS}","Web (Static, desktop-only)","{Table-based profile alignments,Traditional educational outline table,Static contact info links list,Zero responsive breakpoints}","{HTML basic,CSS basic elements}","Beginner","Basic CV — HTML Resume | Muhtasim Rahman","Muhtasim Rahman's very first web project — a simple HTML/CSS CV website. Non-responsive, desktop-only. A preserved milestone from early 2023.","{first html project,curriculum vitae static html,learning cv code,muhtasim rahman}","Preserved exactly as is, illustrating the humble origin point of coding journey.","270","22","0","0","2023-03-01 00:00:00+00"
+"css-calculator-design","HTML & CSS Calculator Design","CSS Calculator","Calculator Interface - CSS Styling Practice","A calculator design made with HTML and CSS (Visual design only, no JavaScript functionality).","A CSS layout styling study mimicking a numeric calculator dashboard. Uses CSS Grid alignments, button hover shimmers, and inner shadow display bars.","<h2>About This Project</h2>
+<p>This is a pure visual design project — a calculator interface built entirely with HTML and CSS, with no JavaScript functionality. The goal was to practice CSS Grid layout, button styling, hover effects, gradients, and shadow design without worrying about any logic.</p>
+<h2>Design Elements</h2>
+<ul>
+  <li>Professional calculator layout (display + buttons)</li>
+  <li>Number buttons 0–9 with hover states</li>
+  <li>Operator buttons (+, −, ×, ÷, =)</li>
+  <li>Function buttons (C, DEL, %)</li>
+  <li>Display screen area with styled output</li>
+  <li>CSS Grid for button layout</li>
+  <li>Gradient styling and box shadows</li>
+  <li>Smooth hover transitions</li>
+  <li>Modern color scheme</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Frontend:</strong> HTML5, CSS3 | <strong>Layout:</strong> CSS Grid | <strong>Effects:</strong> Box shadow, gradients, hover transitions</p>","https://i.ibb.co.com/spv0qXm1/html-and-css-calculator-design.webp","https://github.com/muhtasim-rahman/css-calculator-design","https://muhtasim-rahman.github.io/css-calculator-design","https://drive.google.com/file/d/1eg836DCwH4A9Pe1fNkyApNJzR6vEkZCf/view?usp=drive_link","","{CSS,UI-Design,HTML,Calculator,Learning,Grid,Visual-Design}","Web App","published","public","false","","Development: 2023","{HTML5,CSS3}","Web (Static, visual only)","{Button grid layouts division,Smooth CSS hover transition shimmers,Display screen inner shadow styling,Gradient buttons outline designs,Modern dark theme colors palette}","{HTML5,CSS3,CSS Grid,CSS filters & shadow}","Beginner","HTML & CSS Calculator Design | Muhtasim Rahman","Pure CSS calculator interface design — number buttons, operators, display screen, hover effects, gradients, and shadows. A CSS layout practice project.","{calculator css UI,css grid buttons alignment,mock calculator layout,muhtasim rahman}","Strict styling practice project, highlighting grid alignments and hover states.","102","12","0","0","2023-05-01 00:00:00+00"
+"iftar-mahfil-banner-1447","SSC-2026 Batch Iftar Mahfil Banner 1447H","Iftar Mahfil Banner","Breaking Fast Together - A Sacred Gathering","Dark-themed HTML event banner with Islamic motifs for school Iftar Mahfil event.","A digital header graphic customized for Saidpur Science College's fast-breaking gathering. Integrates SVG skyline elements, gold gradients, Bengali typography, and a Canvas JS star twinkling background.","<h2>About This Project</h2>
+<p>This is a digital event banner I designed for the SSC-2026 batch Iftar Mahfil (Ramadan fast-breaking gathering) at Saidpur Government Science College. The banner blends traditional Islamic motifs with modern animation techniques for an elegant, memorable event graphic.</p>
+<h2>Design Details</h2>
+<ul>
+  <li><strong>Dimensions:</strong> 1920×640px (optimized for social media headers &amp; digital displays)</li>
+  <li><strong>Theme:</strong> Dark premium background with gold gradient accents</li>
+  <li><strong>Animation:</strong> Starfield effect built with Canvas API</li>
+  <li><strong>Graphics:</strong> Custom SVG mosque silhouettes forming an Islamic skyline</li>
+  <li><strong>Typography:</strong> Bengali web fonts for event details</li>
+  <li><strong>Color Palette:</strong> Deep navy/black + gold (#FFD700 gradient)</li>
+  <li><strong>Occasion:</strong> Ramadan 1447H / 2024</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Design:</strong> HTML5, CSS3 | <strong>Animation:</strong> JavaScript Canvas API | <strong>Graphics:</strong> Custom SVG illustrations | <strong>Typography:</strong> Bengali web fonts</p>","https://i.ibb.co.com/jvYDdmX0/sgsc-iftar-banner-1447.webp","","","","","{Design,Islamic,Event,Canvas,Animation,Bengali,SVG,Ramadan}","Design","published","public","false","","Design Date: Ramadan 2024","{HTML5,CSS3,JavaScript}","Digital Display / Social Media","{Twinkling Canvas star background script,Vector SVG mosques skyline silhouettes,Sophisticated gold gradients layout text,Custom Bengali web fonts integration,Digital header proportions (1920x640px)}","{HTML5,CSS3,JavaScript Canvas,SVG graphics}","Intermediate","SSC-2026 Iftar Mahfil Banner 1447H | Muhtasim Rahman","HTML/CSS/JS event banner for SSC-2026 batch Iftar gathering. Animated starfield, SVG mosque silhouettes, gold gradients, Bengali typography. 1920×640px.","{ramadan event banner,canvas starfield banner,saidpur college banner,muhtasim rahman}","Twinkling star algorithm operates dynamically on screen size changes.","103","20","0","0","2024-03-20 00:00:00+00"
+"golden-days-poster","Golden Days — SGSC Friendship Diary Poster","Golden Days Poster","Golden Days - Treasuring Friendships Forever","Animated gold typography poster design for school friendship diary project.","Nostalgic digital poster customized for Golden Days graduation diaries at college. Incorporates shimmering text shimmers, radial light projections, and gold typography animations.","<h2>About This Project</h2>
+<p>Golden Days is an animated poster I designed for the school friendship diary project at Saidpur Government Science College. The design captures the nostalgic, precious quality of school friendships — symbolized through gold typography, metallic shimmer effects, and warm gradient animations.</p>
+<h2>Design Concept</h2>
+<p>Gold symbolizes both the preciousness of school memories and the achievement of reaching the end of an academic chapter. The animated text creates a living, breathing poster — appropriate for both digital display in school events and potential print use.</p>
+<h2>Design Elements</h2>
+<ul>
+  <li>Animated gold metallic typography (CSS keyframes)</li>
+  <li>Shimmer/gloss effect across the text</li>
+  <li>CSS gradient text animation</li>
+  <li>Premium dark background for contrast</li>
+  <li>School (SGSC) branding elements</li>
+  <li>Nostalgic, youth-oriented composition</li>
+  <li>Dual-purpose: digital &amp; print ready</li>
+</ul>
+<h2>Tech Stack</h2>
+<p><strong>Design:</strong> HTML5, CSS3 | <strong>Animation:</strong> CSS @keyframes, JavaScript | <strong>Effects:</strong> Gradient text, transform, opacity transitions</p>","https://i.ibb.co.com/Vpvxt6ht/sgsc-friendship-diary.webp","","","","","{Design,Poster,CSS-Animation,School,Typography,Gold-Effect,SGSC}","Design","published","public","false","","Design Date: 2024","{HTML5,CSS3,JavaScript}","Digital/Print","{CSS shimmer keyframe text masks,Gradient animated background overlays,Saidpur Govt Science College crest vector integration,Fluid typography scaling grids,High resolution display properties}","{HTML5,CSS3,CSS Keyframes,Vanilla JS}","Intermediate","Golden Days — SGSC Friendship Diary Poster | Muhtasim Rahman","Animated poster design for the Golden Days school friendship diary at SGSC. Gold typography, metallic shimmer, CSS keyframe animations.","{animated poster design,css metallic shimmer,school diary poster,muhtasim rahman}","Nostalgic graduation diary template built for classmates.","135","28","0","0","2024-06-01 00:00:00+00"
