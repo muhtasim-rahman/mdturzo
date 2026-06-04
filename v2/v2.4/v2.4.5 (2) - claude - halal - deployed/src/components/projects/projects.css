@@ -1,0 +1,138 @@
+/* ============================================================
+   Projects — Page & Detail Styles (v2.4.5)
+   Extracted from index.css — only used by projects pages.
+   Imported in ProjectsPage.jsx and ProjectDetailPage.jsx.
+   ============================================================ */
+
+/* ── Project grids ──────────────────────────────────────────── */
+.proj-page-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+@media (max-width: 1024px) { .proj-page-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 580px)  { .proj-page-grid { grid-template-columns: 1fr; } }
+
+/* ── Project card base ──────────────────────────────────────── */
+.proj-card {
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.proj-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.proj-card:active { transform: scale(0.98) translateY(0); }
+
+/* ── Prose content (from TipTap HTML) ───────────────────────── */
+.prose-content {
+  color: var(--text-secondary);
+  line-height: 1.75;
+  font-size: 0.9375rem;
+}
+.prose-content h1, .prose-content h2, .prose-content h3,
+.prose-content h4, .prose-content h5, .prose-content h6 {
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+  line-height: 1.3;
+}
+.prose-content h1 { font-size: 1.875rem; }
+.prose-content h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4em; }
+.prose-content h3 { font-size: 1.25rem; }
+.prose-content h4 { font-size: 1.0625rem; }
+
+.prose-content p { margin-bottom: 1.25em; }
+
+.prose-content a {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+.prose-content a:hover { color: var(--accent-hover); }
+
+.prose-content strong { color: var(--text-primary); font-weight: 700; }
+.prose-content em { font-style: italic; }
+
+.prose-content ul, .prose-content ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+}
+.prose-content li { margin-bottom: 0.4em; }
+.prose-content ul { list-style-type: disc; }
+.prose-content ol { list-style-type: decimal; }
+
+.prose-content blockquote {
+  border-left: 3px solid var(--accent-primary);
+  padding-left: 1.25em;
+  margin: 1.5em 0;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.prose-content code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  color: var(--text-accent);
+}
+
+.prose-content pre {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.25em 1.5em;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+.prose-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.prose-content img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 1.5em auto;
+  display: block;
+  border: 1px solid var(--border-color);
+}
+
+.prose-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.875rem;
+}
+.prose-content th, .prose-content td {
+  border: 1px solid var(--border-color);
+  padding: 0.6em 1em;
+  text-align: left;
+}
+.prose-content th {
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+.prose-content hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2em 0;
+}
+
+/* ── Sticky sidebar positioning ─────────────────────────────── */
+@media (min-width: 1024px) {
+  .proj-detail-sidebar {
+    position: sticky;
+    top: calc(var(--navbar-h) + 2rem);
+    align-self: start;
+  }
+}
