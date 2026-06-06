@@ -1,0 +1,13 @@
+/* ============================================================
+   Home Page — Section Styles (v2.4.5)
+   Imported in RecentProjects.jsx (rp-grid)
+   ============================================================ */
+
+/* ── Featured projects grid (RecentProjects) ────────────────── */
+.rp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+@media (max-width: 1024px) { .rp-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .rp-grid { grid-template-columns: 1fr; } }
