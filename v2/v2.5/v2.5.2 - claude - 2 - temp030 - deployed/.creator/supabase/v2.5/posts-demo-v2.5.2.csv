@@ -1,0 +1,35 @@
+slug,title,content,embed_url,platform,thumbnail_url,tags,category,status,visibility,views_count,likes_count,dislikes_count,comments_count,created_at,updated_at,media_items
+dark-mode-design-tips,Dark Mode Design: 5 Tips That Actually Work 🌙,"Just finished redesigning this portfolio's dark mode and learned a ton! Here are 5 things that made the biggest visual difference:
+
+**1. Never use pure black (#000)**
+Pure black creates harsh contrast. Use deep navy (#060f1e) or dark slate — much easier on the eyes.
+
+**2. Surface hierarchy with subtle lightness steps**
+Instead of borders everywhere, use slightly lighter backgrounds for cards and modals. Keep 3-4 surface levels.
+
+**3. Desaturate your colors at night**
+Bright saturated colors (#ff0000) are painful in dark mode. Shift to muted variants (#f87171).
+
+**4. Glass morphism for floating elements**
+Navbars and tooltips pop beautifully with `backdrop-filter: blur(14px)` + semi-transparent bg.
+
+**5. Test at 10% screen brightness**
+Most designers test in bright rooms. That 10% brightness test reveals contrast issues instantly.
+
+What's your biggest dark mode challenge? Drop it below! 👇",,other,https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=85,"{design,darkmode,css,frontend,ux}",Design,published,public,88,34,1,7,2026-05-20 16:00:00+06,2026-05-22 09:30:00+06,"[{""type"":""image"",""url"":""https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=85"",""caption"":""Dark mode code editor setup""},{""type"":""image"",""url"":""https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=900&q=85"",""caption"":""Color palette comparison""}]"
+supabase-vs-firebase-2026,Supabase vs Firebase in 2026 — My Honest Take ⚖️,"After running this portfolio on **Firebase Auth + Supabase DB** for months, here's my honest comparison:
+
+**Supabase wins on:**
+- SQL power (joins, RLS, full PostgreSQL)
+- Self-hostable (free forever if you need it)
+- Realtime subscriptions are actually better
+- Open source — no vendor lock-in
+
+**Firebase wins on:**
+- Authentication (Google/GitHub OAuth is smoother)
+- Realtime DB speed for presence/notifications
+- Hosting CDN performance
+
+**My current setup:** Firebase for Auth + Realtime presence, Supabase for everything else. Best of both worlds!
+
+What's your stack? Firebase team or Supabase team? 🔥",,other,https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&q=85,"{supabase,firebase,backend,database,comparison}",Tech,published,public,201,67,3,15,2026-06-03 11:00:00+06,2026-06-04 08:15:00+06,"[{""type"":""image"",""url"":""https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&q=85"",""caption"":""Server infrastructure""},{""type"":""image"",""url"":""https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=85"",""caption"":""Database design""},{""type"":""image"",""url"":""https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=85"",""caption"":""Performance metrics""}]"
