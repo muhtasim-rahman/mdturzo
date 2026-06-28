@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F0F4F8" />
+
+    <!-- v2.3.6: resolve the real theme BEFORE first paint, synchronously,
+         so there's no flash of the wrong theme for returning visitors.
+         Default (no saved preference) is always 'light'. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme') || 'light';
+          var resolved = saved === 'system'
+            ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+            : saved;
+          document.documentElement.setAttribute('data-theme', resolved);
+          if (resolved === 'dark') document.documentElement.classList.add('dark');
+        } catch (e) { /* localStorage unavailable -- stays on the light default above */ }
+      })();
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon"             type="image/x-icon"    href="/favicon.ico" />
+    <link rel="icon"             type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon"             type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180"         href="/apple-touch-icon.png" />
+    <link rel="manifest"         href="/site.webmanifest" />
+
+    <title>Muhtasim Rahman — Web Developer & Designer</title>
+    <meta name="description" content="Self-taught web developer & designer from Bangladesh — building clean, fast and meaningful digital experiences." />
+    <meta name="author" content="Muhtasim Rahman" />
+
+    <!-- Fonts — v1.4.5 design system -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <!-- Task 8: Google Material Symbols — waving_hand icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=waving_hand" />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="https://mdturzo.web.app" />
+    <meta property="og:title"       content="Muhtasim Rahman — Web Developer & Designer" />
+    <meta property="og:description" content="Self-taught web developer & designer from Bangladesh — building clean, fast and meaningful digital experiences." />
+    <meta property="og:image"       content="https://mdturzo.web.app/preview.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card"       content="summary_large_image" />
+    <meta name="twitter:creator"    content="@mdturzo999" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
